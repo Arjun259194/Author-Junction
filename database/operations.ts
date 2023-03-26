@@ -1,6 +1,6 @@
-import UserModel, { User } from "@/model/User"
+import UserModel, { User } from "@/database/model/User"
 import { genSalt, hash } from "bcrypt"
-import { userData } from "../types"
+import { userData } from "../utils/types"
 
 export async function createUser({ username, email, password }: userData): Promise<User> {
   const saltRound = 10

@@ -1,6 +1,8 @@
 import Head from "next/head"
 
 export default function Home() {
+  const secretKey: string = process.env.SECRET_KEY!
+  console.log(secretKey)
   return (
     <>
       <Head>

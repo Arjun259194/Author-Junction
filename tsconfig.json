@@ -22,8 +22,8 @@
       "@/*": [
         "./*"
       ],
-      "@/model/*": [
-        "./model/*"
+      "@database/*": [
+        "./database/*"
       ],
       "@/utils/*": [
         "./utils/*"
