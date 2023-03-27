@@ -1,3 +1,4 @@
+import { GetServerSideProps } from "next"
 import Head from "next/head"
 
 export default function Home() {
@@ -14,4 +15,14 @@ export default function Home() {
       <h1>THis is home page</h1>
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const token = context.req.cookies.accessToken
+  //* just redirecting to test-page for testing
+  //* will redirect to login or register page in final application
+  if (!token) return { redirect: { destination: "/testing-page", permanent: false } }
+  return {
+    props: {},
+  }
 }

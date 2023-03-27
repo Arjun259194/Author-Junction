@@ -1,7 +1,6 @@
 import { User } from "@/database/model/User"
 import connectDB from "@/utils/connectDB"
-import { isValidUser as findAndValidateUser } from "@/utils/functions"
-import { sign } from "jsonwebtoken"
+import { createToken, isValidUser as findAndValidateUser } from "@/utils/functions"
 import { NextApiRequest, NextApiResponse } from "next"
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -14,15 +13,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-/**
- * !    : postHandler not finished
- * //?    : try to make this more type face
- * //todo : check for email and password
- * //todo : create a token and set it on cookie
- * todo : create a function to create token
- * todo : test it
- */
 type TUserInput = { email: User["email"]; password: User["password"] }
+
 async function postHandler(req: NextApiRequest, res: NextApiResponse) {
   try {
     await connectDB()
@@ -31,12 +23,9 @@ async function postHandler(req: NextApiRequest, res: NextApiResponse) {
     if (result.status === "not-found") return res.status(404).json({ message: "user with this email is not found" })
     if (result.status === "unauthorized") return res.status(401).json({ message: "Password is not valid" })
 
-    const {
-      user: { id },
-    } = result
+    const tokenPayload = { id: result.user._id, email: result.user.email }
+    const TOKEN = createToken(tokenPayload)
 
-    const secretKey: string = process.env.SECRET_KEY!
-    const TOKEN = await sign({ id: id }, secretKey)
     res.setHeader("Set-Cookie", `accessToken=${TOKEN}; HttpOnly; Max-Age=86400; Path=/`)
 
     return res.status(200).json({ message: "ok" })
