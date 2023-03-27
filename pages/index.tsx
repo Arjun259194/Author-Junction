@@ -19,9 +19,7 @@ export default function Home() {
 
 export const getServerSideProps: GetServerSideProps = async context => {
   const token = context.req.cookies.accessToken
-  //* just redirecting to test-page for testing
-  //* will redirect to login or register page in final application
-  if (!token) return { redirect: { destination: "/testing-page", permanent: false } }
+  if (!token) return { redirect: { destination: "/register", permanent: false } }
   return {
     props: {},
   }
