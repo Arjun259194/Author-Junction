@@ -19,6 +19,7 @@ export default function useForm<T>(initialValue: T): Return<T> {
   const [state, setState] = useState<T>(initialValue)
 
   const changeHandler: HandlerFunction = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("Change handler called")
     const { name, value } = event.target
     setState(pre => ({ ...pre, [name]: value }))
   }
