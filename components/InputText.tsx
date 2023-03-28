@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ChangeEventHandler } from "react"
+import { ChangeEventHandler } from "react"
 
 interface Props {
   type: "text" | "email" | "password"
@@ -14,13 +14,25 @@ export default function InputText({ type, changeHandler, value, name, text }: Pr
       <input
         id={name}
         name={name}
-        className=" peer mt-3 bg-gray-700/30 hover:border-blue-400/50 border-b-2 focus:border-2 font-light border-gray-600/50 focus:bg-gray-700 focus:border-blue-400 text-gray-100 outline-none px-2 py-2 w-full rounded-md text-base"
+        className="
+        peer mt-4 w-full rounded-md border-b-2 border-gray-600
+        bg-gray-700/60 px-2 py-2 text-lg font-light text-gray-100 outline-none transition-all
+        duration-100 ease-linear placeholder-shown:mt-0 hover:border-blue-400
+        focus:border-2 focus:border-blue-400 focus:bg-gray-700
+        "
         value={value}
         type={type}
         onChange={changeHandler}
         placeholder=" "
       />
-      <label className=" peer-focus:text-blue-400 peer-focus:text-lg absolute peer-focus:-top-3.5 left-0 peer-focus:px-0 text-gray-500 text-base top-5 px-3 transition-all duration-200" htmlFor={name}>
+      <label
+        className="
+        absolute -top-4 left-0 px-0 text-2xl text-blue-400
+        transition-all duration-200 ease-in-out peer-placeholder-shown:top-3 peer-placeholder-shown:left-0 
+        peer-placeholder-shown:px-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
+        "
+        htmlFor={name}
+      >
         {text}
       </label>
     </div>
