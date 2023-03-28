@@ -6,7 +6,7 @@ export interface User extends Document {
   password: string
 }
 
-const UserSchema = new Schema(
+const UserSchema: Schema = new Schema(
   {
     username: { type: String, require: true },
     email: { type: String, require: true, unique: true },

@@ -1,6 +1,9 @@
+import { GetServerSideProps } from "next"
 import Head from "next/head"
 
 export default function Home() {
+  const secretKey: string = process.env.SECRET_KEY!
+  console.log(secretKey)
   return (
     <>
       <Head>
@@ -12,4 +15,12 @@ export default function Home() {
       <h1>THis is home page</h1>
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const token = context.req.cookies.accessToken
+  if (!token) return { redirect: { destination: "/register", permanent: false } }
+  return {
+    props: {},
+  }
 }

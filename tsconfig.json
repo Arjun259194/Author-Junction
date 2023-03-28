@@ -22,11 +22,14 @@
       "@/*": [
         "./*"
       ],
-      "@/model/*": [
-        "./model/*"
+      "@database/*": [
+        "./database/*"
       ],
       "@/utils/*": [
         "./utils/*"
+      ],
+      "@/hooks/*": [
+        "./hooks/*"
       ],
     }
   },
