@@ -1,14 +1,15 @@
-import { ChangeEventHandler } from "react"
+import { ChangeEventHandler } from "react";
 
 interface Props {
-  type: "text" | "email" | "password"
-  changeHandler: ChangeEventHandler<HTMLInputElement>
-  value: number | string
-  name: string
-  text: string
+  type: "text" | "email" | "password";
+  changeHandler: ChangeEventHandler<HTMLInputElement>;
+  value: number | string;
+  name: string;
+  text: string;
+  required: boolean;
 }
 
-export default function InputText({ type, changeHandler, value, name, text }: Props) {
+export default function InputText({ type, required, changeHandler, value, name, text }: Props) {
   return (
     <div className="relative">
       <input
@@ -23,11 +24,12 @@ export default function InputText({ type, changeHandler, value, name, text }: Pr
         value={value}
         type={type}
         onChange={changeHandler}
+        required={required}
         placeholder=" "
       />
       <label
         className="
-        absolute -top-4 left-0 px-0 text-2xl text-blue-400
+        absolute -top-4 left-0 px-0 text-xl text-blue-400
         transition-all duration-200 ease-in-out peer-placeholder-shown:top-3 peer-placeholder-shown:left-0 
         peer-placeholder-shown:px-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
         "
@@ -36,5 +38,5 @@ export default function InputText({ type, changeHandler, value, name, text }: Pr
         {text}
       </label>
     </div>
-  )
+  );
 }

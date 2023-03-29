@@ -1,14 +1,17 @@
-import UserModel, { User } from "@/database/model/User"
-import { genSalt, hash } from "bcrypt"
-import { userData } from "../utils/types"
+import UserModel, { User } from "@/database/model/User";
+import { hash } from "bcrypt";
 
-export async function createUser({ username, email, password }: userData): Promise<User> {
-  const saltRound = 10
-  const salt = await genSalt(saltRound)
+type UserData = {
+  username: User["username"];
+  email: User["email"];
+  password: User["password"];
+};
+
+export async function createUser({ username, email, password }: UserData): Promise<User> {
   const newUser: User = new UserModel({
     username,
     email,
-    password: await hash(password, salt),
-  })
-  return newUser
+    password: await hash(password, 10),
+  });
+  return newUser;
 }

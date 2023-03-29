@@ -1,36 +1,76 @@
-import InputText from "@/components/InputText"
-import useForm from "@/hooks/useForm"
-import Head from "next/head"
-import Image from "next/image"
-import Link from "next/link"
-import { FormEventHandler } from "react"
+import InputText from "@/components/InputText";
+import useForm from "@/hooks/useForm";
+import { isStrongPassword, isValidEmail } from "@/utils/validation";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { FormEventHandler, useState } from "react";
 
 interface FormState {
-  username: string
-  email: string
-  password: string
-  confPassword: string
+  username: string;
+  email: string;
+  password: string;
+  confPassword: string;
 }
 
-//! form not ready
-//todo : create form with <TextInput/>
+interface ErrorState {
+  state: boolean;
+  message: string;
+}
+
+// ?    : almost ready
+// !    : not tested perfectly
+// todo : test
+// todo : make as many reusable components (UI, logic) from this as you can for login page
 export default function register() {
-  const { changeHandler, reset, state } = useForm<FormState>({
-    confPassword: "",
-    email: "",
-    username: "",
-    password: "",
-  })
+  const {
+    changeHandler,
+    state: { confPassword, email, password, username },
+  } = useForm<FormState>({ confPassword: "", email: "", username: "", password: "" });
+  const [error, setError] = useState<ErrorState>({ state: false, message: "" });
+  const router = useRouter();
 
   const submitHandler: FormEventHandler<HTMLFormElement> = event => {
-    event.preventDefault()
-    console.table(state)
-    /* write submit logic here */
-    reset()
-  }
+    event.preventDefault();
+    // validating user input
+    if (!isValidEmail(email)) return setError({ state: true, message: "Not a valid Email" });
+    if (!isStrongPassword(password)) return setError({ state: true, message: "Password is too weak" });
+    if (password !== confPassword) return setError({ state: true, message: "confirm password not matching" });
+
+    //registering user
+    setError({ state: false, message: "" });
+    registerUser();
+  };
+
+  const registerUser = async () => {
+    const reqHeader = new Headers();
+    reqHeader.append("Content-Type", "application/json");
+
+    const fetchOption: RequestInit = {
+      method: "POST",
+      body: JSON.stringify({ username, email, password }),
+      headers: reqHeader,
+    };
+
+    const res = await fetch("/api/auth/register", fetchOption);
+
+    if (!res.ok) {
+      const data = await res.json();
+      console.log(data);
+      return setError({ state: true, message: "Failed to register, try again" });
+    }
+
+    router.push("/auth/login");
+  };
 
   return (
     <div className="relative flex h-screen w-full flex-col bg-[url('/bg.jpg')] bg-center">
+      {error.state ? (
+        <span className="absolute bottom-0 left-1/2 z-40 my-4 w-6/12 -translate-x-1/2 animate-pulse rounded bg-red-900/90 p-1 text-center font-mono text-xl font-normal capitalize text-red-300">
+          {error.message}{" "}
+        </span>
+      ) : null}
       <Head>
         <title>Register</title>
       </Head>
@@ -62,14 +102,35 @@ export default function register() {
             </Link>
           </span>
           <form onSubmit={submitHandler} className="my-4 mb-6 space-y-6">
-            <InputText text="Username" name="username" type="text" changeHandler={changeHandler} value={state.username} />
-            <InputText text="Email" name="email" type="email" changeHandler={changeHandler} value={state.email} />
-            <InputText text="Password" name="password" type="password" changeHandler={changeHandler} value={state.password} />
-            <InputText text="Confirm Password" name="confPassword" type="password" changeHandler={changeHandler} value={state.confPassword} />
+            <InputText
+              required={true}
+              text="Username"
+              name="username"
+              type="text"
+              changeHandler={changeHandler}
+              value={username}
+            />
+            <InputText required={true} text="Email" name="email" type="email" changeHandler={changeHandler} value={email} />
+            <InputText
+              required={true}
+              text="Password"
+              name="password"
+              type="password"
+              changeHandler={changeHandler}
+              value={password}
+            />
+            <InputText
+              required={true}
+              text="Confirm Password"
+              name="confPassword"
+              type="password"
+              changeHandler={changeHandler}
+              value={confPassword}
+            />
             <input className="rounded-full bg-blue-400 py-2 px-4 text-xl capitalize text-white " type="submit" value="Register" />
           </form>
         </div>
       </main>
     </div>
-  )
+  );
 }
