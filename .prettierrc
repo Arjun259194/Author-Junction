@@ -5,5 +5,5 @@
   "arrowParens": "avoid",
   "singleAttributePerLine": false,
   "useTabs": false,
-  "printWidth": 130
+  "printWidth": 150
 }
