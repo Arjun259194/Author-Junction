@@ -10,8 +10,9 @@ module.exports = {
     extend: {
       fontFamily: {
         main: "Signika Negative",
+        DS: "Dancing Script",
       },
     },
   },
   plugins: [],
-};
+}
