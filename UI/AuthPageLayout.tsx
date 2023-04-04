@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode } from "react"
 
 const AuthPageLayout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
@@ -6,7 +6,7 @@ const AuthPageLayout: FC<{ children: ReactNode }> = ({ children }) => {
       <div className="absolute inset-0 z-0 bg-gradient-to-r from-gray-800 to-gray-800/50"></div>
       {children}
     </div>
-  );
-};
+  )
+}
 
-export default AuthPageLayout;
+export default AuthPageLayout

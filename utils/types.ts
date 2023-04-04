@@ -1,1 +1,1 @@
-export type MongoDBFilter = Record<string, string | number | boolean>;
+export type MongoDBFilter = Record<string, string | number | boolean>

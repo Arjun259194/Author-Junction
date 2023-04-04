@@ -1,5 +1,5 @@
-import { GetServerSideProps } from "next";
-import Head from "next/head";
+import { GetServerSideProps } from "next"
+import Head from "next/head"
 
 export default function Home() {
   return (
@@ -11,13 +11,14 @@ export default function Home() {
       </Head>
       <h1>THis is home page</h1>
     </>
-  );
+  )
 }
 
-export const getServerSideProps: GetServerSideProps = async context => {
-  const token = context.req.cookies.accessToken;
-  if (!token) return { redirect: { destination: "/auth/register", permanent: false } };
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const token = context.req.cookies.accessToken
+  if (!token)
+    return { redirect: { destination: "/auth/login", permanent: false } }
   return {
     props: {},
-  };
-};
+  }
+}
