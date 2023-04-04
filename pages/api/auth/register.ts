@@ -26,8 +26,6 @@ async function postHandler(
   try {
     await connectDB()
     const { username, email, password }: TUserInput = req.body
-    console.log(req.body)
-    console.log({ username, email, password })
     const newUser = await (
       await createUser({ username, email, password })
     ).save()
