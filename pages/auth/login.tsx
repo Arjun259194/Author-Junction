@@ -22,7 +22,7 @@ interface ErrorState {
 }
 
 export default function Login() {
-  const { changeHandler, state } = useForm<FormState>({
+  const { changeHandler, reset, state } = useForm<FormState>({
     email: "",
     password: "",
   })
@@ -35,11 +35,11 @@ export default function Login() {
   const router = useRouter()
 
   function errorMessage(msg: string): void {
-    return setError({ state: true, message: msg })
+    setError({ state: true, message: msg })
   }
 
   function resetError(): void {
-    return setError({ state: false, message: "" })
+    setError({ state: false, message: "" })
   }
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
@@ -49,18 +49,25 @@ export default function Login() {
       email: state.email,
       password: state.password,
     })
+
+    console.log("response ready")
     if (res.status === 404) {
+      console.log("code is 404")
       errorMessage("email not found")
     } else if (res.status === 401) {
+      console.log("code is 401")
       errorMessage("wrong password")
     } else if (res.status === 502) {
+      console.log("code is 502")
       const data = await res.json()
       console.log(data)
       errorMessage("Error while logging in")
+    } else {
+      resetError()
+      reset()
+      router.push("/")
     }
-    resetError()
     setLoading(false)
-    router.push("/")
   }
 
   return (
