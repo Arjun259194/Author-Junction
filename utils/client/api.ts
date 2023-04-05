@@ -15,12 +15,6 @@ function getFetchOptions(
     : { method: method, headers: header }
 }
 
-function getUrl(path: string): string {
-  const url = new URL(path, process.env.BASE_URL!)
-  console.log(url.href)
-  return url.href
-}
-
 /**
  * make request to /api/auth/register end point
  */
@@ -31,15 +25,23 @@ export async function registerPost(body: {
 }) {
   const reqHeader = getHeader()
   const fetchOption = getFetchOptions(reqHeader, "POST", body)
-  const url = getUrl("/api/auth/register")
-  const res = await fetch(url, fetchOption)
+  const URL = "/api/auth/register"
+  const res = await fetch(URL, fetchOption)
   return res
 }
 
 export async function loginPost(body: { email: string; password: string }) {
   const header = getHeader()
   const fetchOption = getFetchOptions(header, "POST", body)
-  const url = getUrl("/api/auth/login")
-  const res = await fetch(url, fetchOption)
+  const URL = "/api/auth/login"
+  const res = await fetch(URL, fetchOption)
+  return res
+}
+
+export async function logoutPost() {
+  const header = getHeader()
+  const fetchOption = getFetchOptions(header, "POST")
+  const URL = "/api/auth/logout"
+  const res = await fetch(URL, fetchOption)
   return res
 }

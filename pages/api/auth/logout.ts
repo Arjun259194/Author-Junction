@@ -1,3 +1,4 @@
+import connectDB from "@/utils/api/connectDB"
 import { NextApiRequest, NextApiResponse } from "next"
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -9,7 +10,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-function postHandler(res: NextApiResponse) {
+async function postHandler(res: NextApiResponse) {
+  await connectDB()
   res.setHeader(
     "Set-Cookie",
     "accessToken=; HttpOnly; Max-Age=0; 01 Jan 1970 00:00:00 GMT; Path=/"
