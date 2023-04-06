@@ -5,7 +5,7 @@ import InputText from "@/components/InputText"
 import useForm from "@/hooks/useForm"
 import AuthFormLayout from "@/UI/AuthFormLayout"
 import AuthPageLayout from "@/UI/AuthPageLayout"
-import { loginPost } from "@/utils/client/api"
+import API from "@/utils/apiClient"
 import Head from "next/head"
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -33,6 +33,7 @@ export default function Login() {
 
   const [loading, setLoading] = useState<boolean>(false)
   const router = useRouter()
+  const api = new API()
 
   function errorMessage(msg: string): void {
     setError({ state: true, message: msg })
@@ -45,7 +46,8 @@ export default function Login() {
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault()
     setLoading(true)
-    const res = await loginPost({
+
+    const res = await api.loginUser({
       email: state.email,
       password: state.password,
     })

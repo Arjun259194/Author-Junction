@@ -5,7 +5,7 @@ import InputText from "@/components/InputText"
 import useForm from "@/hooks/useForm"
 import AuthFormLayout from "@/UI/AuthFormLayout"
 import AuthPageLayout from "@/UI/AuthPageLayout"
-import { registerPost } from "@/utils/client/api"
+import API from "@/utils/apiClient"
 import Head from "next/head"
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -36,13 +36,14 @@ export default function register() {
   const [error, setError] = useState<ErrorState>({ state: false, message: "" })
   const [loading, setLoading] = useState<boolean>(false)
   const router = useRouter()
+  const api = new API()
 
   const submitHandler: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault()
     setLoading(true)
     //registering user
     setError({ state: false, message: "" })
-    const res = await registerPost({ username, email, password })
+    const res = await api.registerUser({ username, email, password })
     if (res.status === 502) {
       const data = await res.json()
       console.log("Error:", data)

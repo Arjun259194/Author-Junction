@@ -1,6 +1,5 @@
 import UserModel, { User } from "@/database/model/User"
 import connectDB from "@/utils/api/connectDB"
-import { logoutPost } from "@/utils/client/api"
 import { JwtPayload, decode } from "jsonwebtoken"
 import { GetServerSideProps, NextPage } from "next"
 import Head from "next/head"
@@ -19,16 +18,6 @@ const Home: NextPage = ({ data }: any) => {
       <h2>{`email:- ${user.email}`}</h2>
       <h2>{`user id:- ${user._id}`}</h2>
       <h2>{`role:- ${user.role}`}</h2>
-
-      <button
-        className="bg-gray-400 py-2 px-4 text-black"
-        onClick={async () => {
-          await logoutPost()
-          window.location.reload()
-        }}
-      >
-        Log out
-      </button>
     </div>
   )
 }
