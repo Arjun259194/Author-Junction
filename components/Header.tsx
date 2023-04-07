@@ -1,10 +1,12 @@
-import Image from "next/image"
-import Link from "next/link"
-import { FC, ReactNode } from "react"
+import Image from "next/image";
+import Link from "next/link";
+import { FC, ReactNode } from "react";
 
-const Header: FC<{ children: ReactNode }> = ({ children }) => {
+const Header: FC<{ children?: ReactNode }> = ({
+  children,
+}) => {
   return (
-    <header className="relative z-20 mx-auto my-4 flex w-10/12 items-center justify-between">
+    <header className="relative z-20 mx-auto flex w-11/12 items-center justify-between py-3.5">
       <Link href="/">
         <div className="flex items-center space-x-2">
           <Image
@@ -25,7 +27,20 @@ const Header: FC<{ children: ReactNode }> = ({ children }) => {
         </ul>
       </nav>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+Header.defaultProps = {
+  children: (
+    <>
+      <li>
+        <Link href="/about">about</Link>
+      </li>
+      <li>
+        <Link href="/contact">contact</Link>
+      </li>
+    </>
+  ),
+};
+
+export default Header;

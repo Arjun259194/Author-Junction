@@ -2,8 +2,12 @@
   "singleQuote": false,
   "bracketSpacing": true,
   "semi": true,
-  "arrowParens": "always",
+  "arrowParens": "avoid",
   "singleAttributePerLine": false,
   "useTabs": false,
-  "printWidth": 150
+  "printWidth": 80,
+  "bracketSameLine": true,
+  "cursorOffset": -1,
+  "htmlWhitespaceSensitivity": "css",
+  "quoteProps": "as-needed"
 }
