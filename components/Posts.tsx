@@ -1,15 +1,17 @@
+import { User } from "@/database/model/User";
 import { FC } from "react";
 import Post from "./Post";
 
 interface Props {
   posts: Post[];
+  user: User;
 }
 
-const Posts: FC<Props> = ({ posts }) => {
+const Posts: FC<Props> = ({ posts, user }) => {
   return (
-    <div className="scrollbar-hide max-h-screen overflow-scroll ">
+    <div className="scrollbar-hide max-h-full ">
       {posts.map(post => {
-        return <Post post={post} />;
+        return <Post user={user} post={post} />;
       })}
     </div>
   );

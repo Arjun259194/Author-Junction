@@ -6,7 +6,6 @@
   "singleAttributePerLine": false,
   "useTabs": false,
   "printWidth": 100,
-  "bracketSameLine": true,
   "cursorOffset": -1,
   "htmlWhitespaceSensitivity": "css",
   "quoteProps": "as-needed"

@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import MediaFeed from "@/components/MediaFeed";
 import Sidebar from "@/components/Sidebar";
 import UserModel, { User } from "@/database/model/User";
@@ -14,16 +13,15 @@ interface PageProps {
 const Home: NextPage<PageProps> = ({ userData }) => {
   const user: User = JSON.parse(userData);
   return (
-    <div className="bg-gray-900">
+    <div className="bg-gray-200">
       <Head>
         <title>{`Home | ${user.username}`}</title>
         <meta name="description" content="Author-Junction Home feed page" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <Header />
-      <main className="flex">
+      <main className="flex h-screen">
         <Sidebar user={user} />
-        <MediaFeed />
+        <MediaFeed user={user} />
       </main>
     </div>
   );

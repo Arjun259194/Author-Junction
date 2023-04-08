@@ -7,9 +7,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const Button: FC<ButtonProps> = ({ variant, className, children, ...props }) => {
   return (
     <button
-      className={`${className} rounded-lg border-2 border-violet-600 py-2 px-4 hover:brightness-110 ${
-        variant === "primary" ? "bg-violet-600 text-violet-50 " : "bg-violet-100 text-violet-600"
-      }`}
+      className={`rounded-lg border-2 border-blue-600 py-1 px-4 hover:brightness-110 ${
+        variant === "primary" ? "bg-blue-600 text-blue-50 " : "bg-blue-100 text-blue-600"
+      } ${className}`}
       {...props}>
       {children}
     </button>
