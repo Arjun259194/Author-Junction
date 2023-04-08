@@ -5,7 +5,7 @@
   "arrowParens": "avoid",
   "singleAttributePerLine": false,
   "useTabs": false,
-  "printWidth": 80,
+  "printWidth": 100,
   "bracketSameLine": true,
   "cursorOffset": -1,
   "htmlWhitespaceSensitivity": "css",

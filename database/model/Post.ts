@@ -1,21 +1,21 @@
-import { Document, Schema, model, models } from "mongoose"
+import { Document, Schema, model, models } from "mongoose";
 
 export interface Post extends Document {
-  title: string
-  creator: Schema.Types.ObjectId
-  likes: number
-  shares: number
+  title: string;
+  creator: Schema.Types.ObjectId;
+  likes: Schema.Types.ObjectId[];
+  shares: number;
   //comments for future
-  content: string
+  content: string;
 }
 
 interface PostSchema {
-  title: string
-  creator: Schema.Types.ObjectId
-  likes: number
-  shares: number
+  title: string;
+  creator: Schema.Types.ObjectId;
+  likes: Schema.Types.ObjectId[];
+  shares: number;
   //comments for future
-  content: string
+  content: string;
 }
 
 const postSchema: Schema<PostSchema> = new Schema(
@@ -29,8 +29,8 @@ const postSchema: Schema<PostSchema> = new Schema(
       required: true,
     },
     likes: {
-      type: Number,
-      default: 0,
+      type: [Schema.Types.ObjectId],
+      default: [],
     },
     shares: {
       type: Number,
@@ -42,8 +42,8 @@ const postSchema: Schema<PostSchema> = new Schema(
     },
   },
   { collection: "Post-Collection" }
-)
+);
 
-const PostModel = models.post || model<Post>("post", postSchema)
+const PostModel = models.post || model<Post>("post", postSchema);
 
-export default PostModel
+export default PostModel;
