@@ -7,7 +7,7 @@
 @tailwind utilities;
 
 body {
-  @apply font-main box-border;
+  @apply box-border font-main;
 }
 
 .scrollbar-hide::-webkit-scrollbar {

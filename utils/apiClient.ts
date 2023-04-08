@@ -29,10 +29,7 @@ export default class API {
     this.header.append("Content-Type", "application/json");
   }
 
-  private getFetchOptions(
-    method: HttpMethods,
-    body?: { [key: string]: any }
-  ): RequestInit {
+  private getFetchOptions(method: HttpMethods, body?: { [key: string]: any }): RequestInit {
     return body
       ? {
           method: method,
@@ -43,18 +40,14 @@ export default class API {
   }
 
   // Authorization
-  public async registerUser(
-    body: RegisterUserInput
-  ): Promise<Response> {
+  public async registerUser(body: RegisterUserInput): Promise<Response> {
     const fetchOption = this.getFetchOptions("POST", body);
     const URL = "/api/auth/register";
     const res = await fetch(URL, fetchOption);
     return res;
   }
 
-  public async loginUser(
-    body: LoginUserInput
-  ): Promise<Response> {
+  public async loginUser(body: LoginUserInput): Promise<Response> {
     const fetchOption = this.getFetchOptions("POST", body);
     const URL = "/api/auth/login";
     const res = await fetch(URL, fetchOption);
@@ -69,9 +62,7 @@ export default class API {
   }
 
   // Post
-  public async createPost(
-    body: CreatePostInput
-  ): Promise<Response> {
+  public async createPost(body: CreatePostInput): Promise<Response> {
     const fetchOption = this.getFetchOptions("POST", body);
     const URL = "/api/post";
     const res = await fetch(URL, fetchOption);
