@@ -1,21 +1,21 @@
-import { Document, model, models, Schema } from "mongoose"
+import { Document, model, models, Schema } from "mongoose";
 
 export interface User extends Document {
-  username: string
-  email: string
-  password: string
-  followers: Schema.Types.ObjectId[]
-  following: Schema.Types.ObjectId[]
-  role: "READER" | "AUTHOR"
+  username: string;
+  email: string;
+  password: string;
+  followers: Schema.Types.ObjectId[];
+  following: Schema.Types.ObjectId[];
+  role: "READER" | "AUTHOR";
 }
 
 interface USchema {
-  username: string
-  email: string
-  password: string
-  followers: Schema.Types.ObjectId[]
-  following: Schema.Types.ObjectId[]
-  role: "READER" | "AUTHOR"
+  username: string;
+  email: string;
+  password: string;
+  followers: Schema.Types.ObjectId[];
+  following: Schema.Types.ObjectId[];
+  role: "READER" | "AUTHOR";
 }
 
 const UserSchema: Schema<USchema> = new Schema(
@@ -48,8 +48,8 @@ const UserSchema: Schema<USchema> = new Schema(
     },
   },
   { collection: "User-Collection" }
-)
+);
 
-const UserModel = models.user || model<User>("user", UserSchema)
+const UserModel = models.user || model<User>("user", UserSchema);
 
-export default UserModel
+export default UserModel;
