@@ -1,9 +1,9 @@
 import { aboutMiniIcon, contactMiniIcon, homeMiniIcon } from "@/assets/icons";
-import ListItem from "./NavItem";
+import ListItem from "./ListItem";
 
 const SidebarNavbar = () => {
   return (
-    <nav className="rounded-lg bg-gray-100 p-2">
+    <nav className="rounded-lg border border-gray-300 bg-blue-50 p-2 shadow-sm">
       <ul className="text-lg capitalize">
         <ListItem icon={homeMiniIcon} href="/">
           home

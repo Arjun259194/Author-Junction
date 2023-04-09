@@ -15,7 +15,7 @@ const MediaFeed: FC<Props> = ({ user }) => {
   const [posts, setPosts] = useState<Array<Post>>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  useEffect(() => {
+  const fetchData = () => {
     setLoading(true);
     api
       .getPosts()
@@ -29,6 +29,10 @@ const MediaFeed: FC<Props> = ({ user }) => {
         console.log(err);
         setPosts([]);
       });
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
   if (loading)
@@ -64,14 +68,14 @@ const MediaFeed: FC<Props> = ({ user }) => {
     );
 
   return (
-    <section className="max-h-full w-full overflow-y-scroll">
+    <section className="scrollbar-hide max-h-full w-full overflow-y-scroll">
       <div className="flex items-center justify-center space-x-2 py-1">
         <span className="aspect-square h-8">{newsIcon}</span>
         <h2 className=" text-center text-4xl font-semibold capitalize text-gray-900">
           latest feed
         </h2>
       </div>
-      <Posts user={user} posts={posts} />
+      <Posts fetchData={fetchData} user={user} posts={posts} />
     </section>
   );
 };

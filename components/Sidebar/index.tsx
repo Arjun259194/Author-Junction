@@ -25,13 +25,14 @@ const Sidebar: FC<Props> = ({ user: { username, email, role } }) => {
       });
   };
   return (
-    <aside className=" flex max-h-full w-1/6 min-w-min flex-col justify-between bg-blue-800 py-2 px-2 text-gray-900">
+    <aside className=" flex max-h-full w-1/6 min-w-min flex-col justify-between bg-blue-300 p-2 text-gray-900">
       <div className="space-y-4">
         <ProfileCard username={username} email={email} role={role} />
         <hr />
         <SidebarNavbar />
       </div>
       <div className="my-2 flex flex-col space-y-3 text-lg">
+        <hr />
         <Button
           className="flex items-center justify-start space-x-2 py-1 text-base font-semibold capitalize"
           variant="primary"

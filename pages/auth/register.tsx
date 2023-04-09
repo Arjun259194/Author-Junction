@@ -71,11 +71,11 @@ export default function register() {
         </li>
       </Header>
       <AuthFormLayout>
-        <span className="mb-2 text-sm font-semibold text-gray-300">Register as new user</span>
-        <h2 className="mb-2 text-5xl font-bold text-gray-200">Create new account</h2>
-        <span className="text-sm text-gray-400">
+        <span className="mb-2 text-sm font-semibold text-gray-700">Register as new user</span>
+        <h2 className="mb-2 text-5xl font-bold text-gray-900">Create new account</h2>
+        <span className="text-sm text-gray-600">
           Already a member?{" "}
-          <Link className="text-blue-500 underline underline-offset-2" href="/auth/login">
+          <Link className="text-blue-600 underline underline-offset-2" href="/auth/login">
             Login
           </Link>
         </span>

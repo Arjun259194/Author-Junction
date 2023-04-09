@@ -1,3 +1,4 @@
+import Button from "@/UI/Button";
 import { loadingIcon } from "@/assets/icons";
 import { FC, FormEventHandler, ReactNode } from "react";
 
@@ -16,11 +17,9 @@ const AuthForm: FC<Props> = ({ children, submitHandler, submitText, loading }) =
       ) : (
         <>
           {children}
-          <input
-            className="rounded-full bg-blue-400 py-2 px-4 text-xl capitalize text-white "
-            type="submit"
-            value={submitText}
-          />
+          <Button variant="primary" type="submit">
+            {submitText}
+          </Button>
         </>
       )}
     </form>

@@ -87,12 +87,12 @@ export default function Login() {
         </li>
       </Header>
       <AuthFormLayout>
-        <span className="mb-2 text-sm font-semibold text-gray-300">Login as an existing user</span>
-        <h2 className="mb-2 text-5xl font-bold text-gray-200">Login with your account</h2>
-        <span className="text-sm text-gray-400">
+        <span className="mb-2 text-sm font-semibold text-gray-600">Login as an existing user</span>
+        <h2 className="mb-2 text-5xl font-bold text-gray-900">Login with your account</h2>
+        <span className="text-sm text-gray-600">
           Don't have an account?{" "}
           <Link
-            className="capitalize text-blue-500 underline underline-offset-2"
+            className="capitalize text-blue-600 underline underline-offset-2"
             href="/auth/register"
           >
             Register

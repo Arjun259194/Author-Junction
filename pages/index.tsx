@@ -1,5 +1,6 @@
 import MediaFeed from "@/components/MediaFeed";
 import Sidebar from "@/components/Sidebar";
+import Statusbar from "@/components/Statusbar";
 import UserModel, { User } from "@/database/model/User";
 import connectDB from "@/utils/api/connectDB";
 import { JwtPayload, decode } from "jsonwebtoken";
@@ -13,7 +14,7 @@ interface PageProps {
 const Home: NextPage<PageProps> = ({ userData }) => {
   const user: User = JSON.parse(userData);
   return (
-    <div className="bg-gray-200">
+    <div className="bg-blue-50">
       <Head>
         <title>{`Home | ${user.username}`}</title>
         <meta name="description" content="Author-Junction Home feed page" />
@@ -22,6 +23,7 @@ const Home: NextPage<PageProps> = ({ userData }) => {
       <main className="flex h-screen">
         <Sidebar user={user} />
         <MediaFeed user={user} />
+        <Statusbar />
       </main>
     </div>
   );
