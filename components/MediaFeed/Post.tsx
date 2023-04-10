@@ -44,6 +44,7 @@ const Post: FC<Props> = ({ post, user }) => {
           </span>
         </PostButton>
       </div>
+      <h1>{post._id}</h1>
     </article>
   );
 };

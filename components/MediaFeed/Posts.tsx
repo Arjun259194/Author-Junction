@@ -10,6 +10,7 @@ interface Props {
 }
 
 const Posts: FC<Props> = ({ posts, fetchData, user }) => {
+  console.table(posts)
   return (
     <>
       <div className=" mx-auto max-h-full w-10/12 ">
