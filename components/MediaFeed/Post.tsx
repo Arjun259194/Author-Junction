@@ -16,6 +16,8 @@ const Post: FC<Props> = ({ post, user }) => {
     <article className="mx-3 mb-6 min-w-min space-y-2 rounded-md border-2 border-gray-200 bg-gray-50 p-2 text-gray-900 shadow-md transition-all duration-200">
       <h3 className="rounded-lg p-1 text-2xl font-semibold text-gray-900">{post.title}</h3>
       <hr />
+      <h1>{post._id}</h1>
+      <hr />
       <p className="p-1 text-base leading-relaxed text-gray-700">{shortenString(post.content)}</p>
       <hr />
       <div className="flex w-full justify-around text-xl capitalize">
