@@ -2,6 +2,7 @@ import AuthForm from "@/components/AuthForm";
 import ErrorMessage from "@/components/ErrorMessage";
 import Header from "@/components/Header";
 import InputText from "@/components/InputText";
+import { userZSchema } from "@/database/model/User";
 import useForm from "@/hooks/useForm";
 import AuthFormLayout from "@/UI/AuthFormLayout";
 import AuthPageLayout from "@/UI/AuthPageLayout";
@@ -20,6 +21,11 @@ interface ErrorState {
   state: boolean;
   message: string;
 }
+
+const zFormSchema = userZSchema.pick({
+  email: true,
+  password: true,
+});
 
 export default function Login() {
   const { changeHandler, reset, state } = useForm<FormState>({
@@ -45,12 +51,15 @@ export default function Login() {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async event => {
     event.preventDefault();
-    setLoading(true);
-
-    const res = await api.loginUser({
+    const zRes = zFormSchema.safeParse({
       email: state.email,
       password: state.password,
     });
+
+    if (!zRes.success) return errorMessage("Form input invalid");
+    setLoading(true);
+
+    const res = await api.loginUser(zRes.data);
 
     console.log("response ready");
     if (res.status === 404) {

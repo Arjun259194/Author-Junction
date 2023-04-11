@@ -1,7 +1,7 @@
-import PostModel, { Post } from "@/database/model/Post";
+import PostModel, { Post, ZodPost } from "@/database/model/Post";
 import { createPost } from "@/database/operations";
 import connectDB from "@/utils/api/connectDB";
-import jwt from "jsonwebtoken";
+import { getUserIdFromCookie } from "@/utils/api/functions";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -17,25 +17,28 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
+const zodInputValidatingSchema = ZodPost.pick({
+  title: true,
+  content: true,
+});
+
 async function postHandler(req: NextApiRequest, res: NextApiResponse) {
   try {
     await connectDB();
 
-    const { title, content } = req.body as {
-      title: string;
-      content: string;
-    };
+    const input = req.body;
+    const zodRes = zodInputValidatingSchema.safeParse(input);
 
-    const token = req.cookies.accessToken;
+    if (!zodRes.success) return res.status(400).json({ message: "invalid data" });
 
-    if (!token) return res.status(401).json({ message: "unauthorized" });
-    const payload = jwt.decode(token) as jwt.JwtPayload;
-    const id = payload.id;
-    const post = createPost({
-      title,
-      content,
-      creator: id,
-    });
+    const userId = getUserIdFromCookie(req);
+
+    if (!userId) return res.status(401).json({ message: "unauthorized" });
+
+    const { title, content } = zodRes.data;
+
+    const post = createPost({ title, content, creator: userId });
+
     await post.save();
     return res.status(200).json({ message: "post created 👍" });
   } catch (err) {
@@ -46,10 +49,8 @@ async function postHandler(req: NextApiRequest, res: NextApiResponse) {
 
 async function getHandler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const posts: Post[] | undefined = await PostModel.find().exec();
-
+    const posts: Post[] | undefined = await PostModel.find().sort({ createdAt: -1 }).exec();
     if (!posts) return res.status(404).json({ message: "There are not posts" });
-
     return res.status(200).json(posts);
   } catch (err) {
     console.log(err);

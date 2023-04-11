@@ -1,22 +1,20 @@
 import { Document, model, models, Schema } from "mongoose";
+import * as z from "zod";
 
-export interface User extends Document {
-  username: string;
-  email: string;
-  password: string;
-  followers: Schema.Types.ObjectId[];
-  following: Schema.Types.ObjectId[];
-  role: "READER" | "AUTHOR";
-}
+const objectIDRegex = /^[a-f\d]{24}$/i;
 
-interface USchema {
-  username: string;
-  email: string;
-  password: string;
-  followers: Schema.Types.ObjectId[];
-  following: Schema.Types.ObjectId[];
-  role: "READER" | "AUTHOR";
-}
+export const userZSchema = z.object({
+  username: z.string().min(3).max(50),
+  email: z.string().email(),
+  password: z.string().min(8).max(50),
+  followers: z.array(z.string().regex(objectIDRegex)),
+  following: z.array(z.string().regex(objectIDRegex)),
+  role: z.enum(["READER", "AUTHOR"]),
+});
+
+type USchema = z.TypeOf<typeof userZSchema>;
+
+export interface User extends USchema, Document {}
 
 const UserSchema: Schema<USchema> = new Schema(
   {
@@ -34,11 +32,11 @@ const UserSchema: Schema<USchema> = new Schema(
       require: true,
     },
     followers: {
-      type: [Schema.Types.ObjectId],
+      type: [String],
       default: [],
     },
     following: {
-      type: [Schema.Types.ObjectId],
+      type: [String],
       default: [],
     },
     role: {
@@ -47,9 +45,9 @@ const UserSchema: Schema<USchema> = new Schema(
       default: "READER",
     },
   },
-  { collection: "User-Collection" }
+  { collection: "User-Collection", timestamps: true }
 );
 
-const UserModel = models.user || model<User>("user", UserSchema);
+const UserModel = models?.user || model<User>("user", UserSchema);
 
 export default UserModel;

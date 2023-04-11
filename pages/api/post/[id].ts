@@ -1,4 +1,4 @@
-import PostModel, { Post } from "@/database/model/Post";
+import PostModel, { Post, ZodPost } from "@/database/model/Post";
 import connectDB from "@/utils/api/connectDB";
 import { isValidObjectId } from "mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -7,10 +7,43 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case "GET":
       return getHandler(req, res);
+
+    case "PUT":
+      return putHandler(req, res);
     default:
       return res.status(405).json({
         message: "Http method not available",
       });
+  }
+}
+
+const zodUpdateInput = ZodPost.pick({
+  title: true,
+  content: true,
+});
+
+async function putHandler(req: NextApiRequest, res: NextApiResponse) {
+  const queryPostId = req.query.id;
+  if (!queryPostId) return res.status(400).json({ message: "No id provided" });
+  let postId: string;
+  if (typeof queryPostId === "string") postId = queryPostId;
+  else postId = queryPostId[0];
+
+  const input = req.body;
+  const parseInput = zodUpdateInput.safeParse(input);
+
+  if (!parseInput.success) return res.status(400).json({ message: "invalid data" });
+
+  const update = parseInput.data;
+
+  try {
+    const post: Post | undefined = await PostModel.findByIdAndUpdate(postId, update).exec();
+    if (!post)
+      return res.status(200).json({ status: "warning", message: "post might not be updated" });
+    return res.status(200).json({ message: "post updated" });
+  } catch (err) {
+    console.log(err);
+    return res.status(502).json({ error: err });
   }
 }
 
