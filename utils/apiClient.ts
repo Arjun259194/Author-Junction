@@ -1,10 +1,7 @@
 import { Post } from "@/database/model/Post";
 import { User } from "@/database/model/User";
-import { Schema } from "mongoose";
 
 export type HttpMethods = "GET" | "POST" | "DELETE" | "PUT";
-
-type IdT = Schema.Types.ObjectId;
 
 interface CreatePostInput {
   title: Post["title"];
@@ -76,9 +73,16 @@ export default class API {
     return res;
   }
 
-  public async getPost(id: IdT): Promise<Response> {
+  public async getPost(id: string): Promise<Response> {
     const fetchOption = this.getFetchOptions("GET");
     const URL = `/api/post/${id}`;
+    const res = await fetch(URL, fetchOption);
+    return res;
+  }
+
+  public async likePost(id: string): Promise<Response> {
+    const fetchOption = this.getFetchOptions("PUT");
+    const URL = `/api/post/like/${id}`;
     const res = await fetch(URL, fetchOption);
     return res;
   }

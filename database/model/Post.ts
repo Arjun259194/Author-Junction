@@ -6,7 +6,7 @@ const objectIDRegex = /^[a-f\d]{24}$/i;
 export const ZodPost = z.object({
   title: z.string().nonempty(),
   creator: z.string().regex(objectIDRegex),
-  likes: z.array(z.string().regex(objectIDRegex)).optional(),
+  likes: z.array(z.string().regex(objectIDRegex)),
   shares: z.number().int().default(0),
   content: z.string().nonempty(),
 });

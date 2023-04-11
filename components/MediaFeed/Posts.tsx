@@ -10,7 +10,6 @@ interface Props {
 }
 
 const Posts: FC<Props> = ({ posts, fetchData, user }) => {
-  console.table(posts)
   return (
     <>
       <div className=" mx-auto max-h-full w-10/12 ">
@@ -21,11 +20,7 @@ const Posts: FC<Props> = ({ posts, fetchData, user }) => {
         </div>
         <div>
           {posts.map((post, index) => {
-            return (
-              <a key={index} href={`/post/${post._id}`}>
-                <Post user={user} post={post} />
-              </a>
-            );
+            return <Post key={index} user={user} post={post} />;
           })}
         </div>
       </div>
