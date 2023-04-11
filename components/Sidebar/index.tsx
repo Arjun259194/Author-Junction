@@ -33,9 +33,14 @@ const Sidebar: FC<Props> = ({ user: { username, email, role } }) => {
       </div>
       <div className="my-2 flex flex-col space-y-3 text-lg">
         <hr />
+
         <Button
           className="flex items-center justify-start space-x-2 py-1 text-base font-semibold capitalize"
           variant="primary"
+          onClick={event => {
+            event.preventDefault();
+            window.location.href = "/user/profile";
+          }}
         >
           <span className="aspect-square h-8">{profileIcon}</span>
           <span>my profile</span>

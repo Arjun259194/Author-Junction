@@ -25,7 +25,16 @@ const PostPage: NextPage<PageProps> = ({ state, postData }) => {
 };
 
 export const getServerSideProps: GetServerSideProps<PageProps> = async context => {
+  const token = context.req.cookies.accessToken;
+  if (!token)
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
   const postId = context.query.id;
+
   if (!isValidObjectId(postId)) {
     return {
       props: {

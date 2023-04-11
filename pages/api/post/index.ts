@@ -1,7 +1,7 @@
 import PostModel, { Post, ZodPost } from "@/database/model/Post";
 import { createPost } from "@/database/operations";
 import connectDB from "@/utils/api/connectDB";
-import { getUserIdFromCookie } from "@/utils/api/functions";
+import { getUserIdFromCookie as getUserIdFromToken } from "@/utils/api/functions";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -31,7 +31,8 @@ async function postHandler(req: NextApiRequest, res: NextApiResponse) {
 
     if (!zodRes.success) return res.status(400).json({ message: "invalid data" });
 
-    const userId = getUserIdFromCookie(req);
+    const token = req.cookies.accessToken;
+    const userId = getUserIdFromToken(token);
 
     if (!userId) return res.status(401).json({ message: "unauthorized" });
 
