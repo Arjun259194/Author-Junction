@@ -1,8 +1,10 @@
 import { locationIcon } from "@/assets/icons";
+import { HTMLElementProps } from "@/utils/types";
+import { FC } from "react";
 
-const Footer = () => {
+const Footer: FC<HTMLElementProps> = ({ className, ...props }) => {
   return (
-    <footer className="bg-gray-200 p-5">
+    <footer {...props} className={`${className} p-5  `}>
       <div>
         <p className="capitalize">&copy; AuthorJunction. All Rights Reserved</p>
         <p className="capitalize">ML institute of Diploma studies</p>

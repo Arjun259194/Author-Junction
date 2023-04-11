@@ -2,39 +2,17 @@ import Button from "@/UI/Button";
 import { authorIcon, loadingIcon, newsIcon } from "@/assets/icons";
 import { Post } from "@/database/model/Post";
 import { User } from "@/database/model/User";
-import API from "@/utils/apiClient";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import Posts from "./Posts";
 
 interface Props {
   user: User;
+  posts: Post[];
+  loading: boolean;
+  fetchFunction: () => void;
 }
 
-const MediaFeed: FC<Props> = ({ user }) => {
-  const api = new API();
-  const [posts, setPosts] = useState<Array<Post>>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-
-  const fetchData = () => {
-    setLoading(true);
-    api
-      .getPosts()
-      .then(res => (res.status === 404 ? null : res.json()))
-      .then(data => {
-        setLoading(false);
-        return !!data ? setPosts(data) : null;
-      })
-      .catch(err => {
-        setLoading(false);
-        console.log(err);
-        setPosts([]);
-      });
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+const MediaFeed: FC<Props> = ({ user, fetchFunction, loading, posts }) => {
   if (loading)
     return (
       <section className="flex w-full items-center justify-center">
@@ -75,7 +53,7 @@ const MediaFeed: FC<Props> = ({ user }) => {
           latest feed
         </h2>
       </div>
-      <Posts fetchData={fetchData} user={user} posts={posts} />
+      <Posts fetchData={fetchFunction} user={user} posts={posts} />
     </section>
   );
 };

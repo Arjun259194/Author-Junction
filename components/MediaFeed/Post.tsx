@@ -29,8 +29,6 @@ const Post: FC<Props> = ({ post, user: { _id } }) => {
         </h3>
       </a>
       <hr />
-      <h1>{post._id}</h1>
-      <hr />
       <p className="p-1 text-base leading-relaxed text-gray-700">{shortenString(post.content)}</p>
       <hr />
       <div className="flex w-full justify-around text-xl capitalize">

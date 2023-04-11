@@ -1,11 +1,14 @@
 import MediaFeed from "@/components/MediaFeed";
 import Sidebar from "@/components/Sidebar";
 import Statusbar from "@/components/Statusbar";
+import { Post } from "@/database/model/Post";
 import UserModel, { User } from "@/database/model/User";
 import connectDB from "@/utils/api/connectDB";
+import API from "@/utils/apiClient";
 import { JwtPayload, decode } from "jsonwebtoken";
 import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 
 interface PageProps {
   userData: string;
@@ -13,6 +16,30 @@ interface PageProps {
 
 const Home: NextPage<PageProps> = ({ userData }) => {
   const user: User = JSON.parse(userData);
+  const api = new API();
+  const [posts, setPosts] = useState<Array<Post>>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const fetchData = () => {
+    setLoading(true);
+    api
+      .getPosts()
+      .then(res => (res.status === 404 ? null : res.json()))
+      .then(data => {
+        setLoading(false);
+        return !!data ? setPosts(data) : null;
+      })
+      .catch(err => {
+        setLoading(false);
+        console.log(err);
+        setPosts([]);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <div className="bg-blue-50">
       <Head>
@@ -22,7 +49,7 @@ const Home: NextPage<PageProps> = ({ userData }) => {
       </Head>
       <main className="flex h-screen">
         <Sidebar user={user} />
-        <MediaFeed user={user} />
+        <MediaFeed fetchFunction={fetchData} loading={loading} posts={posts} user={user} />
         <Statusbar />
       </main>
     </div>
