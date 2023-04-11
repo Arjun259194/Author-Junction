@@ -1,5 +1,5 @@
-import * as z from "zod";
 import { Document, model, models, Schema } from "mongoose";
+import * as z from "zod";
 
 const objectIDRegex = /^[a-f\d]{24}$/i;
 
@@ -45,9 +45,9 @@ const UserSchema: Schema<USchema> = new Schema(
       default: "READER",
     },
   },
-  { collection: "User-Collection" }
+  { collection: "User-Collection", timestamps: true }
 );
 
-const UserModel = models.user || model<User>("user", UserSchema);
+const UserModel = models?.user || model<User>("user", UserSchema);
 
 export default UserModel;

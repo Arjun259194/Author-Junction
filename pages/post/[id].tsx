@@ -19,6 +19,7 @@ const PostPage: NextPage<PageProps> = ({ state, postData }) => {
       </Head>
       <h1 className="text-3xl font-bold">{post.title}</h1>
       <p>{post.content}</p>
+      <span>{post._id}</span>
     </div>
   );
 };
