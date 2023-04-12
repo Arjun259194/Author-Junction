@@ -93,4 +93,11 @@ export default class API {
     const response = await fetch(URL, fetchOption);
     return response;
   }
+
+  public async getAuthorPost(): Promise<Response> {
+    const fetchOption = this.getFetchOptions("GET");
+    const URL = "/api/user/posts";
+    const response = await fetch(URL, fetchOption);
+    return response;
+  }
 }

@@ -25,7 +25,7 @@ const Sidebar: FC<Props> = ({ user: { username, email, role } }) => {
       });
   };
   return (
-    <aside className=" flex max-h-full w-1/6 min-w-min flex-col justify-between bg-blue-300 p-2 text-gray-900">
+    <aside className=" flex max-h-full w-1/6 min-w-min flex-col justify-between bg-blue-300 px-2 text-gray-900">
       <div className="space-y-4">
         <ProfileCard username={username} email={email} role={role} />
         <hr />

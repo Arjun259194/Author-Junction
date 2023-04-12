@@ -8,6 +8,7 @@ import UserModel, { User } from "@/database/model/User";
 import { getUserIdFromToken } from "@/utils/api/functions";
 import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
+import Link from "next/link";
 
 interface Props {
   user: string;
@@ -21,16 +22,30 @@ export const Profile: NextPage<Props> = ({ user }) => {
   const { email, followers, following, role, username, _id } = userData;
 
   return (
-    <div>
+    <div className="flex min-h-screen flex-col bg-gray-50">
       <Head>
         <title>Profile</title>
       </Head>
-      <Header className="bg-gray-100" />
-      <main className="bg-gray-50">
+      <Header className="text-lg text-gray-900">
+        <li className="">
+          <Link href="/">home</Link>
+        </li>
+        <li className="">
+          <Link href="/about">about</Link>
+        </li>
+        <li>
+          <Link href="/contact">contact</Link>
+        </li>
+      </Header>
+      <main className="">
         <UserProfile user={{ username, email, followers, following, role }} />
-        {role === "READER" ? <ReaderMedia userId={userData._id} /> : <AuthorMedia />}
+        {role === "READER" ? (
+          <ReaderMedia userId={userData._id} />
+        ) : (
+          <AuthorMedia userId={userData._id} />
+        )}
       </main>
-      <Footer className="bg-gray-100" />
+      <Footer className="mt-auto bg-gray-100 text-gray-600" />
     </div>
   );
 };

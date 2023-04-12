@@ -1,10 +1,11 @@
 import Button from "@/UI/Button";
 import { authorIcon, loadingIcon } from "@/assets/icons";
 import { Post } from "@/database/model/Post";
+import { HTMLElementProps } from "@/utils/types";
 import { FC, ReactNode } from "react";
 import Posts from "./Posts";
 
-interface Props {
+interface Props extends HTMLElementProps {
   userId: string;
   posts: Post[];
   loading: boolean;
@@ -12,7 +13,15 @@ interface Props {
   children: ReactNode;
 }
 
-const MediaFeed: FC<Props> = ({ children, userId, fetchFunction, loading, posts }) => {
+const MediaFeed: FC<Props> = ({
+  children,
+  className,
+  userId,
+  fetchFunction,
+  loading,
+  posts,
+  ...props
+}) => {
   if (loading)
     return (
       <section className="flex w-full items-center justify-center">
@@ -46,7 +55,7 @@ const MediaFeed: FC<Props> = ({ children, userId, fetchFunction, loading, posts 
     );
 
   return (
-    <section className="scrollbar-hide max-h-full w-full overflow-y-scroll">
+    <section {...props} className={` ${className} scrollbar-hide w-full overflow-y-scroll`}>
       <div className="flex items-center justify-center space-x-2 py-1">
         <h2 className=" flex items-center text-center text-4xl font-semibold capitalize text-gray-900">
           {children}

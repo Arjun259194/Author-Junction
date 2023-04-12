@@ -4,11 +4,11 @@ import { FC } from "react";
 
 const Footer: FC<HTMLElementProps> = ({ className, ...props }) => {
   return (
-    <footer {...props} className={`${className} p-5  `}>
-      <div>
+    <footer {...props} className={`${className} flex flex-col items-center justify-between p-5 `}>
+      <div className="text-center">
         <p className="capitalize">&copy; AuthorJunction. All Rights Reserved</p>
         <p className="capitalize">ML institute of Diploma studies</p>
-        <p className="flex items-center capitalize">
+        <p className="flex items-center justify-center capitalize">
           <span className="aspect-square h-6">{locationIcon}</span> mehsana, gujarat
         </p>
         <p>+91 8200271084</p>

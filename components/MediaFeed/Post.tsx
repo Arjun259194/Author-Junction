@@ -9,7 +9,7 @@ interface Props {
   userId: string;
 }
 
-const shortenString = (str: string): string => str.substring(0, 300) + "...";
+const shortenString = (str: string): string => str.substring(0, 250) + "...";
 
 const Post: FC<Props> = ({ post, userId }) => {
   console.log("This is post:", post);
@@ -24,6 +24,7 @@ const Post: FC<Props> = ({ post, userId }) => {
     const res = await apiClient.likePost(post._id);
     if (res.ok) setLiked(!liked);
   };
+
   return (
     <article className="mx-3 mb-6 min-w-min space-y-2 rounded-md border-2 border-gray-200 bg-gray-50 p-2 text-gray-900 shadow-md transition-all duration-200">
       <a href={`/post/${post._id}`}>

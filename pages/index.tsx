@@ -42,15 +42,21 @@ const Home: NextPage<PageProps> = ({ userData }) => {
   }, []);
 
   return (
-    <div className="bg-blue-50">
+    <div className="bg-blue-300">
       <Head>
         <title>{`Home | ${user.username}`}</title>
         <meta name="description" content="Author-Junction Home feed page" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <main className="flex h-screen">
+      <main className="flex h-screen py-2">
         <Sidebar user={user} />
-        <MediaFeed fetchFunction={fetchData} loading={loading} posts={posts} userId={user._id}>
+        <MediaFeed
+          className="rounded bg-gray-50 py-5"
+          fetchFunction={fetchData}
+          loading={loading}
+          posts={posts}
+          userId={user._id}
+        >
           <span className="block aspect-square h-8">{newsIcon}</span>
           <h2>Latest feed</h2>
         </MediaFeed>

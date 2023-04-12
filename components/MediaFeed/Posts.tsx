@@ -13,7 +13,7 @@ const Posts: FC<Props> = ({ posts, fetchData, userId }) => {
     <>
       <div className=" mx-auto max-h-full w-10/12 ">
         <div className="flex w-full justify-center">
-          <Button onClick={fetchData} className="my-2" variant="secondary">
+          <Button onClick={fetchData} className="sticky top-0 my-2" variant="secondary">
             Refresh
           </Button>
         </div>
@@ -21,6 +21,9 @@ const Posts: FC<Props> = ({ posts, fetchData, userId }) => {
           {posts.map((post, index) => {
             return <Post key={index} userId={userId} post={post} />;
           })}
+          <span className="block h-10 text-center text-xl capitalize italic text-gray-500">
+            Refresh for new posts
+          </span>
         </div>
       </div>
     </>
