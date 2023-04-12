@@ -49,7 +49,7 @@ export default function register() {
       console.log("Error:", data);
       setError({ state: true, message: "Error registering user, try again" });
     } else if (res.status === 400) {
-      setError({state: true,message:"Invalid input try again"})
+      setError({ state: true, message: "Invalid input try again" });
     } else if (res.status === 200) {
       setError({ state: false, message: "" });
       router.push("/auth/login");
