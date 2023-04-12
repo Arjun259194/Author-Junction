@@ -1,7 +1,7 @@
 import PostModel, { Post, ZodPost } from "@/database/model/Post";
 import { createPost } from "@/database/operations";
 import connectDB from "@/utils/api/connectDB";
-import { getUserIdFromCookie as getUserIdFromToken } from "@/utils/api/functions";
+import { getUserIdFromToken } from "@/utils/api/functions";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {

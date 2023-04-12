@@ -1,19 +1,22 @@
 import { likeIcon, likedIcon, saveIcon, shareIcon } from "@/assets/icons";
 import { Post } from "@/database/model/Post";
-import { User } from "@/database/model/User";
 import API from "@/utils/apiClient";
 import { FC, MouseEventHandler, useState } from "react";
 import PostButton from "./PostButton";
 
 interface Props {
   post: Post;
-  user: User;
+  userId: string;
 }
 
 const shortenString = (str: string): string => str.substring(0, 300) + "...";
 
-const Post: FC<Props> = ({ post, user: { _id } }) => {
-  const [liked, setLiked] = useState<boolean>(post.likes.includes(_id));
+const Post: FC<Props> = ({ post, userId }) => {
+  console.log("This is post:", post);
+  console.log("this is like", post.likes);
+  console.log("this is userId", userId);
+  const [liked, setLiked] = useState<boolean>(post.likes.includes(userId));
+  console.log("This is liked state:", liked);
   const apiClient = new API();
 
   const likeToggle: MouseEventHandler<HTMLButtonElement> = async event => {

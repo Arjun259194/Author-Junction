@@ -1,15 +1,14 @@
 import Button from "@/UI/Button";
-import { User } from "@/database/model/User";
 import { FC } from "react";
 import Post from "./Post";
 
 interface Props {
   posts: Post[];
-  user: User;
+  userId: string;
   fetchData: () => void;
 }
 
-const Posts: FC<Props> = ({ posts, fetchData, user }) => {
+const Posts: FC<Props> = ({ posts, fetchData, userId }) => {
   return (
     <>
       <div className=" mx-auto max-h-full w-10/12 ">
@@ -20,7 +19,7 @@ const Posts: FC<Props> = ({ posts, fetchData, user }) => {
         </div>
         <div>
           {posts.map((post, index) => {
-            return <Post key={index} user={user} post={post} />;
+            return <Post key={index} userId={userId} post={post} />;
           })}
         </div>
       </div>

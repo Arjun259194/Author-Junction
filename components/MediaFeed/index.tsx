@@ -1,18 +1,18 @@
 import Button from "@/UI/Button";
-import { authorIcon, loadingIcon, newsIcon } from "@/assets/icons";
+import { authorIcon, loadingIcon } from "@/assets/icons";
 import { Post } from "@/database/model/Post";
-import { User } from "@/database/model/User";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import Posts from "./Posts";
 
 interface Props {
-  user: User;
+  userId: string;
   posts: Post[];
   loading: boolean;
   fetchFunction: () => void;
+  children: ReactNode;
 }
 
-const MediaFeed: FC<Props> = ({ user, fetchFunction, loading, posts }) => {
+const MediaFeed: FC<Props> = ({ children, userId, fetchFunction, loading, posts }) => {
   if (loading)
     return (
       <section className="flex w-full items-center justify-center">
@@ -24,7 +24,7 @@ const MediaFeed: FC<Props> = ({ user, fetchFunction, loading, posts }) => {
     return (
       <section className="flex w-full flex-col items-center justify-center space-y-2 ">
         <h1 className="text-2xl font-semibold ">No Feed available</h1>
-        <p>Use this opportunity and create some posts and share your work</p>
+        <p>There are not post</p>
         {
           //todo: add "create-page" link to this button
         }
@@ -48,12 +48,11 @@ const MediaFeed: FC<Props> = ({ user, fetchFunction, loading, posts }) => {
   return (
     <section className="scrollbar-hide max-h-full w-full overflow-y-scroll">
       <div className="flex items-center justify-center space-x-2 py-1">
-        <span className="aspect-square h-8">{newsIcon}</span>
-        <h2 className=" text-center text-4xl font-semibold capitalize text-gray-900">
-          latest feed
+        <h2 className=" flex items-center text-center text-4xl font-semibold capitalize text-gray-900">
+          {children}
         </h2>
       </div>
-      <Posts fetchData={fetchFunction} user={user} posts={posts} />
+      <Posts fetchData={fetchFunction} userId={userId} posts={posts} />
     </section>
   );
 };

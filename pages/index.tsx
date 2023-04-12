@@ -1,3 +1,4 @@
+import { newsIcon } from "@/assets/icons";
 import MediaFeed from "@/components/MediaFeed";
 import Sidebar from "@/components/Sidebar";
 import Statusbar from "@/components/Statusbar";
@@ -49,7 +50,10 @@ const Home: NextPage<PageProps> = ({ userData }) => {
       </Head>
       <main className="flex h-screen">
         <Sidebar user={user} />
-        <MediaFeed fetchFunction={fetchData} loading={loading} posts={posts} user={user} />
+        <MediaFeed fetchFunction={fetchData} loading={loading} posts={posts} userId={user._id}>
+          <span className="block aspect-square h-8">{newsIcon}</span>
+          <h2>Latest feed</h2>
+        </MediaFeed>
         <Statusbar />
       </main>
     </div>

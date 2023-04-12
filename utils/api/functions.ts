@@ -37,7 +37,7 @@ export function createToken(payload: string | object | Buffer): string {
   return TOKEN;
 }
 
-export function getUserIdFromCookie(token: string | undefined): string | undefined {
+export function getUserIdFromToken(token: string | undefined): string | undefined {
   if (!token) return undefined;
   const payload = jwt.decode(token);
   if (!payload) return undefined;
