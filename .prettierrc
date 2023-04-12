@@ -1,11 +1,11 @@
 {
   "singleQuote": false,
   "bracketSpacing": true,
-  "semi": true,
+  "semi": false,
   "arrowParens": "avoid",
   "singleAttributePerLine": false,
   "useTabs": false,
-  "printWidth": 100,
+  "printWidth": 90,
   "cursorOffset": -1,
   "htmlWhitespaceSensitivity": "css",
   "quoteProps": "as-needed"

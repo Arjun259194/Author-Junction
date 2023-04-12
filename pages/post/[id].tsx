@@ -1,17 +1,17 @@
-import PostModel, { Post } from "@/database/model/Post";
-import { isValidObjectId } from "mongoose";
-import { GetServerSideProps, NextPage } from "next";
-import Head from "next/head";
+import PostModel, { Post } from "@/database/model/Post"
+import { isValidObjectId } from "mongoose"
+import { GetServerSideProps, NextPage } from "next"
+import Head from "next/head"
 
 interface PageProps {
-  state: boolean;
-  postData: string;
+  state: boolean
+  postData: string
 }
 
 const PostPage: NextPage<PageProps> = ({ state, postData }) => {
-  if (!state) return <div>id not valid</div>;
+  if (!state) return <div>id not valid</div>
 
-  const post: Post = JSON.parse(postData);
+  const post: Post = JSON.parse(postData)
   return (
     <div>
       <Head>
@@ -21,19 +21,19 @@ const PostPage: NextPage<PageProps> = ({ state, postData }) => {
       <p>{post.content}</p>
       <span>{post._id}</span>
     </div>
-  );
-};
+  )
+}
 
 export const getServerSideProps: GetServerSideProps<PageProps> = async context => {
-  const token = context.req.cookies.accessToken;
+  const token = context.req.cookies.accessToken
   if (!token)
     return {
       redirect: {
         destination: "/auth/login",
         permanent: false,
       },
-    };
-  const postId = context.query.id;
+    }
+  const postId = context.query.id
 
   if (!isValidObjectId(postId)) {
     return {
@@ -41,15 +41,15 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async context =
         state: false,
         postData: "",
       },
-    };
+    }
   }
-  const post = await PostModel.findById(postId);
+  const post = await PostModel.findById(postId)
   return {
     props: {
       state: true,
       postData: JSON.stringify(post),
     },
-  };
-};
+  }
+}
 
-export default PostPage;
+export default PostPage

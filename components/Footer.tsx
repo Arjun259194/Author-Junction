@@ -1,10 +1,13 @@
-import { locationIcon } from "@/assets/icons";
-import { HTMLElementProps } from "@/utils/types";
-import { FC } from "react";
+import { locationIcon } from "@/assets/icons"
+import { HTMLElementProps } from "@/utils/types"
+import { FC } from "react"
 
 const Footer: FC<HTMLElementProps> = ({ className, ...props }) => {
   return (
-    <footer {...props} className={`${className} flex flex-col items-center justify-between p-5 `}>
+    <footer
+      {...props}
+      className={`${className} flex flex-col items-center justify-between p-5 `}
+    >
       <div className="text-center">
         <p className="capitalize">&copy; AuthorJunction. All Rights Reserved</p>
         <p className="capitalize">ML institute of Diploma studies</p>
@@ -15,8 +18,8 @@ const Footer: FC<HTMLElementProps> = ({ className, ...props }) => {
         <p>arjun259194@gmail.com</p>
       </div>
     </footer>
-  );
-};
+  )
+}
 
 /* 
 © [Year] [Your Company Name]. All Rights Reserved.
@@ -27,4 +30,4 @@ const Footer: FC<HTMLElementProps> = ({ className, ...props }) => {
 [Email Address]
 */
 
-export default Footer;
+export default Footer

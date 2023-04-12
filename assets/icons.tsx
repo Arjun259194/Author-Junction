@@ -6,19 +6,19 @@ export const loadingIcon = (
       clipRule="evenodd"
     />
   </svg>
-);
+)
 
 export const readerIcon = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
     <path d="M11.25 4.533A9.707 9.707 0 006 3a9.735 9.735 0 00-3.25.555.75.75 0 00-.5.707v14.25a.75.75 0 001 .707A8.237 8.237 0 016 18.75c1.995 0 3.823.707 5.25 1.886V4.533zM12.75 20.636A8.214 8.214 0 0118 18.75c.966 0 1.89.166 2.75.47a.75.75 0 001-.708V4.262a.75.75 0 00-.5-.707A9.735 9.735 0 0018 3a9.707 9.707 0 00-5.25 1.533v16.103z" />
   </svg>
-);
+)
 
 export const authorIcon = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
     <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
   </svg>
-);
+)
 
 export const logoutIcon = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -28,7 +28,7 @@ export const logoutIcon = (
       clipRule="evenodd"
     />
   </svg>
-);
+)
 
 export const likeIcon = (
   <svg
@@ -44,13 +44,13 @@ export const likeIcon = (
       d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
     />
   </svg>
-);
+)
 
 export const likedIcon = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
     <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
   </svg>
-);
+)
 
 export const shareIcon = (
   <svg
@@ -66,7 +66,7 @@ export const shareIcon = (
       d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
     />
   </svg>
-);
+)
 
 export const homeMiniIcon = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -76,7 +76,7 @@ export const homeMiniIcon = (
       clipRule="evenodd"
     />
   </svg>
-);
+)
 
 export const aboutMiniIcon = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -86,7 +86,7 @@ export const aboutMiniIcon = (
       clipRule="evenodd"
     />
   </svg>
-);
+)
 
 export const contactMiniIcon = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -96,7 +96,7 @@ export const contactMiniIcon = (
       clipRule="evenodd"
     />
   </svg>
-);
+)
 
 export const profileIcon = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -106,7 +106,7 @@ export const profileIcon = (
       clipRule="evenodd"
     />
   </svg>
-);
+)
 
 export const locationIcon = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -116,7 +116,7 @@ export const locationIcon = (
       clipRule="evenodd"
     />
   </svg>
-);
+)
 
 export const newsIcon = (
   <svg
@@ -132,7 +132,7 @@ export const newsIcon = (
       d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"
     />
   </svg>
-);
+)
 
 export const saveIcon = (
   <svg
@@ -148,4 +148,4 @@ export const saveIcon = (
       d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
     />
   </svg>
-);
+)

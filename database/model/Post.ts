@@ -1,7 +1,7 @@
-import { Document, Schema, model, models } from "mongoose";
-import z from "zod";
+import { Document, Schema, model, models } from "mongoose"
+import z from "zod"
 
-const objectIDRegex = /^[a-f\d]{24}$/i;
+const objectIDRegex = /^[a-f\d]{24}$/i
 
 export const ZodPost = z.object({
   title: z.string().nonempty(),
@@ -9,9 +9,9 @@ export const ZodPost = z.object({
   likes: z.array(z.string().regex(objectIDRegex)),
   shares: z.number().int().default(0),
   content: z.string().nonempty(),
-});
+})
 
-type PostSchema = z.infer<typeof ZodPost>;
+type PostSchema = z.infer<typeof ZodPost>
 
 export interface Post extends PostSchema, Document {}
 
@@ -41,8 +41,8 @@ const postSchema: Schema<PostSchema> = new Schema(
     },
   },
   { collection: "Post-Collection", timestamps: true }
-);
+)
 
-const PostModel = models?.post || model<Post>("post", postSchema);
+const PostModel = models?.post || model<Post>("post", postSchema)
 
-export default PostModel;
+export default PostModel

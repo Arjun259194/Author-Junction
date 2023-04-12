@@ -1,7 +1,7 @@
-import { ButtonHTMLAttributes, FC } from "react";
+import { ButtonHTMLAttributes, FC } from "react"
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: "primary" | "secondary";
+  variant: "primary" | "secondary"
 }
 
 const Button: FC<ButtonProps> = ({ variant, className, children, ...props }) => {
@@ -14,7 +14,7 @@ const Button: FC<ButtonProps> = ({ variant, className, children, ...props }) => 
     >
       {children}
     </button>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button

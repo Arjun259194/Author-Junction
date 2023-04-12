@@ -1,4 +1,4 @@
-import { locationIcon } from "@/assets/icons";
+import { locationIcon } from "@/assets/icons"
 
 const SideFooter = () => {
   return (
@@ -11,7 +11,7 @@ const SideFooter = () => {
       <p>+91 8200271084</p>
       <p>arjun259194@gmail.com</p>
     </footer>
-  );
-};
+  )
+}
 
-export default SideFooter;
+export default SideFooter

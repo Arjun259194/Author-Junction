@@ -1,11 +1,11 @@
-import { authorIcon, readerIcon } from "@/assets/icons";
-import { User } from "@/database/model/User";
-import { FC } from "react";
+import { authorIcon, readerIcon } from "@/assets/icons"
+import { User } from "@/database/model/User"
+import { FC } from "react"
 
 interface Props {
-  username: string;
-  email: string;
-  role: User["role"];
+  username: string
+  email: string
+  role: User["role"]
 }
 
 const ProfileCard: FC<Props> = ({ username, email, role }) => {
@@ -23,7 +23,7 @@ const ProfileCard: FC<Props> = ({ username, email, role }) => {
       <hr />
       <p className="text-gray-500">{email}</p>
     </div>
-  );
-};
+  )
+}
 
-export default ProfileCard;
+export default ProfileCard

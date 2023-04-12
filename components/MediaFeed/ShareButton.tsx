@@ -1,25 +1,25 @@
-import Button from "@/UI/Button";
-import { shareIcon } from "@/assets/icons";
-import { Dialog, Transition } from "@headlessui/react";
-import { FC, Fragment, useState } from "react";
-import PostButton from "./PostButton";
+import Button from "@/UI/Button"
+import { shareIcon } from "@/assets/icons"
+import { Dialog, Transition } from "@headlessui/react"
+import { FC, Fragment, useState } from "react"
+import PostButton from "./PostButton"
 
 interface Props {
-  postId: string;
+  postId: string
 }
 
 const ShareButton: FC<Props> = ({ postId }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [clicked, setClicked] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
+  const [clicked, setClicked] = useState(false)
 
-  const url = new URL("/post/" + postId, "http://localhost:3000");
+  const url = new URL("/post/" + postId, "http://localhost:3000")
 
   function closeModal() {
-    setIsOpen(false);
+    setIsOpen(false)
   }
 
   function openModal() {
-    setIsOpen(true);
+    setIsOpen(true)
   }
   return (
     <>
@@ -67,8 +67,12 @@ const ShareButton: FC<Props> = ({ postId }) => {
                     <p className="text-sm text-gray-500">
                       copy and use the link given below to share this post
                     </p>
-                    <p className="rounded-md bg-gray-200 p-2 font-mono text-gray-600">{url.href}</p>
-                    <p className="text-gray-500">{!!clicked ? "copied to clipboard!" : null}</p>
+                    <p className="rounded-md bg-gray-200 p-2 font-mono text-gray-600">
+                      {url.href}
+                    </p>
+                    <p className="text-gray-500">
+                      {!!clicked ? "copied to clipboard!" : null}
+                    </p>
                   </div>
 
                   <div className="mt-4 space-x-2">
@@ -76,8 +80,8 @@ const ShareButton: FC<Props> = ({ postId }) => {
                       type="button"
                       variant="primary"
                       onClick={_ => {
-                        navigator.clipboard.writeText(url.href);
-                        setClicked(true);
+                        navigator.clipboard.writeText(url.href)
+                        setClicked(true)
                       }}
                     >
                       copy
@@ -86,8 +90,8 @@ const ShareButton: FC<Props> = ({ postId }) => {
                       type="button"
                       variant="secondary"
                       onClick={_ => {
-                        setClicked(false);
-                        closeModal();
+                        setClicked(false)
+                        closeModal()
                       }}
                     >
                       Got it, thanks!
@@ -100,7 +104,7 @@ const ShareButton: FC<Props> = ({ postId }) => {
         </Dialog>
       </Transition>
     </>
-  );
-};
+  )
+}
 
-export default ShareButton;
+export default ShareButton

@@ -1,10 +1,10 @@
-import Link from "next/link";
-import { FC } from "react";
+import Link from "next/link"
+import { FC } from "react"
 
 interface Props {
-  href: string;
-  children: string;
-  icon: JSX.Element;
+  href: string
+  children: string
+  icon: JSX.Element
 }
 const ListItem: FC<Props> = ({ href, children, icon }) => (
   <li>
@@ -15,6 +15,6 @@ const ListItem: FC<Props> = ({ href, children, icon }) => (
       </span>
     </Link>
   </li>
-);
+)
 
-export default ListItem;
+export default ListItem

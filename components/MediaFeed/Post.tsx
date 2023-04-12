@@ -1,26 +1,26 @@
-import { likeIcon, likedIcon } from "@/assets/icons";
-import { Post } from "@/database/model/Post";
-import API from "@/utils/apiClient";
-import { FC, MouseEventHandler, useState } from "react";
-import PostButton from "./PostButton";
-import ShareButton from "./ShareButton";
+import { likeIcon, likedIcon } from "@/assets/icons"
+import { Post } from "@/database/model/Post"
+import API from "@/utils/apiClient"
+import { FC, MouseEventHandler, useState } from "react"
+import PostButton from "./PostButton"
+import ShareButton from "./ShareButton"
 
 interface Props {
-  post: Post;
-  userId: string;
+  post: Post
+  userId: string
 }
 
-const shortenString = (str: string): string => str.substring(0, 250) + "...";
+const shortenString = (str: string): string => str.substring(0, 250) + "..."
 
 const Post: FC<Props> = ({ post, userId }) => {
-  const [liked, setLiked] = useState<boolean>(post.likes.includes(userId));
-  const apiClient = new API();
+  const [liked, setLiked] = useState<boolean>(post.likes.includes(userId))
+  const apiClient = new API()
 
   const likeToggle: MouseEventHandler<HTMLButtonElement> = async event => {
-    event.preventDefault();
-    const res = await apiClient.likePost(post._id);
-    if (res.ok) setLiked(!liked);
-  };
+    event.preventDefault()
+    const res = await apiClient.likePost(post._id)
+    if (res.ok) setLiked(!liked)
+  }
 
   return (
     <article className="mx-3 mb-6 min-w-min space-y-2 rounded-md border-2 border-gray-200 bg-gray-50 p-2 text-gray-900 shadow-md transition-all duration-200">
@@ -30,7 +30,9 @@ const Post: FC<Props> = ({ post, userId }) => {
         </h3>
       </a>
       <hr />
-      <p className="p-1 text-base leading-relaxed text-gray-700">{shortenString(post.content)}</p>
+      <p className="p-1 text-base leading-relaxed text-gray-700">
+        {shortenString(post.content)}
+      </p>
       <hr />
       <div className="flex w-full justify-evenly text-xl capitalize">
         <PostButton onClick={likeToggle} className="hover:bg-pink-50">
@@ -44,7 +46,7 @@ const Post: FC<Props> = ({ post, userId }) => {
         <ShareButton postId={post._id} />
       </div>
     </article>
-  );
-};
+  )
+}
 
-export default Post;
+export default Post

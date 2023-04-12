@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode } from "react"
 
 const AuthFormLayout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
@@ -7,7 +7,7 @@ const AuthFormLayout: FC<{ children: ReactNode }> = ({ children }) => {
         {children}
       </div>
     </main>
-  );
-};
+  )
+}
 
-export default AuthFormLayout;
+export default AuthFormLayout
