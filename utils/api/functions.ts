@@ -1,11 +1,11 @@
-import UserModel, { User } from "@/database/model/User";
-import { compare } from "bcrypt";
-import jwt, { sign } from "jsonwebtoken";
+import UserModel, { User } from "@/database/model/User"
+import { compare } from "bcrypt"
+import jwt, { sign } from "jsonwebtoken"
 
 /**
  * Parameter type for isValidUser function
  */
-type TUserData = { email: User["email"]; password: User["password"] };
+type TUserData = { email: User["email"]; password: User["password"] }
 
 /**
  * Checks if the provided email and password combination match a user in the database.
@@ -18,11 +18,11 @@ type TUserData = { email: User["email"]; password: User["password"] };
 export async function isValidUser({ email, password }: TUserData) {
   const foundUser: User | undefined = await UserModel.findOne({
     email: email,
-  }).exec();
-  if (!foundUser) return { status: "not-found" } as const;
-  const isValidPassword: boolean = await compare(password, foundUser.password);
-  if (!isValidPassword) return { status: "unauthorized" } as const;
-  return { status: "ok", user: foundUser } as const;
+  }).exec()
+  if (!foundUser) return { status: "not-found" } as const
+  const isValidPassword: boolean = await compare(password, foundUser.password)
+  if (!isValidPassword) return { status: "unauthorized" } as const
+  return { status: "ok", user: foundUser } as const
 }
 
 /**
@@ -32,15 +32,15 @@ export async function isValidUser({ email, password }: TUserData) {
  */
 
 export function createToken(payload: string | object | Buffer): string {
-  const secretKey = process.env.SECRET_KEY!;
-  const TOKEN = sign(payload, secretKey);
-  return TOKEN;
+  const secretKey = process.env.SECRET_KEY!
+  const TOKEN = sign(payload, secretKey)
+  return TOKEN
 }
 
 export function getUserIdFromToken(token: string | undefined): string | undefined {
-  if (!token) return undefined;
-  const payload = jwt.decode(token);
-  if (!payload) return undefined;
-  if (typeof payload === "string") return payload;
-  return payload.id;
+  if (!token) return undefined
+  const payload = jwt.decode(token)
+  if (!payload) return undefined
+  if (typeof payload === "string") return payload
+  return payload.id
 }

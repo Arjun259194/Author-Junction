@@ -1,4 +1,4 @@
-import SideFooter from "./SideFooter";
+import SideFooter from "./SideFooter"
 
 const Statusbar = () => {
   return (
@@ -19,7 +19,7 @@ const Statusbar = () => {
       <hr />
       <SideFooter />
     </section>
-  );
-};
+  )
+}
 
-export default Statusbar;
+export default Statusbar

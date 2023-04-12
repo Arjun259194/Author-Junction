@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, FC } from "react";
+import { ButtonHTMLAttributes, FC } from "react"
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
@@ -10,7 +10,7 @@ const PostButton: FC<ButtonProps> = ({ children, className, ...props }) => {
     >
       {children}
     </button>
-  );
-};
+  )
+}
 
-export default PostButton;
+export default PostButton

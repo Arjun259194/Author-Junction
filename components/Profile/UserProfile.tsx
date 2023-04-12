@@ -1,18 +1,20 @@
-import { authorIcon, readerIcon } from "@/assets/icons";
-import { User } from "@/database/model/User";
-import { FC } from "react";
+import { authorIcon, readerIcon } from "@/assets/icons"
+import { User } from "@/database/model/User"
+import { FC } from "react"
 
 interface Props {
   user: {
-    email: User["email"];
-    role: User["role"];
-    username: User["username"];
-    following: User["following"];
-    followers: User["followers"];
-  };
+    email: User["email"]
+    role: User["role"]
+    username: User["username"]
+    following: User["following"]
+    followers: User["followers"]
+  }
 }
 
-const UserProfile: FC<Props> = ({ user: { username, email, role, followers, following } }) => (
+const UserProfile: FC<Props> = ({
+  user: { username, email, role, followers, following },
+}) => (
   <section className="flex cursor-default flex-col items-center text-gray-900">
     <div className="flex flex-col items-center">
       <span className="block aspect-square h-20 text-gray-800">
@@ -35,6 +37,6 @@ const UserProfile: FC<Props> = ({ user: { username, email, role, followers, foll
       </div>
     </div>
   </section>
-);
+)
 
-export default UserProfile;
+export default UserProfile

@@ -1,5 +1,5 @@
-import { aboutMiniIcon, contactMiniIcon, homeMiniIcon } from "@/assets/icons";
-import ListItem from "./ListItem";
+import { aboutMiniIcon, contactMiniIcon, homeMiniIcon } from "@/assets/icons"
+import ListItem from "./ListItem"
 
 const SidebarNavbar = () => {
   return (
@@ -18,7 +18,7 @@ const SidebarNavbar = () => {
         </ListItem>
       </ul>
     </nav>
-  );
-};
+  )
+}
 
-export default SidebarNavbar;
+export default SidebarNavbar

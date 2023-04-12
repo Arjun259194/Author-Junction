@@ -1,7 +1,7 @@
-import { HTMLElementProps } from "@/utils/types";
-import Image from "next/image";
-import Link from "next/link";
-import { FC } from "react";
+import { HTMLElementProps } from "@/utils/types"
+import Image from "next/image"
+import Link from "next/link"
+import { FC } from "react"
 
 const Header: FC<HTMLElementProps> = ({ children, className, ...props }) => {
   return (
@@ -26,8 +26,8 @@ const Header: FC<HTMLElementProps> = ({ children, className, ...props }) => {
         </nav>
       </div>
     </header>
-  );
-};
+  )
+}
 
 Header.defaultProps = {
   children: (
@@ -40,6 +40,6 @@ Header.defaultProps = {
       </li>
     </>
   ),
-};
+}
 
-export default Header;
+export default Header

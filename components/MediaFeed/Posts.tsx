@@ -1,11 +1,11 @@
-import Button from "@/UI/Button";
-import { FC } from "react";
-import Post from "./Post";
+import Button from "@/UI/Button"
+import { FC } from "react"
+import Post from "./Post"
 
 interface Props {
-  posts: Post[];
-  userId: string;
-  fetchData: () => void;
+  posts: Post[]
+  userId: string
+  fetchData: () => void
 }
 
 const Posts: FC<Props> = ({ posts, fetchData, userId }) => {
@@ -19,7 +19,7 @@ const Posts: FC<Props> = ({ posts, fetchData, userId }) => {
         </div>
         <div>
           {posts.map((post, index) => {
-            return <Post key={index} userId={userId} post={post} />;
+            return <Post key={index} userId={userId} post={post} />
           })}
           <span className="block h-10 text-center text-xl capitalize italic text-gray-500">
             Refresh for new posts
@@ -27,7 +27,7 @@ const Posts: FC<Props> = ({ posts, fetchData, userId }) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Posts;
+export default Posts

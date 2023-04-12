@@ -1,7 +1,7 @@
-import { Document, model, models, Schema } from "mongoose";
-import * as z from "zod";
+import { Document, model, models, Schema } from "mongoose"
+import * as z from "zod"
 
-const objectIDRegex = /^[a-f\d]{24}$/i;
+const objectIDRegex = /^[a-f\d]{24}$/i
 
 export const ZodUser = z.object({
   username: z.string().min(3).max(50),
@@ -11,9 +11,9 @@ export const ZodUser = z.object({
   followers: z.array(z.string().regex(objectIDRegex)),
   following: z.array(z.string().regex(objectIDRegex)),
   role: z.enum(["READER", "AUTHOR"]),
-});
+})
 
-type USchema = z.TypeOf<typeof ZodUser>;
+type USchema = z.TypeOf<typeof ZodUser>
 
 export interface User extends USchema, Document {}
 
@@ -49,8 +49,8 @@ const UserSchema: Schema<USchema> = new Schema(
     },
   },
   { collection: "User-Collection", timestamps: true }
-);
+)
 
-const UserModel = models?.user || model<User>("user", UserSchema);
+const UserModel = models?.user || model<User>("user", UserSchema)
 
-export default UserModel;
+export default UserModel

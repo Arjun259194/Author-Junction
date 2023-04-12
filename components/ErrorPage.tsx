@@ -1,4 +1,4 @@
-import Button from "@/UI/Button";
+import Button from "@/UI/Button"
 
 const ErrorPage = () => (
   <div className="flex h-screen w-screen flex-col items-center justify-center space-y-4 bg-gray-100 text-2xl font-light capitalize text-gray-900">
@@ -14,6 +14,6 @@ const ErrorPage = () => (
       </Button>
     </div>
   </div>
-);
+)
 
-export default ErrorPage;
+export default ErrorPage
