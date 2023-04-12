@@ -2,7 +2,7 @@ import AuthForm from "@/components/AuthForm";
 import ErrorMessage from "@/components/ErrorMessage";
 import Header from "@/components/Header";
 import InputText from "@/components/InputText";
-import { userZSchema } from "@/database/model/User";
+import { ZodUser } from "@/database/model/User";
 import useForm from "@/hooks/useForm";
 import AuthFormLayout from "@/UI/AuthFormLayout";
 import AuthPageLayout from "@/UI/AuthPageLayout";
@@ -22,7 +22,7 @@ interface ErrorState {
   message: string;
 }
 
-const zFormSchema = userZSchema.pick({
+const zFormSchema = ZodUser.pick({
   email: true,
   password: true,
 });

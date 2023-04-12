@@ -1,6 +1,6 @@
-import UserModel, { User, userZSchema } from "@/database/model/User";
+import UserModel, { User, ZodUser } from "@/database/model/User";
 import connectDB from "@/utils/api/connectDB";
-import { getUserIdFromCookie } from "@/utils/api/functions";
+import { getUserIdFromToken } from "@/utils/api/functions";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -16,7 +16,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-const InputSchema = userZSchema.omit({
+const InputSchema = ZodUser.omit({
   password: true,
   followers: true,
   following: true,
@@ -24,7 +24,8 @@ const InputSchema = userZSchema.omit({
 
 async function putHandler(req: NextApiRequest, res: NextApiResponse) {
   await connectDB();
-  const userId = getUserIdFromCookie(req);
+  const token = req.cookies.accessToken;
+  const userId = getUserIdFromToken(token);
   if (!userId) return res.status(401).json({ message: "unauthorized" });
   const input = req.body;
   const zRes = InputSchema.safeParse(input);
@@ -42,8 +43,14 @@ async function putHandler(req: NextApiRequest, res: NextApiResponse) {
 }
 
 async function getHandler(req: NextApiRequest, res: NextApiResponse) {
-  const userId = getUserIdFromCookie(req);
+  const token = req.cookies.accessToken;
+  const userId = getUserIdFromToken(token);
   if (!userId) return res.status(401).json({ message: "unauthorized" });
-  const user = await UserModel.findById(userId).exec();
-  return res.status(200).json(user);
+  try {
+    const user = await UserModel.findById(userId).exec();
+    return res.status(200).json(user);
+  } catch (err) {
+    console.log(err);
+    return res.status(502).json({ error: err });
+  }
 }

@@ -1,4 +1,4 @@
-import { User, userZSchema } from "@/database/model/User";
+import { ZodUser } from "@/database/model/User";
 import { createUser } from "@/database/operations";
 import connectDB from "@/utils/api/connectDB";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -14,7 +14,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-const UserInputSchema = userZSchema.pick({
+const UserInputSchema = ZodUser.pick({
   username: true,
   email: true,
   password: true,
@@ -29,9 +29,9 @@ async function postHandler(
   try {
     await connectDB();
     const input = req.body;
-    const zRes = UserInputSchema.safeParse(input)
-    if(!zRes.success) return res.status(400).json({message: "Invalid data"})
-    const {username,email,password} = zRes.data
+    const zRes = UserInputSchema.safeParse(input);
+    if (!zRes.success) return res.status(400).json({ message: "Invalid data" });
+    const { username, email, password } = zRes.data;
     const newUser = await (await createUser({ username, email, password })).save();
     return res.status(200).json({ message: "user created", user: newUser }); // this is just for api testing
   } catch (err) {

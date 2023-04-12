@@ -40,50 +40,64 @@ export default class API {
   public async registerUser(body: RegisterUserInput): Promise<Response> {
     const fetchOption = this.getFetchOptions("POST", body);
     const URL = "/api/auth/register";
-    const res = await fetch(URL, fetchOption);
-    return res;
+    const response = await fetch(URL, fetchOption);
+    return response;
   }
 
   public async loginUser(body: LoginUserInput): Promise<Response> {
     const fetchOption = this.getFetchOptions("POST", body);
     const URL = "/api/auth/login";
-    const res = await fetch(URL, fetchOption);
-    return res;
+    const response = await fetch(URL, fetchOption);
+    return response;
   }
 
   public async logoutUser(): Promise<Response> {
     const fetchOption = this.getFetchOptions("POST");
     const URL = "/api/auth/logout";
-    const res = await fetch(URL, fetchOption);
-    return res;
+    const response = await fetch(URL, fetchOption);
+    return response;
   }
 
   // Post
   public async createPost(body: CreatePostInput): Promise<Response> {
     const fetchOption = this.getFetchOptions("POST", body);
     const URL = "/api/post";
-    const res = await fetch(URL, fetchOption);
-    return res;
+    const response = await fetch(URL, fetchOption);
+    return response;
   }
 
   public async getPosts(): Promise<Response> {
     const fetchOption = this.getFetchOptions("GET");
     const URL = "/api/post";
-    const res = await fetch(URL, fetchOption);
-    return res;
+    const response = await fetch(URL, fetchOption);
+    return response;
   }
 
   public async getPost(id: string): Promise<Response> {
     const fetchOption = this.getFetchOptions("GET");
     const URL = `/api/post/${id}`;
-    const res = await fetch(URL, fetchOption);
-    return res;
+    const response = await fetch(URL, fetchOption);
+    return response;
   }
 
   public async likePost(id: string): Promise<Response> {
     const fetchOption = this.getFetchOptions("PUT");
     const URL = `/api/post/like/${id}`;
-    const res = await fetch(URL, fetchOption);
-    return res;
+    const response = await fetch(URL, fetchOption);
+    return response;
+  }
+
+  public async likedPost(): Promise<Response> {
+    const fetchOption = this.getFetchOptions("GET");
+    const URL = "/api/user/liked";
+    const response = await fetch(URL, fetchOption);
+    return response;
+  }
+
+  public async getAuthorPost(): Promise<Response> {
+    const fetchOption = this.getFetchOptions("GET");
+    const URL = "/api/user/posts";
+    const response = await fetch(URL, fetchOption);
+    return response;
   }
 }

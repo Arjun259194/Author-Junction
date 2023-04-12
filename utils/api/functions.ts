@@ -1,9 +1,6 @@
 import UserModel, { User } from "@/database/model/User";
-import jwt from 'jsonwebtoken'
 import { compare } from "bcrypt";
-import { sign } from "jsonwebtoken";
-import { NextApiRequest } from "next";
-import { type } from "os";
+import jwt, { sign } from "jsonwebtoken";
 
 /**
  * Parameter type for isValidUser function
@@ -40,12 +37,10 @@ export function createToken(payload: string | object | Buffer): string {
   return TOKEN;
 }
 
-export function getUserIdFromCookie(req:NextApiRequest): string | undefined {
-  const token = req.cookies.accessToken
-  if (!token) return undefined
-  const payload = jwt.decode(token) 
-  if (!payload) return undefined
-  if(typeof payload === "string") return payload
-  return payload.id
-
+export function getUserIdFromToken(token: string | undefined): string | undefined {
+  if (!token) return undefined;
+  const payload = jwt.decode(token);
+  if (!payload) return undefined;
+  if (typeof payload === "string") return payload;
+  return payload.id;
 }
