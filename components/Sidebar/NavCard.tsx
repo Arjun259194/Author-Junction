@@ -3,7 +3,7 @@ import ListItem from "./ListItem"
 
 const SidebarNavbar = () => {
   return (
-    <nav className="rounded-lg border border-gray-300 bg-blue-50 p-2 shadow-sm">
+    <nav className="rounded-lg border border-gray-300 bg-cyan-50 p-2 shadow-sm">
       <ul className="text-lg capitalize">
         <ListItem icon={homeMiniIcon} href="/">
           home
