@@ -3,6 +3,7 @@ import ErrorMessage from "@/components/ErrorMessage"
 import Header from "@/components/Header"
 import InputText from "@/components/InputText"
 import useForm from "@/hooks/useForm"
+import A from "@/UI/A"
 import AuthFormLayout from "@/UI/AuthFormLayout"
 import AuthPageLayout from "@/UI/AuthPageLayout"
 import API from "@/utils/apiClient"
@@ -79,9 +80,9 @@ export default function register() {
         <h2 className="mb-2 text-5xl font-bold text-gray-900">Create new account</h2>
         <span className="text-sm text-gray-600">
           Already a member?{" "}
-          <Link className="text-blue-600 underline underline-offset-2" href="/auth/login">
+          <A className="text-violet-500" href="/auth/login">
             Login
-          </Link>
+          </A>
         </span>
         <AuthForm loading={loading} submitHandler={submitHandler} submitText="register">
           <InputText

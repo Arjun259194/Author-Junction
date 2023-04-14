@@ -4,6 +4,7 @@ import Header from "@/components/Header"
 import InputText from "@/components/InputText"
 import { ZodUser } from "@/database/model/User"
 import useForm from "@/hooks/useForm"
+import A from "@/UI/A"
 import AuthFormLayout from "@/UI/AuthFormLayout"
 import AuthPageLayout from "@/UI/AuthPageLayout"
 import API from "@/utils/apiClient"
@@ -96,18 +97,15 @@ export default function Login() {
         </li>
       </Header>
       <AuthFormLayout>
-        <span className="mb-2 text-sm font-semibold text-gray-600">
+        <span className="mb-2 text-sm font-semibold text-cyan-600">
           Login as an existing user
         </span>
         <h2 className="mb-2 text-5xl font-bold text-gray-900">Login with your account</h2>
         <span className="text-sm text-gray-600">
           Don't have an account?{" "}
-          <Link
-            className="capitalize text-blue-600 underline underline-offset-2"
-            href="/auth/register"
-          >
+          <A className="text-violet-500" href="/auth/register">
             Register
-          </Link>
+          </A>
         </span>
         <AuthForm loading={loading} submitHandler={handleSubmit} submitText="Login">
           <InputText

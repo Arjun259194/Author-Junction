@@ -1,3 +1,4 @@
+import A from "@/UI/A"
 import { locationIcon } from "@/assets/icons"
 import { HTMLElementProps } from "@/utils/types"
 import { FC } from "react"
@@ -6,16 +7,22 @@ const Footer: FC<HTMLElementProps> = ({ className, ...props }) => {
   return (
     <footer
       {...props}
-      className={`${className} flex flex-col items-center justify-between p-5 `}
+      className={`${className} flex items-start justify-between px-5 py-4 `}
     >
-      <div className="text-center">
+      <div className="">
         <p className="capitalize">&copy; AuthorJunction. All Rights Reserved</p>
         <p className="capitalize">ML institute of Diploma studies</p>
-        <p className="flex items-center justify-center capitalize">
+        <p className="flex capitalize">
           <span className="aspect-square h-6">{locationIcon}</span> mehsana, gujarat
         </p>
         <p>+91 8200271084</p>
         <p>arjun259194@gmail.com</p>
+      </div>
+      <div className="flex h-full flex-col justify-around text-start capitalize">
+        <A>instagram</A>
+        <A>twitter</A>
+        <A>github</A>
+        <A>discord</A>
       </div>
     </footer>
   )

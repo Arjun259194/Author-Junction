@@ -42,7 +42,7 @@ const Home: NextPage<PageProps> = ({ userData }) => {
   }, [])
 
   return (
-    <div className="bg-blue-300">
+    <div className="bg-gradient-to-r from-violet-400 to-cyan-400">
       <Head>
         <title>{`Home | ${user.username}`}</title>
         <meta name="description" content="Author-Junction Home feed page" />

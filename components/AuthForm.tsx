@@ -13,7 +13,7 @@ const AuthForm: FC<Props> = ({ children, submitHandler, submitText, loading }) =
   return (
     <form onSubmit={submitHandler} className="my-4 mb-6 space-y-6">
       {loading ? (
-        <div className=" mx-auto aspect-square w-10 animate-spin text-gray-200">
+        <div className=" mx-auto aspect-square w-10 animate-spin text-cyan-600">
           {loadingIcon}
         </div>
       ) : (

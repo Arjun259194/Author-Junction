@@ -8,6 +8,7 @@ export const ZodPost = z.object({
   creator: z.string().regex(objectIDRegex),
   likes: z.array(z.string().regex(objectIDRegex)),
   shares: z.number().int().default(0),
+  description: z.string().nonempty(),
   content: z.string().nonempty(),
 })
 
@@ -34,6 +35,10 @@ const postSchema: Schema<PostSchema> = new Schema(
     shares: {
       type: Number,
       default: 0,
+    },
+    description: {
+      type: String,
+      required: true,
     },
     content: {
       type: String,
