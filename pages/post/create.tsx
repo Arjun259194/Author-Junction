@@ -96,6 +96,13 @@ const CreatePost: NextPage = () => {
               ></textarea>
             </div>
             <div className="flex justify-between pt-3">
+              <Button
+                className="hover:bg-red-500 hover:text-white"
+                onClick={reset}
+                variant="secondary"
+              >
+                clear
+              </Button>
               <div className="space-x-4">
                 <Button className="text-xl" type="submit" variant="primary">
                   Create
@@ -109,14 +116,11 @@ const CreatePost: NextPage = () => {
                   cancel
                 </Button>
               </div>
-              <Button onClick={reset} variant="secondary">
-                clear
-              </Button>
             </div>
           </form>
         </section>
       </main>
-      <Footer className="text-gray-800" />
+      <Footer className="font-semibold text-gray-700" />
     </div>
   )
 }
