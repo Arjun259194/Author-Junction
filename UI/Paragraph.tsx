@@ -4,7 +4,7 @@ interface Props extends HTMLAttributes<HTMLParagraphElement> {}
 
 const Paragraph: FC<Props> = ({ children, className, ...props }) => {
   return (
-    <p {...props} className={`${className} w-3/4 text-lg leading-relaxed`}>
+    <p {...props} className={`${className} w-3/4 text-lg font-medium leading-relaxed`}>
       {children}
     </p>
   )

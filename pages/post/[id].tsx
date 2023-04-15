@@ -1,3 +1,4 @@
+import Header from "@/components/Header"
 import PostModel, { Post } from "@/database/model/Post"
 import { isValidObjectId } from "mongoose"
 import { GetServerSideProps, NextPage } from "next"
@@ -17,9 +18,13 @@ const PostPage: NextPage<PageProps> = ({ state, postData }) => {
       <Head>
         <title>postPage</title>
       </Head>
-      <h1 className="text-3xl font-bold">{post.title}</h1>
-      <p>{post.content}</p>
-      <span>{post._id}</span>
+      <Header />
+      <main>
+        <h1 className="text-3xl font-bold">{post.title}</h1>
+        <p>description: {post.description}</p>
+        <p>content: {post.content}</p>
+        <span>{post._id}</span>
+      </main>
     </div>
   )
 }

@@ -20,6 +20,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 const zodInputValidatingSchema = ZodPost.pick({
   title: true,
   content: true,
+  description: true,
 })
 
 async function postHandler(req: NextApiRequest, res: NextApiResponse) {
@@ -36,9 +37,9 @@ async function postHandler(req: NextApiRequest, res: NextApiResponse) {
 
     if (!userId) return res.status(401).json({ message: "unauthorized" })
 
-    const { title, content } = zodRes.data
+    const { title, content, description } = zodRes.data
 
-    const post = createPost({ title, content, creator: userId })
+    const post = createPost({ description, title, content, creator: userId })
 
     await post.save()
     return res.status(200).json({ message: "post created 👍" })
@@ -50,10 +51,9 @@ async function postHandler(req: NextApiRequest, res: NextApiResponse) {
 
 async function getHandler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const posts: Post[] | undefined = await PostModel.find()
-      .sort({ createdAt: -1 })
-      .exec()
-    if (!posts) return res.status(404).json({ message: "There are not posts" })
+    const posts = await PostModel.find<Post>().sort({ createdAt: -1 }).exec()
+    if (!posts || posts.length <= 0)
+      return res.status(404).json({ message: "There are not posts" })
     return res.status(200).json(posts)
   } catch (err) {
     console.log(err)

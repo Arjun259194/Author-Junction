@@ -9,10 +9,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        main: "Signika Negative",
+        main: "Anuphan",
         DS: "Dancing Script",
       },
     },
   },
   plugins: [],
-};
+}

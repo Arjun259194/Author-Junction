@@ -31,7 +31,7 @@ const Post: FC<Props> = ({ post, userId }) => {
       </a>
       <hr />
       <p className="p-1 text-base leading-relaxed text-gray-700">
-        {shortenString(post.content)}
+        {shortenString(post.description)}
       </p>
       <hr />
       <div className="flex w-full justify-evenly text-xl capitalize">

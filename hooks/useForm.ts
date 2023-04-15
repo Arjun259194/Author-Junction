@@ -1,10 +1,9 @@
-import React, { useState } from "react"
+import { ChangeEventHandler, useState } from "react"
 
-type HandlerFunction = (event: React.ChangeEvent<HTMLInputElement>) => void
 type ResetFunction = () => void
 type Return<T> = {
   state: T
-  changeHandler: HandlerFunction
+  changeHandler: ChangeEventHandler<any>
   reset: ResetFunction
 }
 
@@ -22,7 +21,7 @@ type Return<T> = {
 export default function useForm<T>(initialValue: T): Return<T> {
   const [state, setState] = useState<T>(initialValue)
 
-  const changeHandler: HandlerFunction = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const changeHandler: ChangeEventHandler<any> = event => {
     console.log("Change handler called")
     const { name, value } = event.target
     setState(pre => ({ ...pre, [name]: value }))

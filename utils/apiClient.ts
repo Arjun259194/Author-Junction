@@ -5,6 +5,7 @@ export type HttpMethods = "GET" | "POST" | "DELETE" | "PUT"
 
 interface CreatePostInput {
   title: Post["title"]
+  description: Post["description"]
   content: Post["content"]
 }
 

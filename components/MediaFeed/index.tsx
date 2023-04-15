@@ -37,7 +37,11 @@ const MediaFeed: FC<Props> = ({
         {
           //todo: add "create-page" link to this button
         }
-        <Button variant="primary" className=" flex items-center space-x-2 ">
+        <Button
+          onClick={() => (window.location.href = "/post/create")}
+          variant="primary"
+          className=" flex items-center space-x-2 "
+        >
           <span className="aspect-square h-5">{authorIcon}</span>
           <span>Create Post</span>
         </Button>
@@ -57,7 +61,7 @@ const MediaFeed: FC<Props> = ({
   return (
     <section
       {...props}
-      className={` ${className} scrollbar-hide w-full overflow-y-scroll`}
+      className={` ${className} scrollbar-hide w-full overflow-y-scroll `}
     >
       <div className="flex items-center justify-center space-x-2 py-1">
         <h2 className=" flex items-center text-center text-4xl font-semibold capitalize text-gray-900">
