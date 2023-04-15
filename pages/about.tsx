@@ -3,17 +3,14 @@ import Title2 from "@/UI/Title2"
 import HeroSection from "@/components/About/HeroSection"
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
+import Meta from "@/components/Meta"
 import { NextPage } from "next"
-import Head from "next/head"
 import Link from "next/link"
 
 const about: NextPage = () => {
   return (
     <div className="h-screen overflow-y-scroll">
-      <Head>
-        <title>About AuthorJunction</title>
-        <meta name="description" content="About AuthorJunction" />
-      </Head>
+      <Meta title="About AuthorJunction" />
       <Header className="bg-gradient-to-r from-cyan-300 to-violet-500 ">
         <li className="text-gray-50">
           <Link href={"/"}>home</Link>
@@ -38,7 +35,7 @@ const about: NextPage = () => {
           </div>
         </section>
       </main>
-      <Footer className="bg-gray-200 text-gray-600" />
+      <Footer className="bg-gradient-to-b from-gray-100 to-gray-300 text-gray-600" />
     </div>
   )
 }

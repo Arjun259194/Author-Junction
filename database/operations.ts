@@ -21,11 +21,13 @@ type PostData = {
   title: Post["title"]
   content: Post["content"]
   creator: Post["creator"]
+  description: Post["description"]
 }
 
-export function createPost({ title, content, creator }: PostData): Post {
+export function createPost({ title, content, creator, description }: PostData): Post {
   const newPost = new PostModel({
     title,
+    description,
     content,
     creator,
   })
