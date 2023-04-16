@@ -32,11 +32,11 @@ const Header: FC<HTMLElementProps> = ({ children, className, ...props }) => {
 Header.defaultProps = {
   children: (
     <>
+      <li>
+        <Link href="/">Home</Link>
+      </li>
       <li className="">
         <Link href="/about">about</Link>
-      </li>
-      <li>
-        <Link href="/contact">contact</Link>
       </li>
     </>
   ),

@@ -104,4 +104,11 @@ export default class API {
     const response = await fetch(URL, fetchOption)
     return response
   }
+
+  public async getPopularPost(): Promise<Response> {
+    const fetchOption = this.getFetchOptions("GET")
+    const URL = "/api/post/popular"
+    const response = await fetch(URL, fetchOption)
+    return response
+  }
 }

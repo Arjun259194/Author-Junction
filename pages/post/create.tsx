@@ -91,7 +91,7 @@ const CreatePost: NextPage = () => {
                 className="w-full rounded-2xl border-2 border-violet-300 bg-gray-100 p-2 text-lg text-gray-900 outline-none focus:border-cyan-400"
                 id="content"
                 name="content"
-                rows={20}
+                rows={15}
                 value={content}
               ></textarea>
             </div>

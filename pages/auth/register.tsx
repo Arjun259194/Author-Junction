@@ -34,6 +34,7 @@ export default function register() {
     username: "",
     password: "",
   })
+
   const [error, setError] = useState<ErrorState>({ state: false, message: "" })
   const [loading, setLoading] = useState<boolean>(false)
   const router = useRouter()
@@ -41,6 +42,12 @@ export default function register() {
 
   const submitHandler: FormEventHandler<HTMLFormElement> = async event => {
     event.preventDefault()
+
+    if (confPassword !== password) {
+      setError({ state: true, message: "Password not matching" })
+      return
+    }
+
     setLoading(true)
     //registering user
     setError({ state: false, message: "" })
@@ -74,7 +81,7 @@ export default function register() {
         </li>
       </Header>
       <AuthFormLayout>
-        <span className="mb-2 text-sm font-semibold text-gray-700">
+        <span className="mb-2 text-sm font-semibold text-cyan-700">
           Register as new user
         </span>
         <h2 className="mb-2 text-5xl font-bold text-gray-900">Create new account</h2>

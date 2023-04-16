@@ -1,4 +1,5 @@
 import PostModel, { Post, ZodPost } from "@/database/model/Post"
+import UserModel, { User } from "@/database/model/User"
 import { createPost } from "@/database/operations"
 import connectDB from "@/utils/api/connectDB"
 import { getUserIdFromToken } from "@/utils/api/functions"
@@ -35,11 +36,18 @@ async function postHandler(req: NextApiRequest, res: NextApiResponse) {
     const token = req.cookies.accessToken
     const userId = getUserIdFromToken(token)
 
-    if (!userId) return res.status(401).json({ message: "unauthorized" })
+    const user = await UserModel.findById<User>(userId)
+
+    if (!user) return res.status(401).json({ message: "unauthorized" })
+
+    if (user.role === "READER") {
+      user.role = "AUTHOR"
+      await user.save()
+    }
 
     const { title, content, description } = zodRes.data
 
-    const post = createPost({ description, title, content, creator: userId })
+    const post = createPost({ description, title, content, creator: user.id })
 
     await post.save()
     return res.status(200).json({ message: "post created 👍" })

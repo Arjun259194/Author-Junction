@@ -35,7 +35,7 @@ const AuthorMedia: FC<{ userId: string }> = ({ userId }) => {
         posts={posts}
         userId={userId}
       >
-        <h3 className="mt-5 capitalize">Posts created by you</h3>
+        <span className="mt-5 capitalize">Posts created by you</span>
       </MediaFeed>
     </div>
   )

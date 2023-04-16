@@ -1,58 +1,138 @@
+import { likedIcon, likeIcon } from "@/assets/icons"
+import Footer from "@/components/Footer"
 import Header from "@/components/Header"
+import PostButton from "@/components/MediaFeed/PostButton"
+import ShareButton from "@/components/MediaFeed/ShareButton"
 import PostModel, { Post } from "@/database/model/Post"
+import Paragraph from "@/UI/Paragraph"
+import Title from "@/UI/Title"
+import { getUserIdFromToken } from "@/utils/api/functions"
+import API from "@/utils/apiClient"
 import { isValidObjectId } from "mongoose"
 import { GetServerSideProps, NextPage } from "next"
 import Head from "next/head"
+import { MouseEventHandler, useState } from "react"
 
 interface PageProps {
-  state: boolean
-  postData: string
+  userId: string
+  title: string
+  description: string
+  content: string
+  id: string
+  likes: string[]
+  creator: {
+    id: string
+    username: string
+    email: string
+  }
 }
 
-const PostPage: NextPage<PageProps> = ({ state, postData }) => {
-  if (!state) return <div>id not valid</div>
+interface FullPost extends Omit<Post, "creator"> {
+  creator: {
+    id: string
+    username: string
+    email: string
+  }
+}
 
-  const post: Post = JSON.parse(postData)
+const PostPage: NextPage<PageProps> = props => {
+  if (!props) return <div>can't get this post</div>
+  console.log(props.content)
+  const [liked, setLiked] = useState<boolean>(props.likes.includes(props.userId))
+  const apiClient = new API()
+  const likeToggle: MouseEventHandler<HTMLButtonElement> = async event => {
+    event.preventDefault()
+    const res = await apiClient.likePost(props.id)
+    if (res.ok) {
+      const index = props.likes.indexOf(props.userId)
+      if (index !== -1) {
+        props.likes.splice(index, 1)
+      } else {
+        props.likes.push(props.userId)
+      }
+      setLiked(!liked)
+    }
+  }
   return (
-    <div>
+    <div className="bg-gradient-to-br from-cyan-300 to-violet-300">
       <Head>
         <title>postPage</title>
       </Head>
       <Header />
-      <main>
-        <h1 className="text-3xl font-bold">{post.title}</h1>
-        <p>description: {post.description}</p>
-        <p>content: {post.content}</p>
-        <span>{post._id}</span>
+      <main className="mx-auto min-h-screen w-10/12 space-y-6 py-5">
+        <div className="flex w-full justify-between">
+          <span className="font-semibold capitalize text-gray-700">
+            written by: {props.creator.username}
+          </span>
+          <span className="font-semibold capitalize text-gray-700">
+            email: {props.creator.email}
+          </span>
+          <ShareButton postId={props.id} />
+          <PostButton onClick={likeToggle} className="hover:bg-pink-50">
+            <span className=" aspect-square h-6 transition-colors duration-200 group-hover:text-pink-500">
+              {liked ? likedIcon : likeIcon}
+            </span>
+            <span className=" text-base capitalize text-gray-500 transition-colors duration-200 group-hover:text-pink-500">
+              {props.likes.length}
+            </span>
+          </PostButton>
+        </div>
+        <Title>{props.title}</Title>
+        <p className=" text-base leading-snug text-gray-700">
+          <q>{props.description}</q>
+        </p>
+        <div>
+          {props.content
+            .split("\n\n")
+            .filter(Boolean)
+            .map((p, i) => (
+              <Paragraph key={i} className="my-2">
+                {p}
+              </Paragraph>
+            ))}
+        </div>
       </main>
+      <Footer />
     </div>
   )
 }
 
 export const getServerSideProps: GetServerSideProps<PageProps> = async context => {
   const token = context.req.cookies.accessToken
-  if (!token)
-    return {
-      redirect: {
-        destination: "/auth/login",
-        permanent: false,
-      },
-    }
+
+  const userId = getUserIdFromToken(token)
+
+  //redirecting user
+  if (!userId)
+    return { redirect: { destination: "/auth/login", permanent: false } } as any
+
   const postId = context.query.id
 
   if (!isValidObjectId(postId)) {
-    return {
-      props: {
-        state: false,
-        postData: "",
-      },
-    }
+    return { props: {} }
   }
-  const post = await PostModel.findById(postId)
+
+  const post = await PostModel.findById<FullPost>(postId).populate("creator")
+
+  if (!post)
+    return {
+      props: {},
+    }
+
+  console.log(post?.creator)
   return {
     props: {
-      state: true,
-      postData: JSON.stringify(post),
+      userId: userId,
+      id: post.id,
+      content: post.content,
+      description: post.description,
+      title: post.title,
+      likes: post.likes,
+      creator: {
+        id: post.creator.id,
+        username: post.creator.username,
+        email: post.creator.email,
+      },
     },
   }
 }
