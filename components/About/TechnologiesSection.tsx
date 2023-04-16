@@ -14,8 +14,8 @@ const TechnologiesSection = () => {
           ></path>
         </svg>
       </div>
-      <div className="mx-auto w-10/12 space-y-24 py-5">
-        <div className="space-y-6">
+      <div className="mx-auto w-10/12 space-y-24  py-5">
+        <div className="space-y-6 ">
           <Title>technologies use to create authorjunction</Title>
           <Paragraph>
             At Authorjunction, we use a range of modern web technologies to create a
@@ -58,6 +58,13 @@ const TechnologiesSection = () => {
               times.
             </Paragraph>
             <Paragraph>
+              <img
+                src="https://images.prismic.io/launchdarkly/6bfcaa10-40a3-42a5-9346-9e83d25cbeb4_What's%20So%20Great%20About%20Next.js.png?ixlib=gatsbyFP&auto=compress%2Cformat&fit=max&rect=0%2C0%2C4000%2C2252&w=2000&h=1126"
+                className="rounded-md"
+                alt="nextjs image"
+              />
+            </Paragraph>
+            <Paragraph>
               One of the most notable features of Next.js is its automatic code splitting
               and optimized client-side routing, which enables fast and smooth page
               transitions without requiring additional configuration. It also supports
@@ -78,6 +85,9 @@ const TechnologiesSection = () => {
               following in the web development community due to its simplicity and
               flexibility. ReactJS is used for building dynamic and interactive
               applications that can run in a web browser, mobile device, or server.
+            </Paragraph>
+            <Paragraph>
+              <img className=" rounded-md" src="/code/react_1.png" alt="code example" />
             </Paragraph>
             <Paragraph>
               The main concept behind ReactJS is the component-based architecture, where
@@ -106,6 +116,13 @@ const TechnologiesSection = () => {
               web application, without worrying about the details of CSS styling.
             </Paragraph>
             <Paragraph>
+              <img
+                className=" rounded-md"
+                src="/code/tailwind_1.png"
+                alt="code example"
+              />
+            </Paragraph>
+            <Paragraph>
               Tailwind CSS is designed to be highly customizable, allowing you to
               configure your own design system and tailor it to your specific needs. It
               also offers features like PurgeCSS, which removes unused CSS styles from
@@ -131,6 +148,13 @@ const TechnologiesSection = () => {
               means that the type of a variable is inferred at runtime. While JavaScript
               is a powerful language, it can be challenging to maintain large codebases
               due to its lack of static typing.
+            </Paragraph>
+            <Paragraph>
+              <img
+                src="https://res.cloudinary.com/practicaldev/image/fetch/s--1cI_HEtt--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/kioot4ilontcqokek526.png"
+                className="rounded-md"
+                alt="javascript and typescript image"
+              />
             </Paragraph>
             <Paragraph>
               TypeScript, on the other hand, is a superset of JavaScript that adds

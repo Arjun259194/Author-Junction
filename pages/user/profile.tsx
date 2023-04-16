@@ -22,7 +22,7 @@ export const Profile: NextPage<Props> = ({ user }) => {
   const { email, followers, following, role, username, _id } = userData
 
   return (
-    <div className="flex min-h-screen flex-col bg-gray-50">
+    <div className="flex min-h-screen flex-col bg-gradient-to-tr from-violet-300 to-cyan-300">
       <Head>
         <title>Profile</title>
       </Head>
@@ -42,7 +42,7 @@ export const Profile: NextPage<Props> = ({ user }) => {
           <AuthorMedia userId={userData._id} />
         )}
       </main>
-      <Footer className="mt-auto bg-gray-100 text-gray-600" />
+      <Footer className="mt-auto text-gray-600" />
     </div>
   )
 }
