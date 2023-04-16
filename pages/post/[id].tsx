@@ -43,7 +43,15 @@ const PostPage: NextPage<PageProps> = props => {
   const likeToggle: MouseEventHandler<HTMLButtonElement> = async event => {
     event.preventDefault()
     const res = await apiClient.likePost(props.id)
-    if (res.ok) setLiked(!liked)
+    if (res.ok) {
+      const index = props.likes.indexOf(props.userId)
+      if (index !== -1) {
+        props.likes.splice(index, 1)
+      } else {
+        props.likes.push(props.userId)
+      }
+      setLiked(!liked)
+    }
   }
   return (
     <div className="bg-gradient-to-br from-cyan-300 to-violet-300">
@@ -51,8 +59,7 @@ const PostPage: NextPage<PageProps> = props => {
         <title>postPage</title>
       </Head>
       <Header />
-      <main className="mx-auto min-h-screen w-10/12 space-y-6">
-        <Title>{props.title}</Title>
+      <main className="mx-auto min-h-screen w-10/12 space-y-6 py-5">
         <div className="flex w-full justify-between">
           <span className="font-semibold capitalize text-gray-700">
             written by: {props.creator.username}
@@ -60,27 +67,28 @@ const PostPage: NextPage<PageProps> = props => {
           <span className="font-semibold capitalize text-gray-700">
             email: {props.creator.email}
           </span>
-        </div>
-        <p className=" text-base leading-snug text-gray-700">
-          <q>{props.description}</q>
-        </p>
-        <div className="flex w-full justify-evenly text-xl capitalize">
+          <ShareButton postId={props.id} />
           <PostButton onClick={likeToggle} className="hover:bg-pink-50">
             <span className=" aspect-square h-6 transition-colors duration-200 group-hover:text-pink-500">
               {liked ? likedIcon : likeIcon}
             </span>
             <span className=" text-base capitalize text-gray-500 transition-colors duration-200 group-hover:text-pink-500">
-              like
+              {props.likes.length}
             </span>
           </PostButton>
-          <ShareButton postId={props.id} />
         </div>
+        <Title>{props.title}</Title>
+        <p className=" text-base leading-snug text-gray-700">
+          <q>{props.description}</q>
+        </p>
         <div>
           {props.content
             .split("\n\n")
             .filter(Boolean)
-            .map(p => (
-              <Paragraph className="my-2">{p}</Paragraph>
+            .map((p, i) => (
+              <Paragraph key={i} className="my-2">
+                {p}
+              </Paragraph>
             ))}
         </div>
       </main>

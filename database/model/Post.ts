@@ -7,7 +7,6 @@ export const ZodPost = z.object({
   title: z.string().nonempty(),
   creator: z.string().regex(objectIDRegex),
   likes: z.array(z.string().regex(objectIDRegex)),
-  shares: z.number().int().default(0),
   description: z.string().nonempty(),
   content: z.string().nonempty(),
 })
@@ -31,10 +30,6 @@ const postSchema: Schema<PostSchema> = new Schema(
       type: [String],
       ref: "user",
       default: [],
-    },
-    shares: {
-      type: Number,
-      default: 0,
     },
     description: {
       type: String,
