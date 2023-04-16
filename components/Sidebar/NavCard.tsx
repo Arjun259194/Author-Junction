@@ -12,10 +12,6 @@ const SidebarNavbar = () => {
         <ListItem icon={aboutMiniIcon} href="/about">
           about
         </ListItem>
-        <hr />
-        <ListItem icon={contactMiniIcon} href="/contact">
-          contact
-        </ListItem>
       </ul>
     </nav>
   )

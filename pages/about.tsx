@@ -17,9 +17,6 @@ const about: NextPage = () => (
       <li className="text-gray-50">
         <Link href={"/about"}>about</Link>
       </li>
-      <li className="text-gray-50">
-        <Link href={"/contact"}>contact</Link>
-      </li>
     </Header>
     <main className="">
       <HeroSection />
