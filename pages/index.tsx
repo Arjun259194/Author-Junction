@@ -51,14 +51,14 @@ const Home: NextPage<PageProps> = ({ userData }) => {
       <main className="flex h-screen py-2">
         <Sidebar user={user} />
         <MediaFeed
-          className="rounded bg-gradient-to-r from-violet-200 to-cyan-200 py-5"
+          className="rounded  py-5"
           fetchFunction={fetchData}
           loading={loading}
           posts={posts}
           userId={user._id}
         >
           <span className="block aspect-square h-8">{newsIcon}</span>
-          <h2>Latest feed</h2>
+          <span>Latest feed</span>
         </MediaFeed>
         <Statusbar />
       </main>

@@ -64,14 +64,6 @@ const PostPage: NextPage<PageProps> = props => {
         <p className=" text-base leading-snug text-gray-700">
           <q>{props.description}</q>
         </p>
-        <div>
-          {props.content
-            .split("\n\n")
-            .filter(Boolean)
-            .map(p => (
-              <Paragraph className="my-2">{p}</Paragraph>
-            ))}
-        </div>
         <div className="flex w-full justify-evenly text-xl capitalize">
           <PostButton onClick={likeToggle} className="hover:bg-pink-50">
             <span className=" aspect-square h-6 transition-colors duration-200 group-hover:text-pink-500">
@@ -82,6 +74,14 @@ const PostPage: NextPage<PageProps> = props => {
             </span>
           </PostButton>
           <ShareButton postId={props.id} />
+        </div>
+        <div>
+          {props.content
+            .split("\n\n")
+            .filter(Boolean)
+            .map(p => (
+              <Paragraph className="my-2">{p}</Paragraph>
+            ))}
         </div>
       </main>
       <Footer />

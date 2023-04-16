@@ -39,7 +39,7 @@ const ReaderMedia: FC<Props> = ({ userId }) => {
         posts={posts}
         userId={userId}
       >
-        <h3 className="mt-5 capitalize">posts you Liked</h3>
+        <span className="mt-5 capitalize">posts you Liked</span>
       </MediaFeed>
     </div>
   )
