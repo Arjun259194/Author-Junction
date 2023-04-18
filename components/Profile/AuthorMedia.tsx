@@ -3,8 +3,14 @@ import { FC, useEffect, useState } from "react"
 import MediaFeed from "../MediaFeed"
 import Post from "../MediaFeed/Post"
 
+interface FullPost extends Omit<Post,"creator"> {
+  creator : {
+    username: string,
+    _id: string
+  }
+}
 const AuthorMedia: FC<{ userId: string }> = ({ userId }) => {
-  const [posts, setPosts] = useState<Array<Post>>([])
+  const [posts, setPosts] = useState<Array<FullPost>>([])
   const api = new API()
   const fetchFunction = () => {
     setLoading(true)
@@ -25,6 +31,7 @@ const AuthorMedia: FC<{ userId: string }> = ({ userId }) => {
 
   useEffect(() => {
     fetchFunction()
+    console.log(posts)
   }, [])
 
   return (

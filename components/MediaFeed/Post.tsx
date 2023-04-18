@@ -6,13 +6,21 @@ import PostButton from "./PostButton"
 import ShareButton from "./ShareButton"
 
 interface Props {
-  post: Post
+  post: FullPost
   userId: string
+}
+
+interface FullPost extends Omit<Post,"creator"> {
+  creator : {
+    username: string,
+    _id: string
+  }
 }
 
 const shortenString = (str: string): string => str.substring(0, 250) + "..."
 
 const Post: FC<Props> = ({ post, userId }) => {
+  // console.log(post)
   const [liked, setLiked] = useState<boolean>(post.likes.includes(userId))
   const apiClient = new API()
 
@@ -24,6 +32,10 @@ const Post: FC<Props> = ({ post, userId }) => {
 
   return (
     <article className="mx-3 mb-6 min-w-min space-y-2 rounded-md border-2 border-gray-200 bg-gray-50 p-2 text-gray-900 shadow-md transition-all duration-200">
+    <a href={`/user/${post.creator._id}`}>
+      <h4>{post.creator.username}</h4>
+    </a>
+    <hr />
       <a href={`/post/${post._id}`}>
         <h3 className="rounded-lg p-1 text-2xl font-semibold text-gray-900 hover:text-blue-600 hover:underline">
           {post.title}

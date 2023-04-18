@@ -6,27 +6,23 @@ import ReaderMedia from "@/components/Profile/ReaderMedia"
 import UserProfile from "@/components/Profile/UserProfile"
 import UserModel, { User } from "@/database/model/User"
 import connectDB from "@/utils/api/connectDB"
-import { getUserIdFromToken } from "@/utils/api/functions"
+import { isValidObjectId } from "mongoose"
 import { GetServerSideProps, NextPage } from "next"
-import Head from "next/head"
+import { Head } from "next/document"
 import Link from "next/link"
 
-interface Props {
-  user: string
+interface Props
+  extends Pick<User, "role" | "username" | "email" | "following" | "followers"> {
+  id: string
 }
 
-export const Profile: NextPage<Props> = ({ user }) => {
-  const userData: User | null = JSON.parse(user)
+const UserProfilePage: NextPage<Props> = props => {
+  if (!props) return <ErrorPage />
 
-  if (!userData) return <ErrorPage />
-
-  const { email, followers, following, role, username, _id } = userData
-
+  console.log(props)
+  const { username, email, followers, following, role, id } = props
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-tr from-violet-300 to-cyan-300">
-      <Head>
-        <title>Profile</title>
-      </Head>
       <Header className="text-lg text-gray-900">
         <li className="">
           <Link href="/">home</Link>
@@ -37,36 +33,45 @@ export const Profile: NextPage<Props> = ({ user }) => {
       </Header>
       <main className="">
         <UserProfile user={{ username, email, followers, following, role }} />
-        {role === "READER" ? (
-          <ReaderMedia userId={_id} />
-        ) : (
-          <AuthorMedia userId={_id} />
-        )}
+        {role === "READER" ? null : <AuthorMedia userId={id} />}
       </main>
       <Footer className="mt-auto text-gray-600" />
     </div>
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getServerSideProps: GetServerSideProps<Props> = async context => {
   await connectDB()
-  const token = context.req.cookies["accessToken"]
-  const userId = getUserIdFromToken(token)
-  if (!userId)
+  const token = context.req.cookies.accessToken
+  if (!token)
     return {
       redirect: {
         destination: "/auth/login",
         permanent: false,
       },
-    }
+    } as any
 
-  const user = await UserModel.findById<User>(userId).exec()
+  const queryId = context.query.id
+
+  let id: string
+  if (!queryId || !isValidObjectId(queryId)) return { props: {} }
+
+  if (typeof queryId === "string") id = queryId
+  else id = queryId[0]
+
+  const user = await UserModel.findOne<User>().exec()
+  if (!user) return { props: {} }
 
   return {
     props: {
-      user: JSON.stringify(user),
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      followers: user.followers,
+      following: user.following,
+      role: user.role,
     },
   }
 }
 
-export default Profile
+export default UserProfilePage

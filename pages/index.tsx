@@ -15,10 +15,17 @@ interface PageProps {
   userData: string
 }
 
+interface FullPost extends Omit<Post,"creator"> {
+  creator : {
+    username: string,
+    _id: string
+  }
+}
+
 const Home: NextPage<PageProps> = ({ userData }) => {
   const user: User = JSON.parse(userData)
   const api = new API()
-  const [posts, setPosts] = useState<Array<Post>>([])
+  const [posts, setPosts] = useState<Array<FullPost>>([])
   const [loading, setLoading] = useState<boolean>(false)
 
   const fetchData = () => {
