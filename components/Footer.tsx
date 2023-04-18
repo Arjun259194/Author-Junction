@@ -16,7 +16,9 @@ const Footer: FC<HTMLElementProps> = ({ className, ...props }) => {
           <span className="aspect-square h-6">{locationIcon}</span> mehsana, gujarat
         </p>
         <p>+91 8200271084</p>
+        <p>+91 9537711468</p>
         <p>arjun259194@gmail.com</p>
+        <p>radhepatel2004@gmail.com</p>
       </div>
       <div className="flex h-full flex-col justify-around text-start capitalize">
         <A>instagram</A>

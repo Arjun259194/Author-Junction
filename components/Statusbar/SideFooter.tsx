@@ -9,7 +9,9 @@ const SideFooter = () => {
         <span className="aspect-square h-6">{locationIcon}</span> mehsana, gujarat
       </p>
       <p>+91 8200271084</p>
+      <p>+91 9537711468</p>
       <p>arjun259194@gmail.com</p>
+      <p>radhepatel2004@gmail.com</p>
     </footer>
   )
 }
