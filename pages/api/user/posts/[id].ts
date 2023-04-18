@@ -14,16 +14,22 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
 async function getHandler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const token = req.cookies.accessToken
-    const userId = getUserIdFromToken(token)
+    const reqId = req.query.id
 
-    if (!isValidObjectId(userId) || !userId) {
-      return res.status(401).json({ message: "unauthorized" })
-    }
+    if (!reqId || !isValidObjectId(reqId))
+      return res.status(502).json({ message: "query id not right" })
+
+    let userId: string;
+
+    if(typeof reqId === "string") userId = reqId
+    else userId = reqId[0]
 
     const posts = await PostModel.find<Post>({ creator: userId }).sort({ createdAt: -1 })
+
     if (posts.length <= 0) return res.status(404).json({ message: "no post found" })
+
     return res.status(200).json(posts)
+
   } catch (err) {
     console.log(err)
     return res.status(502).json({ error: err })

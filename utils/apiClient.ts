@@ -98,9 +98,9 @@ export default class API {
     return response
   }
 
-  public async getAuthorPost(): Promise<Response> {
+  public async getAuthorPost(id: string): Promise<Response> {
     const fetchOption = this.getFetchOptions("GET")
-    const URL = "/api/user/posts"
+    const URL = `/api/user/posts/${id}`
     const response = await fetch(URL, fetchOption)
     return response
   }

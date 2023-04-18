@@ -33,7 +33,11 @@ const UserProfilePage: NextPage<Props> = props => {
       </Header>
       <main className="">
         <UserProfile user={{ username, email, followers, following, role }} />
-        {role === "READER" ? null : <AuthorMedia userId={id} />}
+        {role === "READER" ? (
+          <ReaderMedia userId={id} />
+        ) : (
+          <AuthorMedia userId={id} />
+        )}
       </main>
       <Footer className="mt-auto text-gray-600" />
     </div>
@@ -59,7 +63,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async context => {
   if (typeof queryId === "string") id = queryId
   else id = queryId[0]
 
-  const user = await UserModel.findOne<User>().exec()
+  const user = await UserModel.findById<User>(id).exec()
   if (!user) return { props: {} }
 
   return {

@@ -15,7 +15,7 @@ const AuthorMedia: FC<{ userId: string }> = ({ userId }) => {
   const fetchFunction = () => {
     setLoading(true)
     api
-      .getAuthorPost()
+      .getAuthorPost(userId)
       .then(res => (res.status === 404 ? null : res.json()))
       .then(data => {
         setLoading(false)
@@ -31,7 +31,6 @@ const AuthorMedia: FC<{ userId: string }> = ({ userId }) => {
 
   useEffect(() => {
     fetchFunction()
-    console.log(posts)
   }, [])
 
   return (
