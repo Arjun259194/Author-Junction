@@ -6,6 +6,7 @@ import ReaderMedia from "@/components/Profile/ReaderMedia"
 import UserProfile from "@/components/Profile/UserProfile"
 import UserModel, { User } from "@/database/model/User"
 import connectDB from "@/utils/api/connectDB"
+import { getUserIdFromToken } from "@/utils/api/functions"
 import { isValidObjectId } from "mongoose"
 import { GetServerSideProps, NextPage } from "next"
 import { Head } from "next/document"
@@ -47,7 +48,8 @@ const UserProfilePage: NextPage<Props> = props => {
 export const getServerSideProps: GetServerSideProps<Props> = async context => {
   await connectDB()
   const token = context.req.cookies.accessToken
-  if (!token)
+  const userId = getUserIdFromToken(token)
+  if (!userId)
     return {
       redirect: {
         destination: "/auth/login",
@@ -62,6 +64,12 @@ export const getServerSideProps: GetServerSideProps<Props> = async context => {
 
   if (typeof queryId === "string") id = queryId
   else id = queryId[0]
+
+  if(userId === id) return {
+    redirect: {
+        destination: "/user/profile"
+    }
+  }
 
   const user = await UserModel.findById<User>(id).exec()
   if (!user) return { props: {} }
