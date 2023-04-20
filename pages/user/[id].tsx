@@ -1,6 +1,7 @@
 import ErrorPage from "@/components/ErrorPage"
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
+import Meta from "@/components/Meta"
 import AuthorMedia from "@/components/Profile/AuthorMedia"
 import ReaderMedia from "@/components/Profile/ReaderMedia"
 import UserProfile from "@/components/Profile/UserProfile"
@@ -24,6 +25,7 @@ const UserProfilePage: NextPage<Props> = props => {
   const { username, email, followers, following, role, id } = props
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-tr from-violet-300 to-cyan-300">
+      <Meta title={`${username} - ${email}`} />
       <Header className="text-lg text-gray-900">
         <li className="">
           <Link href="/">home</Link>

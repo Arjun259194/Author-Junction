@@ -62,6 +62,14 @@ export default class API {
     return response
   }
 
+  //User
+  public async followUser(id:string):Promise<Response> {
+    const fetchOption = this.getFetchOptions("PUT")
+    const URL = `api/user/follow/${id}`
+    const response = await fetch(URL,fetchOption)
+    return response
+  }
+
   // Post
   public async createPost(body: CreatePostInput): Promise<Response> {
     const fetchOption = this.getFetchOptions("POST", body)

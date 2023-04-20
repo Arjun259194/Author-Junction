@@ -47,7 +47,7 @@ const Post: FC<Props> = ({ post, userId }) => {
       <hr />
       <div className="flex w-full justify-evenly text-xl capitalize">
         <PostButton onClick={likeToggle} className="hover:bg-pink-50">
-          <span className=" aspect-square h-6 transition-colors duration-200 group-hover:text-pink-500">
+          <span className={` aspect-square h-6 transition-colors ${!!liked ? "text-pink-500" : ""} duration-200 group-hover:text-pink-500`}>
             {liked ? likedIcon : likeIcon}
           </span>
           <span className=" text-base capitalize text-gray-500 transition-colors duration-200 group-hover:text-pink-500">
