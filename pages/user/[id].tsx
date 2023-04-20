@@ -1,3 +1,4 @@
+import Button from "@/UI/Button"
 import ErrorPage from "@/components/ErrorPage"
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
@@ -8,21 +9,35 @@ import UserProfile from "@/components/Profile/UserProfile"
 import UserModel, { User } from "@/database/model/User"
 import connectDB from "@/utils/api/connectDB"
 import { getUserIdFromToken } from "@/utils/api/functions"
+import API from "@/utils/apiClient"
 import { isValidObjectId } from "mongoose"
 import { GetServerSideProps, NextPage } from "next"
-import { Head } from "next/document"
 import Link from "next/link"
+import { MouseEventHandler, useState } from "react"
 
 interface Props
   extends Pick<User, "role" | "username" | "email" | "following" | "followers"> {
   id: string
+  clientUserId: string
 }
 
 const UserProfilePage: NextPage<Props> = props => {
   if (!props) return <ErrorPage />
 
-  console.log(props)
-  const { username, email, followers, following, role, id } = props
+  const { username, email, followers, following, role, id, clientUserId } = props
+
+  const [isFollowed, setIsFollowed] = useState<boolean>(followers.includes(clientUserId))
+  const apiClient = new API()
+
+  const onFollowHandler: MouseEventHandler<HTMLButtonElement> = async event => {
+    event.preventDefault()
+    console.log("Toggling")
+    const res = await apiClient.followUser(id)
+    if (res.ok) {
+      setIsFollowed(!isFollowed)
+    }
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-tr from-violet-300 to-cyan-300">
       <Meta title={`${username} - ${email}`} />
@@ -36,11 +51,20 @@ const UserProfilePage: NextPage<Props> = props => {
       </Header>
       <main className="">
         <UserProfile user={{ username, email, followers, following, role }} />
-        {role === "READER" ? (
-          <ReaderMedia userId={id} />
-        ) : (
-          <AuthorMedia userId={id} />
-        )}
+        <div className="mx-auto flex w-10/12 justify-center">
+          <Button
+            variant={`${isFollowed ? "secondary" : "primary"}`}
+            className={`${
+              isFollowed
+                ? "hover:border-red-500 hover:bg-red-500 hover:text-white"
+                : "hover:border-cyan-600 hover:bg-cyan-600 hover:text-white"
+            } mt-5 text-xl`}
+            onClick={onFollowHandler}
+          >
+            {isFollowed ? "unfollow" : "follow"}
+          </Button>
+        </div>
+        {role === "READER" ? <ReaderMedia userId={id} /> : <AuthorMedia userId={id} />}
       </main>
       <Footer className="mt-auto text-gray-600" />
     </div>
@@ -67,11 +91,12 @@ export const getServerSideProps: GetServerSideProps<Props> = async context => {
   if (typeof queryId === "string") id = queryId
   else id = queryId[0]
 
-  if(userId === id) return {
-    redirect: {
-        destination: "/user/profile"
+  if (userId === id)
+    return {
+      redirect: {
+        destination: "/user/profile",
+      },
     }
-  }
 
   const user = await UserModel.findById<User>(id).exec()
   if (!user) return { props: {} }
@@ -84,6 +109,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async context => {
       followers: user.followers,
       following: user.following,
       role: user.role,
+      clientUserId: userId,
     },
   }
 }

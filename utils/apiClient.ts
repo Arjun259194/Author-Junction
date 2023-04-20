@@ -65,7 +65,7 @@ export default class API {
   //User
   public async followUser(id:string):Promise<Response> {
     const fetchOption = this.getFetchOptions("PUT")
-    const URL = `api/user/follow/${id}`
+    const URL = `/api/user/follow/${id}`
     const response = await fetch(URL,fetchOption)
     return response
   }

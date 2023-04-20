@@ -32,9 +32,12 @@ async function putHandler(req: NextApiRequest, res: NextApiResponse) {
 
     if (typeof reqId === "string") followUserId = reqId
     else followUserId = reqId[0]
-    
+
     const user = await UserModel.findById<User>(userId).exec()
     const followUser = await UserModel.findById<User>(followUserId).exec()
+
+    console.log("User:", user)
+    console.log("userToFollow:", followUser)
 
     if (!user || !followUser) {
       return res.status(404).json({ message: "not found" })
@@ -45,7 +48,7 @@ async function putHandler(req: NextApiRequest, res: NextApiResponse) {
     await user.save()
     await followUser.save()
 
-    return res.status(200).json({message:"done "})
+    return res.status(200).json({ message: "done " })
   } catch (err) {
     return res.status(502).json({ error: err })
   }
@@ -56,10 +59,12 @@ const followToggle = (currUser: User, userToFollow: User): void => {
   const { id: userToFollowId, followers } = userToFollow
 
   if (following.includes(userToFollowId)) {
-    following.filter(uid => uid !== userToFollowId)
-    followers.filter(uid => uid !== currUserId)
+    currUser.following = following.filter(uid => uid !== userToFollowId)
+    userToFollow.followers = followers.filter(uid => uid !== currUserId)
   } else {
     currUser.following = [...currUser.following, userToFollowId]
     userToFollow.followers = [...userToFollow.followers, currUserId]
+    console.log("currUser following after remove:",currUser.following)
+    console.log("userToFollow follower after remove:",userToFollow.followers)
   }
 }
