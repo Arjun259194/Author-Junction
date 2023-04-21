@@ -7,10 +7,17 @@ import Posts from "./Posts"
 
 interface Props extends HTMLElementProps {
   userId: string
-  posts: Post[]
+  posts: FullPost[]
   loading: boolean
   fetchFunction: () => void
   children: ReactNode
+}
+
+interface FullPost extends Omit<Post,"creator"> {
+  creator : {
+    username: string,
+    _id: string
+  }
 }
 
 const MediaFeed: FC<Props> = ({

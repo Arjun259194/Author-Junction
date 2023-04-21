@@ -5,6 +5,7 @@ import AuthorMedia from "@/components/Profile/AuthorMedia"
 import ReaderMedia from "@/components/Profile/ReaderMedia"
 import UserProfile from "@/components/Profile/UserProfile"
 import UserModel, { User } from "@/database/model/User"
+import connectDB from "@/utils/api/connectDB"
 import { getUserIdFromToken } from "@/utils/api/functions"
 import { GetServerSideProps, NextPage } from "next"
 import Head from "next/head"
@@ -37,9 +38,9 @@ export const Profile: NextPage<Props> = ({ user }) => {
       <main className="">
         <UserProfile user={{ username, email, followers, following, role }} />
         {role === "READER" ? (
-          <ReaderMedia userId={userData._id} />
+          <ReaderMedia userId={_id} />
         ) : (
-          <AuthorMedia userId={userData._id} />
+          <AuthorMedia userId={_id} />
         )}
       </main>
       <Footer className="mt-auto text-gray-600" />
@@ -48,6 +49,7 @@ export const Profile: NextPage<Props> = ({ user }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async context => {
+  await connectDB()
   const token = context.req.cookies["accessToken"]
   const userId = getUserIdFromToken(token)
   if (!userId)

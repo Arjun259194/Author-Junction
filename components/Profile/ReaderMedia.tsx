@@ -7,8 +7,15 @@ interface Props {
   userId: string
 }
 
+interface FullPost extends Omit<Post,"creator"> {
+  creator : {
+    username: string,
+    _id: string
+  }
+}
+
 const ReaderMedia: FC<Props> = ({ userId }) => {
-  const [posts, setPosts] = useState<Array<Post>>([])
+  const [posts, setPosts] = useState<Array<FullPost>>([])
   const api = new API()
   const fetchFunction = () => {
     setLoading(true)

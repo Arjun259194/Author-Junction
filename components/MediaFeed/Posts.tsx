@@ -2,8 +2,15 @@ import Button from "@/UI/Button"
 import { FC } from "react"
 import Post from "./Post"
 
+interface FullPost extends Omit<Post,"creator"> {
+  creator : {
+    username: string,
+    _id: string
+  }
+}
+
 interface Props {
-  posts: Post[]
+  posts: FullPost[]
   userId: string
   fetchData: () => void
 }
@@ -31,3 +38,4 @@ const Posts: FC<Props> = ({ posts, fetchData, userId }) => {
 }
 
 export default Posts
+// 642c6f973af69e649eb07be0 - radhe
