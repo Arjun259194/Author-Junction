@@ -2,6 +2,7 @@ import Button from "@/UI/Button"
 import Paragraph from "@/UI/Paragraph"
 import Title from "@/UI/Title"
 import Image from "next/image"
+import Link from "next/link"
 import { FC } from "react"
 
 interface Props {}
@@ -19,7 +20,7 @@ const HeroSection: FC<Props> = ({}) => {
             community and start sharing your passion for writing today.
           </Paragraph>
           <Button className="text-lg font-semibold" variant="secondary">
-            Get Started
+            <Link href="/media">Get Started</Link>
           </Button>
         </div>
         <Image
