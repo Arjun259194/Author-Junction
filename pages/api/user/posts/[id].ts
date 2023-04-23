@@ -1,5 +1,4 @@
 import PostModel, { Post } from "@/database/model/Post"
-import { getUserIdFromToken } from "@/utils/api/functions"
 import { isValidObjectId } from "mongoose"
 import { NextApiRequest, NextApiResponse } from "next"
 
@@ -19,9 +18,9 @@ async function getHandler(req: NextApiRequest, res: NextApiResponse) {
     if (!reqId || !isValidObjectId(reqId))
       return res.status(502).json({ message: "query id not right" })
 
-    let userId: string;
+    let userId: string
 
-    if(typeof reqId === "string") userId = reqId
+    if (typeof reqId === "string") userId = reqId
     else userId = reqId[0]
 
     const posts = await PostModel.find<Post>({ creator: userId }).sort({ createdAt: -1 })
@@ -29,7 +28,6 @@ async function getHandler(req: NextApiRequest, res: NextApiResponse) {
     if (posts.length <= 0) return res.status(404).json({ message: "no post found" })
 
     return res.status(200).json(posts)
-
   } catch (err) {
     console.log(err)
     return res.status(502).json({ error: err })

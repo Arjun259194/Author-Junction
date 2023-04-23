@@ -77,7 +77,7 @@ export default function Login() {
     } else {
       resetError()
       reset()
-      router.push("/")
+      router.push("/media")
     }
     setLoading(false)
   }

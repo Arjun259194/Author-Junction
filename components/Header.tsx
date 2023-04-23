@@ -16,11 +16,11 @@ const Header: FC<HTMLElementProps> = ({ children, className, ...props }) => {
               src="/logo.svg"
               alt="logo"
             />
-            <h1 className="font-DS text-3xl font-bold text-gray-900">AuthorJunction</h1>
+            <h1 className="font-DS text-3xl font-bold">AuthorJunction</h1>
           </div>
         </Link>
         <nav>
-          <ul className="flex space-x-6 font-semibold capitalize text-gray-900 [&>li:hover]:underline">
+          <ul className="flex items-center space-x-6 font-semibold capitalize [&>li:hover]:underline">
             {children}
           </ul>
         </nav>
