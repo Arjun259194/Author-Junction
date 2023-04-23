@@ -1,91 +1,61 @@
-import { newsIcon } from "@/assets/icons"
-import MediaFeed from "@/components/MediaFeed"
-import Sidebar from "@/components/Sidebar"
-import Statusbar from "@/components/Statusbar"
-import { Post } from "@/database/model/Post"
-import UserModel, { User } from "@/database/model/User"
-import connectDB from "@/utils/api/connectDB"
-import API from "@/utils/apiClient"
-import { JwtPayload, decode } from "jsonwebtoken"
-import { GetServerSideProps, NextPage } from "next"
-import Head from "next/head"
-import { useEffect, useState } from "react"
+import Button from "@/UI/Button"
+import Paragraph from "@/UI/Paragraph"
+import { SvgSearchArt, SvgWave2 } from "@/assets/svgArt"
+import Footer from "@/components/Footer"
+import Header from "@/components/Header"
+import HeroSection from "@/components/LandingPage/HeroSection"
+import UserCaseSection from "@/components/LandingPage/UserCaseSection"
+import Meta from "@/components/Meta"
+import { NextPage } from "next"
+import Link from "next/link"
 
-interface PageProps {
-  userData: string
-}
-
-interface FullPost extends Omit<Post,"creator"> {
-  creator : {
-    username: string,
-    _id: string
-  }
-}
-
-const Home: NextPage<PageProps> = ({ userData }) => {
-  const user: User = JSON.parse(userData)
-  const api = new API()
-  const [posts, setPosts] = useState<Array<FullPost>>([])
-  const [loading, setLoading] = useState<boolean>(false)
-
-  const fetchData = () => {
-    setLoading(true)
-    api
-      .getPosts()
-      .then(res => (res.status === 404 ? null : res.json()))
-      .then(data => {
-        setLoading(false)
-        return !!data ? setPosts(data) : null
-      })
-      .catch(err => {
-        setLoading(false)
-        console.log(err)
-        setPosts([])
-      })
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, [])
-
+const Index: NextPage = () => {
   return (
-    <div className="bg-gradient-to-r from-violet-400 to-cyan-400">
-      <Head>
-        <title>{`Home | ${user.username}`}</title>
-        <meta name="description" content="Author-Junction Home feed page" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <main className="flex h-screen py-2">
-        <Sidebar user={user} />
-        <MediaFeed
-          className="rounded  py-5"
-          fetchFunction={fetchData}
-          loading={loading}
-          posts={posts}
-          userId={user._id}
-        >
-          <span className="block aspect-square h-8">{newsIcon}</span>
-          <span>Latest feed</span>
-        </MediaFeed>
-        <Statusbar />
+    <div className="">
+      <Meta title="AuthorJunction" />
+      <Header className=" bg-violet-700  text-gray-100">
+        <li className="font-semibold text-gray-100">
+          <Link href="/media">media</Link>
+        </li>
+        <li className="font-semibold text-gray-100">
+          <Link href="/about">about</Link>
+        </li>
+        <li>
+          <Link href="/auth/login">
+            <Button variant="primary">log in</Button>
+          </Link>
+        </li>
+        <li>
+          <Link href="/auth/register">
+            <Button className="" variant="secondary">
+              register
+            </Button>
+          </Link>
+        </li>
+      </Header>
+      <main className=" ">
+        <HeroSection />
+        <SvgWave2 />
+        <section>
+          <div className="mx-auto flex w-10/12 items-center space-x-6">
+            <SvgSearchArt />
+            <Paragraph>
+              Discovering new writers and expanding your literary horizons has never been
+              easier with AuthorJunction. Our platform offers a diverse range of genres
+              and styles to suit your reading preferences. Explore our carefully curated
+              selection of author profiles and sample chapters to find your next favorite
+              writer. At AuthorJunction, we're passionate about helping readers connect
+              with talented writers, and we're committed to providing a seamless and
+              enjoyable user experience. Join our community today and discover the latest
+              voices in the literary world.
+            </Paragraph>
+          </div>
+        </section>
+        <UserCaseSection />
       </main>
+      <Footer className="text-gray-600" />
     </div>
   )
 }
 
-export const getServerSideProps: GetServerSideProps<PageProps> = async context => {
-  await connectDB()
-  const token = context.req.cookies.accessToken
-  if (!token)
-    return {
-      redirect: {
-        destination: "/auth/login",
-        permanent: false,
-      },
-    }
-  const payLoad = decode(token) as JwtPayload
-  const user = await UserModel.findById(payLoad.id).exec()
-  return { props: { userData: JSON.stringify(user) } }
-}
-
-export default Home
+export default Index
