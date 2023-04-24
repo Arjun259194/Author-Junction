@@ -63,10 +63,10 @@ export default class API {
   }
 
   //User
-  public async followUser(id:string):Promise<Response> {
+  public async followUser(id: string): Promise<Response> {
     const fetchOption = this.getFetchOptions("PUT")
     const URL = `/api/user/follow/${id}`
-    const response = await fetch(URL,fetchOption)
+    const response = await fetch(URL, fetchOption)
     return response
   }
 
@@ -102,6 +102,13 @@ export default class API {
   public async likedPost(): Promise<Response> {
     const fetchOption = this.getFetchOptions("GET")
     const URL = "/api/user/liked"
+    const response = await fetch(URL, fetchOption)
+    return response
+  }
+
+  public async deletePost(id: string): Promise<Response> {
+    const fetchOption = this.getFetchOptions("DELETE")
+    const URL = `/api/post/${id}`
     const response = await fetch(URL, fetchOption)
     return response
   }
