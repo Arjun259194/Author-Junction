@@ -4,6 +4,7 @@ import Header from "@/components/Header"
 import PostButton from "@/components/MediaFeed/PostButton"
 import ShareButton from "@/components/MediaFeed/ShareButton"
 import PostModel, { Post } from "@/database/model/Post"
+import A from "@/UI/A"
 import Paragraph from "@/UI/Paragraph"
 import Title from "@/UI/Title"
 import { getUserIdFromToken } from "@/utils/api/functions"
@@ -54,7 +55,7 @@ const PostPage: NextPage<PageProps> = props => {
     }
   }
   return (
-    <div className="bg-gradient-to-br from-cyan-300 to-violet-300">
+    <div className="bg-gradient-to-b from-cyan-400 to-violet-500">
       <Head>
         <title>postPage</title>
       </Head>
@@ -62,13 +63,17 @@ const PostPage: NextPage<PageProps> = props => {
       <main className="mx-auto min-h-screen w-10/12 space-y-6 py-5">
         <div className="flex w-full justify-between">
           <span className="font-semibold capitalize text-gray-700">
-            written by: {props.creator.username}
+            written by:{" "}
+            <A href={`/user/${props.creator.id}`}>
+              {props.creator.username}
+            </A>
           </span>
-          <span className="font-semibold capitalize text-gray-700">
-            email: {props.creator.email}
-          </span>
+          <span className="font-semibold text-gray-700">
+            <span className="capitalize">email:</span> {props.creator.email} </span>
           <ShareButton postId={props.id} />
-          <PostButton onClick={likeToggle} className="hover:bg-pink-50">
+          <PostButton onClick={likeToggle}
+            className={` aspect-square h-6 transition-colors ${!!liked ? "text-pink-500" : ""
+              } duration-200 group-hover:text-pink-500`}>
             <span className=" aspect-square h-6 transition-colors duration-200 group-hover:text-pink-500">
               {liked ? likedIcon : likeIcon}
             </span>
@@ -81,12 +86,12 @@ const PostPage: NextPage<PageProps> = props => {
         <p className=" text-base leading-snug text-gray-700">
           <q>{props.description}</q>
         </p>
-        <div>
+        <div className="space-y-4">
           {props.content
             .split("\n\n")
             .filter(Boolean)
             .map((p, i) => (
-              <Paragraph key={i} className="my-2">
+              <Paragraph key={i} className="">
                 {p}
               </Paragraph>
             ))}

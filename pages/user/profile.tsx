@@ -34,6 +34,9 @@ export const Profile: NextPage<Props> = ({ user }) => {
         <li className="">
           <Link href="/about">about</Link>
         </li>
+        <li className="">
+          <Link href="/media">media</Link>
+        </li>
       </Header>
       <main className="">
         <UserProfile user={{ username, email, followers, following, role }} />

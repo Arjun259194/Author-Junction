@@ -4,6 +4,7 @@ import { Post } from "@/database/model/Post"
 import { HTMLElementProps } from "@/utils/types"
 import { FC, ReactNode } from "react"
 import Posts from "./Posts"
+import LoadingPosts from "./LoadingPosts"
 
 interface Props extends HTMLElementProps {
   userId: string
@@ -31,8 +32,8 @@ const MediaFeed: FC<Props> = ({
 }) => {
   if (loading)
     return (
-      <section className="flex w-full items-center justify-center">
-        <span className="aspect-square h-10 animate-spin">{loadingIcon}</span>
+      <section className="flex flex-col  w-full items-center justify-center">
+        <LoadingPosts />
       </section>
     )
 
@@ -68,10 +69,7 @@ const MediaFeed: FC<Props> = ({
 
 
   return (
-    <section
-      {...props}
-      className={` ${className} scrollbar-hide w-full overflow-y-scroll `}
-    >
+    <section {...props} className={` ${className} scrollbar-hide w-full overflow-y-scroll `} >
       <div className="flex items-center justify-center space-x-2 py-1">
         <h2 className=" flex items-center text-center text-4xl font-semibold capitalize text-gray-900">
           {children}
