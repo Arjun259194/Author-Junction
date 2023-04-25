@@ -8,8 +8,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     case "GET":
       return getHandler(req, res)
 
+    case "DELETE":
+      return deleteHandler(req, res)
+
     case "PUT":
       return putHandler(req, res)
+
     default:
       return res.status(405).json({
         message: "Http method not available",
@@ -68,7 +72,21 @@ async function getHandler(req: NextApiRequest, res: NextApiResponse) {
     return res.status(200).json(post)
   } catch (err) {
     console.log(err)
+    return res.status(502).json({ error: err })
+  }
+}
 
+async function deleteHandler(req: NextApiRequest, res: NextApiResponse) {
+  try {
+    const queryId = req.query.id
+    if (!queryId) return res.status(502).json({ message: "bad request" })
+    let id: string
+    if (typeof queryId === "string") id = queryId
+    else id = queryId[0]
+    await PostModel.findByIdAndDelete(id).exec()
+    return res.status(200).json({ message: "deleted" })
+  } catch (err) {
+    console.log(err)
     return res.status(502).json({ error: err })
   }
 }

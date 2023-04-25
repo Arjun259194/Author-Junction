@@ -13,8 +13,8 @@ interface Props extends HTMLElementProps {
   children: ReactNode
 }
 
-interface FullPost extends Omit<Post,"creator"> {
-  creator : {
+interface FullPost extends Omit<Post, "creator"> {
+  creator: {
     username: string,
     _id: string
   }
@@ -64,6 +64,8 @@ const MediaFeed: FC<Props> = ({
         </Button>
       </section>
     )
+
+
 
   return (
     <section

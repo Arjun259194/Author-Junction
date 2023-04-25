@@ -1,10 +1,11 @@
 import A from "@/UI/A"
+import { Post } from "@/database/model/Post"
 import API from "@/utils/apiClient"
 import { useEffect, useState } from "react"
 import SideFooter from "./SideFooter"
 
 const Statusbar = () => {
-  const [posts, setPosts] = useState<{ title: string; _id: string }[]>([])
+  const [posts, setPosts] = useState<Post[]>([])
   const apiClient = new API()
   useEffect(() => {
     apiClient
@@ -15,6 +16,7 @@ const Statusbar = () => {
       .then(data => setPosts(data))
       .catch(err => console.log(err))
   }, [])
+  console.log(posts)
   return (
     <section className="flex w-2/5 flex-col space-y-4 px-2">
       <div className="rounded-md border border-gray-300 bg-blue-50 px-4 py-2 shadow-md">

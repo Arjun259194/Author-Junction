@@ -64,7 +64,10 @@ interface FullPost extends Omit<Post, "creator"> {
 async function getHandler(req: NextApiRequest, res: NextApiResponse) {
   await connectDB()
   try {
-    const posts = await PostModel.find<FullPost>().populate("creator", "username id").sort({ createdAt: -1 }).exec()
+    const posts = await PostModel.find<FullPost>()
+      .populate("creator", "username id")
+      .sort({ createdAt: -1 })
+      .exec()
     if (!posts || posts.length <= 0)
       return res.status(404).json({ message: "There are not posts" })
     return res.status(200).json(posts)
