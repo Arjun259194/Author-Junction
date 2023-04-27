@@ -64,7 +64,7 @@ const followToggle = (currUser: User, userToFollow: User): void => {
   } else {
     currUser.following = [...currUser.following, userToFollowId]
     userToFollow.followers = [...userToFollow.followers, currUserId]
-    console.log("currUser following after remove:",currUser.following)
-    console.log("userToFollow follower after remove:",userToFollow.followers)
+    console.log("currUser following after remove:", currUser.following)
+    console.log("userToFollow follower after remove:", userToFollow.followers)
   }
 }

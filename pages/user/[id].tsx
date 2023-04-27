@@ -26,6 +26,8 @@ const UserProfilePage: NextPage<Props> = props => {
 
   const { username, email, followers, following, role, id, clientUserId } = props
 
+  console.log({ username, email, followers, following, role, id, clientUserId })
+
   const [isFollowed, setIsFollowed] = useState<boolean>(followers.includes(clientUserId))
   const apiClient = new API()
 

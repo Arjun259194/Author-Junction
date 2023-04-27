@@ -63,17 +63,18 @@ const PostPage: NextPage<PageProps> = props => {
       <main className="mx-auto min-h-screen w-10/12 space-y-6 py-5">
         <div className="flex w-full justify-between">
           <span className="font-semibold capitalize text-gray-700">
-            written by:{" "}
-            <A href={`/user/${props.creator.id}`}>
-              {props.creator.username}
-            </A>
+            written by: <A href={`/user/${props.creator.id}`}>{props.creator.username}</A>
           </span>
           <span className="font-semibold text-gray-700">
-            <span className="capitalize">email:</span> {props.creator.email} </span>
+            <span className="capitalize">email:</span> {props.creator.email}{" "}
+          </span>
           <ShareButton postId={props.id} />
-          <PostButton onClick={likeToggle}
-            className={` aspect-square h-6 transition-colors ${!!liked ? "text-pink-500" : ""
-              } duration-200 group-hover:text-pink-500`}>
+          <PostButton
+            onClick={likeToggle}
+            className={` aspect-square h-6 transition-colors ${
+              !!liked ? "text-pink-500" : ""
+            } duration-200 group-hover:text-pink-500`}
+          >
             <span className=" aspect-square h-6 transition-colors duration-200 group-hover:text-pink-500">
               {liked ? likedIcon : likeIcon}
             </span>

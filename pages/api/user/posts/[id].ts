@@ -23,7 +23,9 @@ async function getHandler(req: NextApiRequest, res: NextApiResponse) {
     if (typeof reqId === "string") userId = reqId
     else userId = reqId[0]
 
-    const posts = await PostModel.find<Post>({ creator: userId }).populate("creator","username _id").sort({ createdAt: -1 })
+    const posts = await PostModel.find<Post>({ creator: userId })
+      .populate("creator", "username _id")
+      .sort({ createdAt: -1 })
 
     if (posts.length <= 0) return res.status(404).json({ message: "no post found" })
 
