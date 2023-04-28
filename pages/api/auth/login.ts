@@ -1,6 +1,6 @@
 import { User } from "@/database/model/User"
-import connectDB from "@/utils/connectDB"
-import { createToken, isValidUser as findAndValidateUser } from "@/utils/functions"
+import connectDB from "@/utils/api/connectDB"
+import { createToken, isValidUser as findAndValidateUser } from "@/utils/api/functions"
 import { NextApiRequest, NextApiResponse } from "next"
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -20,13 +20,18 @@ async function postHandler(req: NextApiRequest, res: NextApiResponse) {
     await connectDB()
     const { email, password }: TUserInput = req.body
     const result = await findAndValidateUser({ email, password })
-    if (result.status === "not-found") return res.status(404).json({ message: "user with this email is not found" })
-    if (result.status === "unauthorized") return res.status(401).json({ message: "Password is not valid" })
+    if (result.status === "not-found")
+      return res.status(404).json({ message: "user with this email is not found" })
+    if (result.status === "unauthorized")
+      return res.status(401).json({ message: "Password is not valid" })
 
     const tokenPayload = { id: result.user._id, email: result.user.email }
     const TOKEN = createToken(tokenPayload)
 
-    res.setHeader("Set-Cookie", `accessToken=${TOKEN}; HttpOnly; Max-Age=86400; Path=/`)
+    res.setHeader(
+      "Set-Cookie",
+      `accessToken=${TOKEN}; HttpOnly; Max-Age=${60 * 60 * 24 * 7}; Path=/`
+    )
 
     return res.status(200).json({ message: "ok" })
   } catch (err) {

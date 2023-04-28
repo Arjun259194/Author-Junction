@@ -1,1 +1,3 @@
-export type MongoDBFilter = Record<string, string | number | boolean>
+import { HTMLAttributes } from "react"
+
+export interface HTMLElementProps extends HTMLAttributes<HTMLElement> {}

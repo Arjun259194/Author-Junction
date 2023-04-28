@@ -6,30 +6,39 @@ interface Props {
   value: number | string
   name: string
   text: string
+  required: boolean
 }
 
-export default function InputText({ type, changeHandler, value, name, text }: Props) {
+export default function InputText({
+  type,
+  required,
+  changeHandler,
+  value,
+  name,
+  text,
+}: Props) {
   return (
     <div className="relative">
       <input
         id={name}
         name={name}
         className="
-        peer mt-4 w-full rounded-md border-b-2 border-gray-600
-        bg-gray-700/60 px-2 py-2 text-lg font-light text-gray-100 outline-none transition-all
-        duration-100 ease-linear placeholder-shown:mt-0 hover:border-blue-400
-        focus:border-2 focus:border-blue-400 focus:bg-gray-700
+        peer mt-4 w-full rounded border-b-2 border-gray-600
+        bg-gray-100 px-2 py-2 text-lg font-light text-gray-900 outline-none transition-all
+        duration-100 ease-linear placeholder-shown:mt-0 hover:border-cyan-400
+        focus:border-violet-400
         "
         value={value}
         type={type}
         onChange={changeHandler}
+        required={required}
         placeholder=" "
       />
       <label
         className="
-        absolute -top-4 left-0 px-0 text-2xl text-blue-400
+        absolute -top-4 left-0 px-0 text-xl text-violet-600
         transition-all duration-200 ease-in-out peer-placeholder-shown:top-3 peer-placeholder-shown:left-0 
-        peer-placeholder-shown:px-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
+        peer-placeholder-shown:px-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500
         "
         htmlFor={name}
       >

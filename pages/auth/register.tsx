@@ -1,9 +1,16 @@
+import AuthForm from "@/components/AuthForm"
+import ErrorMessage from "@/components/ErrorMessage"
+import Header from "@/components/Header"
 import InputText from "@/components/InputText"
 import useForm from "@/hooks/useForm"
+import A from "@/UI/A"
+import AuthFormLayout from "@/UI/AuthFormLayout"
+import AuthPageLayout from "@/UI/AuthPageLayout"
+import API from "@/utils/apiClient"
 import Head from "next/head"
-import Image from "next/image"
 import Link from "next/link"
-import { FormEventHandler } from "react"
+import { useRouter } from "next/router"
+import { FormEventHandler, useState } from "react"
 
 interface FormState {
   username: string
@@ -12,64 +19,113 @@ interface FormState {
   confPassword: string
 }
 
-//! form not ready
-//todo : create form with <TextInput/>
+interface ErrorState {
+  state: boolean
+  message: string
+}
+
 export default function register() {
-  const { changeHandler, reset, state } = useForm<FormState>({
+  const {
+    changeHandler,
+    state: { confPassword, email, password, username },
+  } = useForm<FormState>({
     confPassword: "",
     email: "",
     username: "",
     password: "",
   })
 
-  const submitHandler: FormEventHandler<HTMLFormElement> = event => {
+  const [error, setError] = useState<ErrorState>({ state: false, message: "" })
+  const [loading, setLoading] = useState<boolean>(false)
+  const router = useRouter()
+  const api = new API()
+
+  const submitHandler: FormEventHandler<HTMLFormElement> = async event => {
     event.preventDefault()
-    console.table(state)
-    /* write submit logic here */
-    reset()
+
+    if (confPassword !== password) {
+      setError({ state: true, message: "Password not matching" })
+      return
+    }
+
+    setLoading(true)
+    //registering user
+    setError({ state: false, message: "" })
+    const res = await api.registerUser({ username, email, password })
+    if (res.status === 502) {
+      const data = await res.json()
+      console.log("Error:", data)
+      setError({ state: true, message: "Error registering user, try again" })
+    } else if (res.status === 400) {
+      setError({ state: true, message: "Invalid input try again" })
+    } else if (res.status === 200) {
+      setError({ state: false, message: "" })
+      router.push("/auth/login")
+    }
+
+    setLoading(false)
   }
 
   return (
-    <div className="relative flex h-screen w-full flex-col bg-[url('/bg.jpg')] bg-center">
+    <AuthPageLayout>
+      <ErrorMessage error={error} />
       <Head>
         <title>Register</title>
       </Head>
-      <div className="absolute inset-0 z-0 bg-gradient-to-r from-gray-800 to-gray-800/50"></div>
-      <header className="relative z-20 mx-auto my-4 flex w-10/12 items-center justify-between">
-        <div className="flex items-center space-x-2">
-          <Image className="aspect-square w-12" width={50} height={50} src="/logo.svg" alt="logo" />
-          <h1 className="text-3xl font-bold text-white">AuthorJunction</h1>
-        </div>
-        <nav>
-          <ul className="flex space-x-6 font-semibold capitalize text-gray-200 [&>li:hover]:underline">
-            <li>
-              <Link href="/about">about</Link>
-            </li>
-            <li>
-              <Link href="/contact">contact</Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
-      <main className="relative z-20 mx-auto my-auto h-max w-10/12 ">
-        <div className="mx-auto w-1/2 rounded-xl bg-gray-800/90 p-5">
-          <span className="mb-2 text-sm font-semibold text-gray-300">Register as new user</span>
-          <h2 className="mb-2 text-5xl font-bold text-gray-200">Create new account</h2>
-          <span className="text-sm text-gray-400">
-            Already a member?{" "}
-            <Link className="text-blue-500 underline underline-offset-2" href="/auth/login">
-              Login
-            </Link>
-          </span>
-          <form onSubmit={submitHandler} className="my-4 mb-6 space-y-6">
-            <InputText text="Username" name="username" type="text" changeHandler={changeHandler} value={state.username} />
-            <InputText text="Email" name="email" type="email" changeHandler={changeHandler} value={state.email} />
-            <InputText text="Password" name="password" type="password" changeHandler={changeHandler} value={state.password} />
-            <InputText text="Confirm Password" name="confPassword" type="password" changeHandler={changeHandler} value={state.confPassword} />
-            <input className="rounded-full bg-blue-400 py-2 px-4 text-xl capitalize text-white " type="submit" value="Register" />
-          </form>
-        </div>
-      </main>
-    </div>
+      <Header>
+        <li>
+          <Link href="/about">about</Link>
+        </li>
+        <li>
+          <Link href="/contact">contact</Link>
+        </li>
+      </Header>
+      <AuthFormLayout>
+        <span className="mb-2 text-sm font-semibold text-cyan-700">
+          Register as new user
+        </span>
+        <h2 className="mb-2 text-5xl font-bold text-gray-900">Create new account</h2>
+        <span className="text-sm text-gray-600">
+          Already a member?{" "}
+          <A className="text-violet-500" href="/auth/login">
+            Login
+          </A>
+        </span>
+        <AuthForm loading={loading} submitHandler={submitHandler} submitText="register">
+          <InputText
+            required={true}
+            text="Username"
+            name="username"
+            type="text"
+            changeHandler={changeHandler}
+            value={username}
+          />
+          <InputText
+            required={true}
+            text="Email"
+            name="email"
+            type="email"
+            changeHandler={changeHandler}
+            value={email}
+          />
+          <InputText
+            required={true}
+            text="Password"
+            name="password"
+            type="password"
+            changeHandler={changeHandler}
+            value={password}
+          />
+          <InputText
+            required={true}
+            text="Confirm Password"
+            name="confPassword"
+            type="password"
+            changeHandler={changeHandler}
+            value={confPassword}
+          />
+        </AuthForm>
+      </AuthFormLayout>
+    </AuthPageLayout>
   )
 }

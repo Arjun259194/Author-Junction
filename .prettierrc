@@ -5,5 +5,8 @@
   "arrowParens": "avoid",
   "singleAttributePerLine": false,
   "useTabs": false,
-  "printWidth": 150
+  "printWidth": 90,
+  "cursorOffset": -1,
+  "htmlWhitespaceSensitivity": "css",
+  "quoteProps": "as-needed"
 }

@@ -1,8 +1,11 @@
-import React, { useState } from "react"
+import { ChangeEventHandler, useState } from "react"
 
-type HandlerFunction = (event: React.ChangeEvent<HTMLInputElement>) => void
 type ResetFunction = () => void
-type Return<T> = { state: T; changeHandler: HandlerFunction; reset: ResetFunction }
+type Return<T> = {
+  state: T
+  changeHandler: ChangeEventHandler<any>
+  reset: ResetFunction
+}
 
 /**
  * A custom React hook that simplifies form management by providing a state object, change handler, and reset function.
@@ -18,7 +21,7 @@ type Return<T> = { state: T; changeHandler: HandlerFunction; reset: ResetFunctio
 export default function useForm<T>(initialValue: T): Return<T> {
   const [state, setState] = useState<T>(initialValue)
 
-  const changeHandler: HandlerFunction = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const changeHandler: ChangeEventHandler<any> = event => {
     console.log("Change handler called")
     const { name, value } = event.target
     setState(pre => ({ ...pre, [name]: value }))
