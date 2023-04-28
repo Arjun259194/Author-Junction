@@ -10,25 +10,25 @@ import { GetServerSideProps, NextPage } from "next"
 import Head from "next/head"
 
 type Props = {
-  following: Pick<User, "id" | "username" | "email">[]
+  following: Pick<User, "id" | "username" | "email" | "following" | "followers">[]
 }
 
 const following: NextPage<Props> = props => {
   return (
-    <div>
+    <div className="flex min-h-screen flex-col bg-gradient-to-tr from-violet-400 to-cyan-400">
       <Head>
         <title>Following</title>
       </Head>
       <Header />
-      <main className="w-11/12 mx-auto">
-        <SecTitle>
-          People you follow
-        </SecTitle>
-        <div>
-          {props.following.map(v => <UserCard user={v} />)}
+      <main className="mx-auto w-10/12 space-y-2">
+        <SecTitle>People you follow</SecTitle>
+        <div className="grid grid-cols-2 gap-6 py-4">
+          {props.following.map(v => (
+            <UserCard user={v} />
+          ))}
         </div>
       </main>
-      <Footer />
+      <Footer className="mt-auto" />
     </div>
   )
 }
@@ -62,9 +62,11 @@ export const getServerSideProps: GetServerSideProps<Props> = async context => {
     props: {
       following: followingUser.map(v => {
         return {
-          id: v.id,
           username: v.username,
           email: v.email,
+          id: v.id,
+          followers: v.followers,
+          following: v.following,
         }
       }),
     },

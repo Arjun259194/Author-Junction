@@ -53,7 +53,7 @@ const Index: NextPage = () => {
         </section>
         <UserCaseSection />
       </main>
-      <Footer className="text-gray-600" />
+      <Footer className="" />
     </div>
   )
 }

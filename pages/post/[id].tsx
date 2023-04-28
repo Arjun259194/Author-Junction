@@ -38,7 +38,7 @@ interface FullPost extends Omit<Post, "creator"> {
 
 const PostPage: NextPage<PageProps> = props => {
   if (!props) return <div>can't get this post</div>
-  console.log(props.content)
+  // console.log(props.content)
   const [liked, setLiked] = useState<boolean>(props.likes.includes(props.userId))
   const apiClient = new API()
   const likeToggle: MouseEventHandler<HTMLButtonElement> = async event => {
@@ -55,7 +55,7 @@ const PostPage: NextPage<PageProps> = props => {
     }
   }
   return (
-    <div className="bg-gradient-to-b from-cyan-400 to-violet-500">
+    <div className="bg-gradient-to-b from-cyan-100 to-violet-100">
       <Head>
         <title>postPage</title>
       </Head>

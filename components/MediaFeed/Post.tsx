@@ -46,7 +46,8 @@ const Post: FC<Props> = ({ post, userId, index }) => {
       animate={{ y: 0, opacity: 1 }}
       transition={{
         type: "spring",
-        duration: 0.2 * (index + 1),
+        duration: 0.4 * (index + 1),
+        delay: 0.1 * (index + 1),
         ease: "easeInOut"
       }}
     >

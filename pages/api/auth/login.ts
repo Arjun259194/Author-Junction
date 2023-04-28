@@ -28,7 +28,7 @@ async function postHandler(req: NextApiRequest, res: NextApiResponse) {
     const tokenPayload = { id: result.user._id, email: result.user.email }
     const TOKEN = createToken(tokenPayload)
 
-    res.setHeader("Set-Cookie", `accessToken=${TOKEN}; HttpOnly; Max-Age=86400; Path=/`)
+    res.setHeader("Set-Cookie", `accessToken=${TOKEN}; HttpOnly; Max-Age=${60 * 60 * 24 * 7}; Path=/`)
 
     return res.status(200).json({ message: "ok" })
   } catch (err) {

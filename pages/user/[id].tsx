@@ -71,7 +71,7 @@ const UserProfilePage: NextPage<Props> = props => {
         </div>
         {role === "READER" ? <ReaderMedia userId={id} /> : <AuthorMedia userId={id} />}
       </main>
-      <Footer className="mt-auto text-gray-600" />
+      <Footer className="mt-auto" />
     </div>
   )
 }

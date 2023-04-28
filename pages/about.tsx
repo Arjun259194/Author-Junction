@@ -23,7 +23,7 @@ const about: NextPage = () => (
       <UseCaseSection />
       <TechnologiesSection />
     </main>
-    <Footer className="bg-gradient-to-b from-gray-100 to-gray-300 text-gray-600" />
+    <Footer className="" />
   </div>
 )
 
