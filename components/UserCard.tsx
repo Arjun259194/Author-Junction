@@ -9,7 +9,7 @@ interface Props {
 const UserCard: FC<Props> = ({ user: { id, username, email, following, followers } }) => {
   return (
     <Link className="" href={`/user/${id}`}>
-      <article className="group text-gray-900 flex w-full hover:bg-violet-600 hover:text-gray-100 items-center justify-between rounded-md border-2 border-gray-300 bg-gray-100 p-2 shadow-md">
+      <article className="group flex w-full items-center justify-between rounded-md border-2 border-gray-300 bg-gray-100 p-2 text-gray-900 shadow-md hover:bg-violet-600 hover:text-gray-100">
         <div>
           <h4 className="text-2xl font-semibold capitalize">{username}</h4>
           <span>{email}</span>

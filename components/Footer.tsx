@@ -10,9 +10,9 @@ const Footer: FC<HTMLElementProps> = ({ className, ...props }) => {
   return (
     <footer
       {...props}
-      className={`${className} px-5 py-4 space-y-4 bg-cyan-900 text-gray-200 `}
+      className={`${className} space-y-4 bg-cyan-900 px-5 py-4 text-gray-200 `}
     >
-      <div className="flex items-center justify-between w-full">
+      <div className="flex w-full items-center justify-between">
         <div className="">
           <p className="capitalize">&copy; AuthorJunction. All Rights Reserved</p>
           <p className="capitalize">ML institute of Diploma studies</p>
@@ -24,14 +24,20 @@ const Footer: FC<HTMLElementProps> = ({ className, ...props }) => {
           <p>arjun259194@gmail.com</p>
           <p>radhepatel2004@gmail.com</p>
         </div>
-        <div className="flex h-full flex-col justify-around text-end space-y-2 capitalize">
-          <A target="_blank" href="https://www.instagram.com/_radhe_patel_5lp/">instagram</A>
-          <A target="_blank" href="https://twitter.com/arjun31690705">twitter</A>
-          <A target="_blank" href="https://github.com/Arjun259194">github</A>
+        <div className="flex h-full flex-col justify-around space-y-2 text-end capitalize">
+          <A target="_blank" href="https://www.instagram.com/_radhe_patel_5lp/">
+            instagram
+          </A>
+          <A target="_blank" href="https://twitter.com/arjun31690705">
+            twitter
+          </A>
+          <A target="_blank" href="https://github.com/Arjun259194">
+            github
+          </A>
         </div>
       </div>
-      <hr className="mx-4" /> 
-      <div className="flex justify-between items-center">
+      <hr className="mx-4" />
+      <div className="flex items-center justify-between">
         <Image
           className="aspect-square w-12"
           width={50}
@@ -39,26 +45,18 @@ const Footer: FC<HTMLElementProps> = ({ className, ...props }) => {
           src="/logo.svg"
           alt="logo"
         />
-        <ul className="flex space-x-6 capitalize items-center">
+        <ul className="flex items-center space-x-6 capitalize">
           <li>
-            <Link href={`/`}>
-              home
-            </Link>
+            <Link href={`/`}>home</Link>
           </li>
           <li>
-            <Link href={`/about`}>
-              about
-            </Link>
+            <Link href={`/about`}>about</Link>
           </li>
           <li>
-            <Link href={`/user/profile`}>
-              profile
-            </Link>
+            <Link href={`/user/profile`}>profile</Link>
           </li>
           <li>
-            <Link href={`/media`}>
-              media
-            </Link>
+            <Link href={`/media`}>media</Link>
           </li>
           {/* <li> */}
           {/*   <Link href={`/auth/login`}> */}

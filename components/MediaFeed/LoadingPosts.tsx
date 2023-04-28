@@ -1,9 +1,9 @@
-import { FC } from "react";
-import LoadingPost from "./LoadingPost";
+import { FC } from "react"
+import LoadingPost from "./LoadingPost"
 
 const LoadingPosts: FC = () => {
   return (
-    <div className=" mx-auto max-h-full py-10 w-11/12 ">
+    <div className=" mx-auto max-h-full w-11/12 py-10 ">
       <LoadingPost />
       <LoadingPost />
       <LoadingPost />
@@ -12,4 +12,4 @@ const LoadingPosts: FC = () => {
   )
 }
 
-export default LoadingPosts;
+export default LoadingPosts

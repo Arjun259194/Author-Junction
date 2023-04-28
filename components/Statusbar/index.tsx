@@ -26,26 +26,24 @@ const Statusbar = () => {
       <div className="rounded-md border border-gray-300 bg-blue-50 px-4 py-2 shadow-md">
         <h3 className="my-2 text-center text-2xl font-semibold">Popular</h3>
         <div className="flex flex-col divide-y text-base font-normal [&>*]:my-1">
-          {
-            loading
-              ? <>
-              <div className="h-4 w-full rounded-md bg-gray-200 animate-pulse" />
-              <div className="h-4 w-full rounded-md bg-gray-200 animate-pulse" />
-              <div className="h-4 w-full rounded-md bg-gray-200 animate-pulse" />
-              <div className="h-4 w-full rounded-md bg-gray-200 animate-pulse" />
-              </>
-              : posts.length <= 0 ? (
-                <span>no post on trend right now</span>
-              ) : (
-                <>
-                  {posts.map((post, i) => (
-                    <A key={i} href={`/post/${post._id}`}>
-                      {post.title}
-                    </A>
-                  ))}
-                </>
-              )
-          }
+          {loading ? (
+            <>
+              <div className="h-4 w-full animate-pulse rounded-md bg-gray-200" />
+              <div className="h-4 w-full animate-pulse rounded-md bg-gray-200" />
+              <div className="h-4 w-full animate-pulse rounded-md bg-gray-200" />
+              <div className="h-4 w-full animate-pulse rounded-md bg-gray-200" />
+            </>
+          ) : posts.length <= 0 ? (
+            <span>no post on trend right now</span>
+          ) : (
+            <>
+              {posts.map((post, i) => (
+                <A key={i} href={`/post/${post._id}`}>
+                  {post.title}
+                </A>
+              ))}
+            </>
+          )}
         </div>
       </div>
       <hr />

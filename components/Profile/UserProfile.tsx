@@ -34,10 +34,10 @@ const UserProfile: FC<Props> = ({
         <span>Follower</span>
         <span>{followers.length}</span>
       </div>
-        <div className="flex w-1/2 justify-around space-x-2 rounded-md border border-gray-300 bg-gray-50 p-2 shadow-sm">
-          <span>following</span>
-          <span>{following.length}</span>
-        </div>
+      <div className="flex w-1/2 justify-around space-x-2 rounded-md border border-gray-300 bg-gray-50 p-2 shadow-sm">
+        <span>following</span>
+        <span>{following.length}</span>
+      </div>
     </div>
   </section>
 )

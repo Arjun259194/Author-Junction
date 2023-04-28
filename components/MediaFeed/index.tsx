@@ -16,7 +16,7 @@ interface Props extends HTMLElementProps {
 
 interface FullPost extends Omit<Post, "creator"> {
   creator: {
-    username: string,
+    username: string
     _id: string
   }
 }
@@ -32,7 +32,7 @@ const MediaFeed: FC<Props> = ({
 }) => {
   if (loading)
     return (
-      <section className="flex flex-col  w-full items-center justify-center">
+      <section className="flex w-full  flex-col items-center justify-center">
         <LoadingPosts />
       </section>
     )
@@ -66,10 +66,11 @@ const MediaFeed: FC<Props> = ({
       </section>
     )
 
-
-
   return (
-    <section {...props} className={` ${className} scrollbar-hide w-full overflow-y-scroll `} >
+    <section
+      {...props}
+      className={` ${className} scrollbar-hide w-full overflow-y-scroll `}
+    >
       <div className="flex items-center justify-center space-x-2 py-1">
         <h2 className=" flex items-center text-center text-4xl font-semibold capitalize text-gray-900">
           {children}

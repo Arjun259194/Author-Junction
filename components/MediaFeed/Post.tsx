@@ -33,11 +33,14 @@ const Post: FC<Props> = ({ post, userId, index }) => {
 
   const deletePost: MouseEventHandler<HTMLButtonElement> = event => {
     event.preventDefault()
-    apiClient.deletePost(post._id).then(res => {
-      if (res.ok) {
-        window.location.reload()
-      }
-    }).catch(err => console.error(err))
+    apiClient
+      .deletePost(post._id)
+      .then(res => {
+        if (res.ok) {
+          window.location.reload()
+        }
+      })
+      .catch(err => console.error(err))
   }
 
   return (
@@ -48,7 +51,7 @@ const Post: FC<Props> = ({ post, userId, index }) => {
         type: "spring",
         duration: 0.4 * (index + 1),
         delay: 0.1 * (index + 1),
-        ease: "easeInOut"
+        ease: "easeInOut",
       }}
     >
       <article className="mx-3 mb-6 min-w-min space-y-2 rounded-md border-2 border-gray-200 bg-gray-50 p-2 text-gray-900 shadow-md transition-all duration-200">
@@ -70,8 +73,9 @@ const Post: FC<Props> = ({ post, userId, index }) => {
         <div className="flex w-full justify-evenly text-xl capitalize">
           <PostButton onClick={likeToggle} className="hover:bg-pink-50">
             <span
-              className={` aspect-square h-6 transition-colors ${!!liked ? "text-pink-500" : ""
-                } duration-200 group-hover:text-pink-500`}
+              className={` aspect-square h-6 transition-colors ${
+                !!liked ? "text-pink-500" : ""
+              } duration-200 group-hover:text-pink-500`}
             >
               {liked ? likedIcon : likeIcon}
             </span>

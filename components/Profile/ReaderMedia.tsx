@@ -7,9 +7,9 @@ interface Props {
   userId: string
 }
 
-interface FullPost extends Omit<Post,"creator"> {
-  creator : {
-    username: string,
+interface FullPost extends Omit<Post, "creator"> {
+  creator: {
+    username: string
     _id: string
   }
 }
