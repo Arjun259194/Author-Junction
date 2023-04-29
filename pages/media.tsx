@@ -1,5 +1,6 @@
 import { newsIcon } from "@/assets/icons"
 import MediaFeed from "@/components/MediaFeed"
+import Searchdialog from "@/components/SearchDialog"
 import Sidebar from "@/components/Sidebar"
 import Statusbar from "@/components/Statusbar"
 import { Post } from "@/database/model/Post"
@@ -27,6 +28,11 @@ const Home: NextPage<PageProps> = ({ userData }) => {
   const api = new API()
   const [posts, setPosts] = useState<Array<FullPost>>([])
   const [loading, setLoading] = useState<boolean>(false)
+  const [isSearchOpen,setIsSearchOpen] = useState<boolean>(false)
+
+  function openSearch() {
+    setIsSearchOpen(true)
+  }
 
   const fetchData = () => {
     setLoading(true)
@@ -49,14 +55,24 @@ const Home: NextPage<PageProps> = ({ userData }) => {
   }, [])
 
   return (
-    <div className="bg-gradient-to-r from-violet-500 to-cyan-500">
+    <div className="bg-gradient-to-r from-violet-600 to-cyan-600">
       <Head>
         <title>{`Home | ${user.username}`}</title>
         <meta name="description" content="Author-Junction Home feed page" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main className="flex h-screen py-2">
-        <Sidebar user={user} />
+        <Searchdialog
+          isOpenState={isSearchOpen}
+          setStateFunction={setIsSearchOpen}
+          posts={posts.map(post => {
+            return {
+              title: post.title,
+              _id: post._id,
+            }
+          })}
+        />
+        <Sidebar searchToggle={openSearch} user={user} />
         <MediaFeed
           className="rounded  py-5"
           fetchFunction={fetchData}
@@ -64,8 +80,10 @@ const Home: NextPage<PageProps> = ({ userData }) => {
           posts={posts}
           userId={user._id}
         >
-          <span className="block aspect-square h-8">{newsIcon}</span>
-          <span>Latest feed</span>
+          <div className="flex items-center space-x-2 font-bold text-gray-100">
+            <span className="block aspect-square h-8">{newsIcon}</span>
+            <span>Latest feed</span>
+          </div>
         </MediaFeed>
         <Statusbar />
       </main>

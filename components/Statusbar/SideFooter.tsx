@@ -2,7 +2,7 @@ import { locationIcon } from "@/assets/icons"
 
 const SideFooter = () => {
   return (
-    <footer className="my-5 flex flex-col items-center space-y-1 rounded-md bg-cyan-50 p-2 text-center font-normal text-gray-600 shadow-md">
+    <footer className="my-5 flex flex-col items-start space-y-1.5 rounded-md bg-gray-100 border-2 border-gray-300 p-2 text-sm font-normal text-gray-600">
       <p>&copy; AuthorJunction {new Date().getFullYear()}. All Rights Reserved</p>
       <p>ML institute of Diploma studies</p>
       <p className="flex items-center ">
