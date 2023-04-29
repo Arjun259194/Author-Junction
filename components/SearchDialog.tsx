@@ -41,11 +41,18 @@ const Searchdialog: FC<Props> = ({ posts, isOpenState, setStateFunction }) => {
           }}
         />
         {filterPost.length > 0 ? (
-          <Combobox.Options className={`scrollbar-hide max-h-64 overflow-y-scroll py-2`} static>
+          <Combobox.Options
+            className={`scrollbar-hide max-h-64 overflow-y-scroll py-2`}
+            static
+          >
             {filterPost.map((post, i) => (
               <Combobox.Option value={post} key={i}>
                 {({ active }) => (
-                  <div className={`p-2 capitalize cursor-pointer  ${active ? "bg-violet-500 text-gray-100" : ""}`}>
+                  <div
+                    className={`cursor-pointer p-2 capitalize  ${
+                      active ? "bg-violet-500 text-gray-100" : ""
+                    }`}
+                  >
                     <span>{post.title}</span>
                   </div>
                 )}

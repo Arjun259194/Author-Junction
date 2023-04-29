@@ -28,7 +28,7 @@ const Home: NextPage<PageProps> = ({ userData }) => {
   const api = new API()
   const [posts, setPosts] = useState<Array<FullPost>>([])
   const [loading, setLoading] = useState<boolean>(false)
-  const [isSearchOpen,setIsSearchOpen] = useState<boolean>(false)
+  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false)
 
   function openSearch() {
     setIsSearchOpen(true)

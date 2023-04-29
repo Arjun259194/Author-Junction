@@ -22,8 +22,8 @@ const Statusbar = () => {
       .catch(err => console.log(err))
   }, [])
   return (
-    <section className="flex w-2/5 flex-col min-w-max space-y-4 px-2">
-      <div className="rounded-md border-2 min-w-max border-gray-300 bg-gray-50 px-4">
+    <section className="flex w-2/5 min-w-max flex-col space-y-4 px-2">
+      <div className="min-w-max rounded-md border-2 border-gray-300 bg-gray-50 px-4">
         <h3 className="my-2 text-center text-2xl font-semibold">Popular</h3>
         <div className="flex flex-col divide-y pb-2 text-base font-normal [&>*]:my-1">
           {loading ? (
