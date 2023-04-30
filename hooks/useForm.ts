@@ -22,7 +22,6 @@ export default function useForm<T>(initialValue: T): Return<T> {
   const [state, setState] = useState<T>(initialValue)
 
   const changeHandler: ChangeEventHandler<any> = event => {
-    console.log("Change handler called")
     const { name, value } = event.target
     setState(pre => ({ ...pre, [name]: value }))
   }

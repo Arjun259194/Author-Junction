@@ -8,7 +8,7 @@ import ShareButton from "./ShareButton"
 
 interface Props {
   post: FullPost
-  userId: string
+  clientUserId: string
   index: number
 }
 
@@ -21,9 +21,9 @@ interface FullPost extends Omit<Post, "creator"> {
 
 const shortenString = (str: string): string => str.substring(0, 250) + "..."
 
-const Post: FC<Props> = ({ post, userId, index }) => {
+const Post: FC<Props> = ({ post, clientUserId, index }) => {
   const apiClient = new API()
-  const [liked, setLiked] = useState<boolean>(post.likes.includes(userId))
+  const [liked, setLiked] = useState<boolean>(post.likes.includes(clientUserId))
 
   const likeToggle: MouseEventHandler<HTMLButtonElement> = async event => {
     event.preventDefault()
@@ -84,7 +84,7 @@ const Post: FC<Props> = ({ post, userId, index }) => {
             </span>
           </PostButton>
           <ShareButton postId={post._id} />
-          {post.creator._id === userId ? (
+          {post.creator._id === clientUserId ? (
             <PostButton onClick={deletePost} className="hover:bg-red-50">
               <span
                 className={` aspect-square h-6 transition-colors duration-200 group-hover:text-red-500`}

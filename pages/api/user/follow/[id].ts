@@ -36,9 +36,6 @@ async function putHandler(req: NextApiRequest, res: NextApiResponse) {
     const user = await UserModel.findById<User>(userId).exec()
     const followUser = await UserModel.findById<User>(followUserId).exec()
 
-    console.log("User:", user)
-    console.log("userToFollow:", followUser)
-
     if (!user || !followUser) {
       return res.status(404).json({ message: "not found" })
     }
@@ -64,7 +61,5 @@ const followToggle = (currUser: User, userToFollow: User): void => {
   } else {
     currUser.following = [...currUser.following, userToFollowId]
     userToFollow.followers = [...userToFollow.followers, currUserId]
-    console.log("currUser following after remove:", currUser.following)
-    console.log("userToFollow follower after remove:", userToFollow.followers)
   }
 }

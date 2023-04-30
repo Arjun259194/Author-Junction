@@ -5,6 +5,9 @@ import { HTMLElementProps } from "@/utils/types"
 import { FC, ReactNode } from "react"
 import Posts from "./Posts"
 import LoadingPosts from "./LoadingPosts"
+import Title from "@/UI/Title"
+import Paragraph from "@/UI/Paragraph"
+import { motion } from "framer-motion"
 
 interface Props extends HTMLElementProps {
   userId: string
@@ -39,38 +42,41 @@ const MediaFeed: FC<Props> = ({
 
   if (posts.length <= 0)
     return (
-      <section className="flex w-full flex-col items-center justify-center space-y-2 ">
-        <h1 className="text-2xl font-semibold ">No Feed available</h1>
-        <p>There are not post</p>
-        {
-          //todo: add "create-page" link to this button
-        }
-        <Button
-          onClick={() => (window.location.href = "/post/create")}
-          variant="primary"
-          className=" flex items-center space-x-2 "
-        >
-          <span className="aspect-square h-5">{authorIcon}</span>
-          <span>Create Post</span>
-        </Button>
-        <p>or you can try to refresh</p>
-        <Button
-          onClick={_ => {
-            window.location.reload()
-          }}
-          className="capitalize"
-          variant="secondary"
-        >
-          refresh
-        </Button>
-      </section>
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.2,
+          delay: 0.2,
+        }}
+      >
+        <section className="flex w-full flex-col items-center justify-center space-y-2 py-10 text-center ">
+          <Title className="text-gray-800">No Feed available</Title>
+          <Paragraph>There are no posts</Paragraph>
+          <Button
+            onClick={() => (window.location.href = "/post/create")}
+            variant="primary"
+            className=" flex items-center space-x-2 "
+          >
+            <span className="aspect-square h-6">{authorIcon}</span>
+            <span className="text-lg">Create Post</span>
+          </Button>
+          <Paragraph>or you can try to refresh</Paragraph>
+          <Button
+            onClick={_ => {
+              window.location.reload()
+            }}
+            className="text-lg"
+            variant="secondary"
+          >
+            refresh
+          </Button>
+        </section>
+      </motion.div>
     )
 
   return (
-    <section
-      {...props}
-      className={` ${className} scrollbar-hide w-full overflow-y-scroll `}
-    >
+    <section {...props} className={` ${className} scrollbar-hide w-full overflow-y-scroll `}>
       <div className="flex items-center justify-center space-x-2 py-1">
         <h2 className=" flex items-center text-center text-4xl font-semibold capitalize text-gray-900">
           {children}

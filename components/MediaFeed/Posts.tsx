@@ -26,7 +26,7 @@ const Posts: FC<Props> = ({ posts, fetchData, userId }) => {
         </div>
         <div>
           {posts.map((post, index) => {
-            return <Post index={index} key={index} userId={userId} post={post} />
+            return <Post index={index} key={index} clientUserId={userId} post={post} />
           })}
           <span className="block h-10 text-center text-xl capitalize italic text-gray-500">
             Refresh for new posts

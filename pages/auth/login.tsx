@@ -62,17 +62,12 @@ export default function Login() {
 
     const res = await api.loginUser(zRes.data)
 
-    console.log("response ready")
     if (res.status === 404) {
-      console.log("code is 404")
       errorMessage("email not found")
     } else if (res.status === 401) {
-      console.log("code is 401")
       errorMessage("wrong password")
     } else if (res.status === 502) {
-      console.log("code is 502")
       const data = await res.json()
-      console.log(data)
       errorMessage("Error while logging in")
     } else {
       resetError()
