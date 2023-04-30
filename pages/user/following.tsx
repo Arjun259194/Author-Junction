@@ -23,8 +23,8 @@ const following: NextPage<Props> = props => {
       <main className="mx-auto w-10/12 space-y-2">
         <SecTitle>People you follow</SecTitle>
         <div className="grid grid-cols-2 gap-6 py-4">
-          {props.following.map(v => (
-            <UserCard user={v} />
+          {props.following.map((v,i) => (
+            <UserCard key={i} user={v} />
           ))}
         </div>
       </main>

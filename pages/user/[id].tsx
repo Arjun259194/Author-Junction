@@ -22,7 +22,6 @@ interface Props
 }
 
 const UserProfilePage: NextPage<Props> = props => {
-  if (!props) return <ErrorPage />
 
   const { username, email, followers, following, role, id, clientUserId } = props
 
@@ -39,6 +38,8 @@ const UserProfilePage: NextPage<Props> = props => {
       setIsFollowed(!isFollowed)
     }
   }
+
+  if (!props) return <ErrorPage />
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-tr from-violet-300 to-cyan-300">

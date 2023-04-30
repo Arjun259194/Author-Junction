@@ -102,7 +102,7 @@ export default function Login() {
         </span>
         <h2 className="mb-2 text-5xl font-bold text-gray-900">Login with your account</h2>
         <span className="text-sm text-gray-600">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <A className="text-violet-500" href="/auth/register">
             Register
           </A>

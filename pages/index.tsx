@@ -44,8 +44,8 @@ const Index: NextPage = () => {
               easier with AuthorJunction. Our platform offers a diverse range of genres
               and styles to suit your reading preferences. Explore our carefully curated
               selection of author profiles and sample chapters to find your next favorite
-              writer. At AuthorJunction, we're passionate about helping readers connect
-              with talented writers, and we're committed to providing a seamless and
+              writer. At AuthorJunction, we&apos;re passionate about helping readers connect
+              with talented writers, and we&apos;re committed to providing a seamless and
               enjoyable user experience. Join our community today and discover the latest
               voices in the literary world.
             </Paragraph>

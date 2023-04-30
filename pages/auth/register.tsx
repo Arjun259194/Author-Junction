@@ -7,6 +7,7 @@ import A from "@/UI/A"
 import AuthFormLayout from "@/UI/AuthFormLayout"
 import AuthPageLayout from "@/UI/AuthPageLayout"
 import API from "@/utils/apiClient"
+import { NextPage } from "next"
 import Head from "next/head"
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -24,7 +25,7 @@ interface ErrorState {
   message: string
 }
 
-export default function register() {
+const Register:NextPage = () => {
   const {
     changeHandler,
     state: { confPassword, email, password, username },
@@ -129,3 +130,5 @@ export default function register() {
     </AuthPageLayout>
   )
 }
+
+export default Register;
