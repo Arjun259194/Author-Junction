@@ -8,6 +8,7 @@ import LoadingPosts from "./LoadingPosts"
 import Title from "@/UI/Title"
 import Paragraph from "@/UI/Paragraph"
 import { motion } from "framer-motion"
+import FadeIn from "@/UI/FadeIn"
 
 interface Props extends HTMLElementProps {
   userId: string
@@ -42,14 +43,7 @@ const MediaFeed: FC<Props> = ({
 
   if (posts.length <= 0)
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 0.2,
-          delay: 0.2,
-        }}
-      >
+      <FadeIn>
         <section className="flex w-full flex-col items-center justify-center space-y-2 py-10 text-center ">
           <Title className="text-gray-800">No Feed available</Title>
           <Paragraph>There are no posts</Paragraph>
@@ -72,7 +66,7 @@ const MediaFeed: FC<Props> = ({
             refresh
           </Button>
         </section>
-      </motion.div>
+      </FadeIn>
     )
 
   return (

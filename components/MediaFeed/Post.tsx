@@ -43,6 +43,7 @@ const Post: FC<Props> = ({ post, clientUserId, index }) => {
       .catch(err => console.error(err))
   }
 
+
   return (
     <motion.div
       initial={{ y: 100, opacity: 0 }}

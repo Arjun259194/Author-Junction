@@ -68,6 +68,7 @@ export default function Login() {
       errorMessage("wrong password")
     } else if (res.status === 502) {
       const data = await res.json()
+      console.log(data)
       errorMessage("Error while logging in")
     } else {
       resetError()
@@ -92,9 +93,7 @@ export default function Login() {
         </li>
       </Header>
       <AuthFormLayout>
-        <span className="mb-2 text-sm font-semibold text-cyan-600">
-          Login as an existing user
-        </span>
+        <span className="mb-2 text-sm font-semibold text-cyan-600">Login as an existing user</span>
         <h2 className="mb-2 text-5xl font-bold text-gray-900">Login with your account</h2>
         <span className="text-sm text-gray-600">
           Don&apos;t have an account?{" "}
