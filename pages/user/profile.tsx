@@ -15,6 +15,27 @@ interface Props {
   user: string
 }
 
+export const getServerSideProps: GetServerSideProps = async context => {
+  await connectDB()
+  const token = context.req.cookies["accessToken"]
+  const userId = getUserIdFromToken(token)
+  if (!userId)
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    }
+
+  const user = await UserModel.findById<User>(userId).exec()
+
+  return {
+    props: {
+      user: JSON.stringify(user),
+    },
+  }
+}
+
 export const Profile: NextPage<Props> = ({ user }) => {
   const userData: User | null = JSON.parse(user)
 
@@ -42,30 +63,9 @@ export const Profile: NextPage<Props> = ({ user }) => {
         <UserProfile user={{ username, email, followers, following, role }} />
         {role === "READER" ? <ReaderMedia userId={_id} /> : <AuthorMedia userId={_id} />}
       </main>
-      <Footer className="mt-auto " />
+      <Footer />
     </div>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async context => {
-  await connectDB()
-  const token = context.req.cookies["accessToken"]
-  const userId = getUserIdFromToken(token)
-  if (!userId)
-    return {
-      redirect: {
-        destination: "/auth/login",
-        permanent: false,
-      },
-    }
-
-  const user = await UserModel.findById<User>(userId).exec()
-
-  return {
-    props: {
-      user: JSON.stringify(user),
-    },
-  }
 }
 
 export default Profile

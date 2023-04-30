@@ -37,10 +37,9 @@ interface FullPost extends Omit<Post, "creator"> {
 }
 
 const PostPage: NextPage<PageProps> = props => {
-  if (!props) return <div>can't get this post</div>
-  // console.log(props.content)
   const [liked, setLiked] = useState<boolean>(props.likes.includes(props.userId))
   const apiClient = new API()
+  // console.log(props.content)
   const likeToggle: MouseEventHandler<HTMLButtonElement> = async event => {
     event.preventDefault()
     const res = await apiClient.likePost(props.id)
@@ -54,6 +53,9 @@ const PostPage: NextPage<PageProps> = props => {
       setLiked(!liked)
     }
   }
+
+  if (!props) return <div>can not get this post</div>
+
   return (
     <div className="bg-gradient-to-b from-cyan-100 to-violet-100">
       <Head>
@@ -109,8 +111,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async context =
   const userId = getUserIdFromToken(token)
 
   //redirecting user
-  if (!userId)
-    return { redirect: { destination: "/auth/login", permanent: false } } as any
+  if (!userId) return { redirect: { destination: "/auth/login", permanent: false } } as any
 
   const postId = context.query.id
 

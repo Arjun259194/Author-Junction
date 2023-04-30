@@ -10,7 +10,7 @@ interface Props {
 
 const ProfileCard: FC<Props> = ({ username, email, role }) => {
   return (
-    <div className="rounded-lg border border-gray-300 bg-cyan-50 p-2 shadow-sm ">
+    <div className="rounded-lg border-2 border-gray-300 bg-gray-50 p-2">
       <div className="flex items-center">
         <h3 className=" text-3xl font-bold capitalize text-gray-900">{username}</h3>
         <span className="group relative mx-2 aspect-square h-6 text-gray-800">

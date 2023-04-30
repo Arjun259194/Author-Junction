@@ -10,15 +10,15 @@ const HeroSection = () => (
         writers and authors in showcasing their work to a wider audience. Our platform is
         a safe and supportive space for small authors to upload their written pieces,
         ranging from poetry and short stories to novels and creative non-fiction. At
-        Authorjunction, we're committed to empowering writers and helping them to build
+        Authorjunction, we&apos;re committed to empowering writers and helping them to build
         their audiences and achieve their creative goals.
       </Paragraph>
       <Paragraph>
         With a simple and intuitive interface, Authorjunction provides a user-friendly
-        experience for both writers and readers. Our platform's advanced search and
+        experience for both writers and readers. Our platform&apos;s advanced search and
         browsing features enable readers to easily discover fresh and exciting new
         content, while our robust author profiles allow writers to showcase their work and
-        connect with readers from around the world. Whether you're an emerging writer
+        connect with readers from around the world. Whether you&apos;re an emerging writer
         looking to get your work out there or a reader seeking out new and engaging
         stories, Authorjunction is the perfect platform for you.
       </Paragraph>
