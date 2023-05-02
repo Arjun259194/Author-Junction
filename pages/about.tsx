@@ -15,6 +15,9 @@ const about: NextPage = () => (
         <Link href={"/"}>home</Link>
       </li>
       <li className="text-gray-50">
+        <Link href={"/media"}>media</Link>
+      </li>
+      <li className="text-gray-50">
         <Link href={"/about"}>about</Link>
       </li>
     </Header>

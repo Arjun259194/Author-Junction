@@ -7,11 +7,25 @@ import useForm from "@/hooks/useForm"
 import A from "@/UI/A"
 import AuthFormLayout from "@/UI/AuthFormLayout"
 import AuthPageLayout from "@/UI/AuthPageLayout"
+import connectDB from "@/utils/api/connectDB"
 import API from "@/utils/apiClient"
+import { GetServerSideProps } from "next"
 import Head from "next/head"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { FormEventHandler, useState } from "react"
+
+export const getServerSideProps: GetServerSideProps = async ctx => {
+  await connectDB()
+  const token = ctx.req.cookies.accessToken
+  if (token)
+    return {
+      redirect: {
+        destination: "/media",
+        permanent: false,
+      },
+    } as any
+}
 
 interface FormState {
   email: string
