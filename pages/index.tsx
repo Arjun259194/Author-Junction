@@ -37,38 +37,34 @@ const Index: NextPage<Props> = ({ status, user }) => {
           <Link href="/about">about</Link>
         </li>
         {!status && !user ? (
-          <></>
+          <>
+            <li className="">
+              <Link href="/auth/register">
+                <Button className="" variant="secondary">
+                  register
+                </Button>
+              </Link>
+            </li>
+            <li className="">
+              <Link href="/auth/login">
+                <Button variant="primary">log in</Button>
+              </Link>
+            </li>
+          </>
         ) : (
           <>
-            <li>
-              <Link href="/user/profile">profile</Link>
-            </li>
             <li>
               <Link href="/user/following">following</Link>
             </li>
             <li className="font-semibold text-gray-100">
               <Link href="/media">media</Link>
             </li>
+            <li className="rounded-md bg-violet-600 px-4 py-1 shadow-md">
+              <Link href={`/user/profile`}>
+                <h3 className="text-2xl font-bold capitalize">{user?.username}</h3>
+              </Link>
+            </li>
           </>
-        )}
-        {user === null && !status ? (
-          <div className="space-x-2">
-            <Link href="/auth/register">
-              <Button className="" variant="secondary">
-                register
-              </Button>
-            </Link>
-            <Link href="/auth/login">
-              <Button variant="primary">log in</Button>
-            </Link>
-          </div>
-        ) : (
-          <div className="flex flex-col rounded-md p-1">
-            <Link href={`/user/profile`}>
-              <h3 className="text-lg capitalize">{user?.username}</h3>
-            </Link>
-            <span className="text-sm text-gray-200">{user?.email}</span>
-          </div>
         )}
       </Header>
       <main className=" ">
