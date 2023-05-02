@@ -14,7 +14,7 @@ import Link from "next/link"
 
 interface Props {
   status: boolean
-  user?: Pick<User, "username" | "email"> | null
+  user: Pick<User, "username" | "email"> | null
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
@@ -36,7 +36,7 @@ const Index: NextPage<Props> = ({ status, user }) => {
         <li className="font-semibold text-gray-100">
           <Link href="/about">about</Link>
         </li>
-        {!status && !user ? (
+        {!status && user === null ? (
           <>
             <li className="">
               <Link href="/auth/register">
@@ -56,13 +56,11 @@ const Index: NextPage<Props> = ({ status, user }) => {
             <li>
               <Link href="/user/following">following</Link>
             </li>
-            <li className="font-semibold text-gray-100">
+            <li className="">
               <Link href="/media">media</Link>
             </li>
-            <li className="rounded-md bg-violet-600 px-4 py-1 shadow-md">
-              <Link href={`/user/profile`}>
-                <h3 className="text-2xl font-bold capitalize">{user?.username}</h3>
-              </Link>
+            <li className="">
+              <Link href={`/user/profile`}>profile</Link>
             </li>
           </>
         )}

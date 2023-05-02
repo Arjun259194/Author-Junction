@@ -22,7 +22,17 @@ const following: NextPage<Props> = props => {
       <Head>
         <title>Following</title>
       </Head>
-      <Header />
+      <Header>
+        <li className="">
+          <Link href="/about">about</Link>
+        </li>
+        <li className="">
+          <Link href="/media">media</Link>
+        </li>
+        <li className="">
+          <Link href={`/user/profile`}>profile</Link>
+        </li>
+      </Header>
       <main className="mx-auto w-10/12 space-y-2">
         {props.following.length <= 0 ? (
           <div className="flex flex-col items-center space-y-2 py-20 text-center">
