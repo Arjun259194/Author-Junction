@@ -24,7 +24,8 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
         destination: "/media",
         permanent: false,
       },
-    } as any
+    }
+   return { props: {} }
 }
 
 interface FormState {
