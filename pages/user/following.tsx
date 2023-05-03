@@ -36,7 +36,7 @@ const following: NextPage<Props> = props => {
       <main className="mx-auto w-10/12 space-y-2">
         {props.following.length <= 0 ? (
           <div className="flex flex-col items-center space-y-2 py-20 text-center">
-            <SecTitle>You haven't followed anyone</SecTitle>
+            <SecTitle>You haven&apos;t followed anyone</SecTitle>
             <Paragraph>Find authors to follow</Paragraph>
             <Link href={`/media`}>
               <Button variant="primary">Media</Button>
