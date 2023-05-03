@@ -58,7 +58,7 @@ const PostPage: NextPage<PageProps> = props => {
   return (
     <div className="bg-gradient-to-b from-cyan-100 to-violet-100">
       <Head>
-        <title>postPage</title>
+        <title>{props.title}</title>
       </Head>
       <Header />
       <main className="mx-auto min-h-screen w-10/12 space-y-6 py-5">
