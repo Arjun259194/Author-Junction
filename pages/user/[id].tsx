@@ -15,24 +15,19 @@ import { GetServerSideProps, NextPage } from "next"
 import Link from "next/link"
 import { MouseEventHandler, useState } from "react"
 
-interface Props
-  extends Pick<User, "role" | "username" | "email" | "following" | "followers"> {
+interface Props extends Pick<User, "role" | "username" | "email" | "following" | "followers"> {
   id: string
   clientUserId: string
 }
 
 const UserProfilePage: NextPage<Props> = props => {
-
   const { username, email, followers, following, role, id, clientUserId } = props
-
-  console.log({ username, email, followers, following, role, id, clientUserId })
 
   const [isFollowed, setIsFollowed] = useState<boolean>(followers.includes(clientUserId))
   const apiClient = new API()
 
   const onFollowHandler: MouseEventHandler<HTMLButtonElement> = async event => {
     event.preventDefault()
-    console.log("Toggling")
     const res = await apiClient.followUser(id)
     if (res.ok) {
       setIsFollowed(!isFollowed)
@@ -70,7 +65,11 @@ const UserProfilePage: NextPage<Props> = props => {
             {isFollowed ? "unfollow" : "follow"}
           </Button>
         </div>
-        {role === "READER" ? <ReaderMedia userId={id} /> : <AuthorMedia userId={id} />}
+        {role === "READER" ? (
+          <ReaderMedia userId={id} />
+        ) : (
+          <AuthorMedia fetchUserId={id} userId={clientUserId} />
+        )}
       </main>
       <Footer className="mt-auto" />
     </div>

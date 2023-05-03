@@ -7,11 +7,26 @@ import useForm from "@/hooks/useForm"
 import A from "@/UI/A"
 import AuthFormLayout from "@/UI/AuthFormLayout"
 import AuthPageLayout from "@/UI/AuthPageLayout"
+import connectDB from "@/utils/api/connectDB"
 import API from "@/utils/apiClient"
+import { GetServerSideProps } from "next"
 import Head from "next/head"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { FormEventHandler, useState } from "react"
+
+export const getServerSideProps: GetServerSideProps = async ctx => {
+  await connectDB()
+  const token = ctx.req.cookies.accessToken
+  if (token)
+    return {
+      redirect: {
+        destination: "/media",
+        permanent: false,
+      },
+    }
+   return { props: {} }
+}
 
 interface FormState {
   email: string
@@ -62,15 +77,11 @@ export default function Login() {
 
     const res = await api.loginUser(zRes.data)
 
-    console.log("response ready")
     if (res.status === 404) {
-      console.log("code is 404")
       errorMessage("email not found")
     } else if (res.status === 401) {
-      console.log("code is 401")
       errorMessage("wrong password")
     } else if (res.status === 502) {
-      console.log("code is 502")
       const data = await res.json()
       console.log(data)
       errorMessage("Error while logging in")
@@ -97,9 +108,7 @@ export default function Login() {
         </li>
       </Header>
       <AuthFormLayout>
-        <span className="mb-2 text-sm font-semibold text-cyan-600">
-          Login as an existing user
-        </span>
+        <span className="mb-2 text-sm font-semibold text-cyan-600">Login as an existing user</span>
         <h2 className="mb-2 text-5xl font-bold text-gray-900">Login with your account</h2>
         <span className="text-sm text-gray-600">
           Don&apos;t have an account?{" "}

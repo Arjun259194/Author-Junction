@@ -6,12 +6,27 @@ import useForm from "@/hooks/useForm"
 import A from "@/UI/A"
 import AuthFormLayout from "@/UI/AuthFormLayout"
 import AuthPageLayout from "@/UI/AuthPageLayout"
+import connectDB from "@/utils/api/connectDB"
 import API from "@/utils/apiClient"
-import { NextPage } from "next"
+import { GetServerSideProps, NextPage } from "next"
 import Head from "next/head"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { FormEventHandler, useState } from "react"
+
+export const getServerSideProps: GetServerSideProps = async ctx => {
+  await connectDB()
+  const token = ctx.req.cookies.accessToken
+  if (token)
+    return {
+      redirect: {
+        destination: "/media",
+        permanent: false,
+      },
+    }
+
+  return { props: {} }
+}
 
 interface FormState {
   username: string
@@ -25,7 +40,7 @@ interface ErrorState {
   message: string
 }
 
-const Register:NextPage = () => {
+const Register: NextPage = () => {
   const {
     changeHandler,
     state: { confPassword, email, password, username },
@@ -82,9 +97,7 @@ const Register:NextPage = () => {
         </li>
       </Header>
       <AuthFormLayout>
-        <span className="mb-2 text-sm font-semibold text-cyan-700">
-          Register as new user
-        </span>
+        <span className="mb-2 text-sm font-semibold text-cyan-700">Register as new user</span>
         <h2 className="mb-2 text-5xl font-bold text-gray-900">Create new account</h2>
         <span className="text-sm text-gray-600">
           Already a member?{" "}
@@ -131,4 +144,4 @@ const Register:NextPage = () => {
   )
 }
 
-export default Register;
+export default Register

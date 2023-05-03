@@ -52,7 +52,7 @@ const Home: NextPage<PageProps> = ({ userData }) => {
 
   useEffect(() => {
     fetchData()
-  }, [fetchData])
+  },[])
 
   return (
     <div className="bg-gradient-to-r from-violet-600 to-cyan-600">

@@ -39,6 +39,7 @@ const BtnGroup = () => {
         <span className="aspect-square h-5">{authorIcon}</span>
         <span>Create Post</span>
       </Button>
+
       <Button
         onClick={logoutHandler}
         className="flex items-center justify-start space-x-2 py-1 text-base font-semibold capitalize  hover:bg-red-500 hover:text-gray-100"

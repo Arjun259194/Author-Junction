@@ -1,3 +1,5 @@
+import Button from "@/UI/Button"
+import Paragraph from "@/UI/Paragraph"
 import SecTitle from "@/UI/SecTitle"
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
@@ -8,6 +10,7 @@ import connectDB from "@/utils/api/connectDB"
 import { getUserIdFromToken } from "@/utils/api/functions"
 import { GetServerSideProps, NextPage } from "next"
 import Head from "next/head"
+import Link from "next/link"
 
 type Props = {
   following: Pick<User, "id" | "username" | "email" | "following" | "followers">[]
@@ -19,14 +22,36 @@ const following: NextPage<Props> = props => {
       <Head>
         <title>Following</title>
       </Head>
-      <Header />
+      <Header>
+        <li className="">
+          <Link href="/about">about</Link>
+        </li>
+        <li className="">
+          <Link href="/media">media</Link>
+        </li>
+        <li className="">
+          <Link href={`/user/profile`}>profile</Link>
+        </li>
+      </Header>
       <main className="mx-auto w-10/12 space-y-2">
-        <SecTitle>People you follow</SecTitle>
-        <div className="grid grid-cols-2 gap-6 py-4">
-          {props.following.map((v,i) => (
-            <UserCard key={i} user={v} />
-          ))}
-        </div>
+        {props.following.length <= 0 ? (
+          <div className="flex flex-col items-center space-y-2 py-20 text-center">
+            <SecTitle>You haven't followed anyone</SecTitle>
+            <Paragraph>Find authors to follow</Paragraph>
+            <Link href={`/media`}>
+              <Button variant="primary">Media</Button>
+            </Link>
+          </div>
+        ) : (
+          <>
+            <SecTitle>People you follow</SecTitle>
+            <div className="grid grid-cols-2 gap-6 py-4">
+              {props.following.map((v, i) => (
+                <UserCard key={i} user={v} />
+              ))}
+            </div>
+          </>
+        )}
       </main>
       <Footer className="mt-auto" />
     </div>
@@ -57,7 +82,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async context => {
 
   if (!followingUser || followingUser.length <= 0) return { props: { following: [] } }
 
-  console.log(followingUser)
   return {
     props: {
       following: followingUser.map(v => {

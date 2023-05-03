@@ -2,13 +2,15 @@ import { deleteIcon, likeIcon, likedIcon } from "@/assets/icons"
 import { motion } from "framer-motion"
 import { Post } from "@/database/model/Post"
 import API from "@/utils/apiClient"
-import { FC, MouseEventHandler, useState } from "react"
+import { FC, Fragment, MouseEventHandler, useState } from "react"
 import PostButton from "./PostButton"
 import ShareButton from "./ShareButton"
+import { Dialog, Transition } from "@headlessui/react"
+import Button from "@/UI/Button"
 
 interface Props {
   post: FullPost
-  userId: string
+  clientUserId: string
   index: number
 }
 
@@ -21,10 +23,18 @@ interface FullPost extends Omit<Post, "creator"> {
 
 const shortenString = (str: string): string => str.substring(0, 250) + "..."
 
-const Post: FC<Props> = ({ post, userId, index }) => {
+const Post: FC<Props> = ({ post, clientUserId, index }) => {
+  let [isOpen, setIsOpen] = useState(false)
   const apiClient = new API()
-  const [liked, setLiked] = useState<boolean>(post.likes.includes(userId))
+  const [liked, setLiked] = useState<boolean>(post.likes.includes(clientUserId))
 
+  function closeModal() {
+    setIsOpen(false)
+  }
+
+  function openModal() {
+    setIsOpen(true)
+  }
   const likeToggle: MouseEventHandler<HTMLButtonElement> = async event => {
     event.preventDefault()
     const res = await apiClient.likePost(post._id)
@@ -84,17 +94,71 @@ const Post: FC<Props> = ({ post, userId, index }) => {
             </span>
           </PostButton>
           <ShareButton postId={post._id} />
-          {post.creator._id === userId ? (
-            <PostButton onClick={deletePost} className="hover:bg-red-50">
-              <span
-                className={` aspect-square h-6 transition-colors duration-200 group-hover:text-red-500`}
-              >
-                {deleteIcon}
-              </span>
-              <span className=" text-base capitalize text-gray-500 transition-colors duration-200 group-hover:text-red-500">
-                delete
-              </span>
-            </PostButton>
+          {post.creator._id === clientUserId ? (
+            <>
+              <PostButton onClick={openModal} className="hover:bg-red-50">
+                <span
+                  className={` aspect-square h-6 transition-colors duration-200 group-hover:text-red-500`}
+                >
+                  {deleteIcon}
+                </span>
+                <span className=" text-base capitalize text-gray-500 transition-colors duration-200 group-hover:text-red-500">
+                  delete
+                </span>
+              </PostButton>
+              <Transition appear show={isOpen} as={Fragment}>
+                <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                  <Transition.Child
+                    as={Fragment}
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0"
+                    enterTo="opacity-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                  >
+                    <div className="fixed inset-0 bg-black bg-opacity-25" />
+                  </Transition.Child>
+
+                  <div className="fixed inset-0 overflow-y-auto">
+                    <div className="flex min-h-full items-center justify-center p-4 text-center">
+                      <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0 scale-95"
+                        enterTo="opacity-100 scale-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100 scale-100"
+                        leaveTo="opacity-0 scale-95"
+                      >
+                        <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                          <Dialog.Title
+                            as="h3"
+                            className="text-lg font-medium leading-6 text-gray-900"
+                          >
+                            Are you sure you want to delete this post?
+                          </Dialog.Title>
+
+                          <div className="mt-4 space-x-4">
+                            <Button
+                              className="hover:bg-red-500"
+                              type="button"
+                              variant="primary"
+                              onClick={deletePost}
+                            >
+                              Remove
+                            </Button>
+                            <Button onClick={closeModal} variant="secondary">
+                              close
+                            </Button>
+                          </div>
+                        </Dialog.Panel>
+                      </Transition.Child>
+                    </div>
+                  </div>
+                </Dialog>
+              </Transition>
+            </>
           ) : null}
         </div>
       </article>

@@ -4,13 +4,12 @@ import { locationIcon } from "@/assets/icons"
 import { HTMLElementProps } from "@/utils/types"
 import { FC } from "react"
 import Link from "next/link"
-import Button from "@/UI/Button"
 
 const Footer: FC<HTMLElementProps> = ({ className, ...props }) => {
   return (
     <footer
       {...props}
-      className={`${className} space-y-4 bg-cyan-900 px-5 py-4 text-gray-200 `}
+      className={`${className} space-y-4 font-light bg-cyan-900 px-5 py-4 text-gray-200 `}
     >
       <div className="flex w-full items-center justify-between">
         <div className="">

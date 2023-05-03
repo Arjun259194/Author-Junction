@@ -9,13 +9,13 @@ const Header: FC<HTMLElementProps> = ({ children, className, ...props }) => {
       <div className="mx-auto flex w-11/12 items-center justify-between">
         <Link href="/">
           <div className="flex items-center space-x-2">
-            <Image
-              className="aspect-square w-12"
-              width={50}
-              height={50}
-              src="/logo.svg"
-              alt="logo"
-            />
+              <Image
+                className="aspect-square w-12"
+                width={50}
+                height={50}
+                src="/logo.svg"
+                alt="logo"
+              />
             <h1 className="font-DS text-3xl font-bold">AuthorJunction</h1>
           </div>
         </Link>

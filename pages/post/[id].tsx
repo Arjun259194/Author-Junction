@@ -39,7 +39,6 @@ interface FullPost extends Omit<Post, "creator"> {
 const PostPage: NextPage<PageProps> = props => {
   const [liked, setLiked] = useState<boolean>(props.likes.includes(props.userId))
   const apiClient = new API()
-  // console.log(props.content)
   const likeToggle: MouseEventHandler<HTMLButtonElement> = async event => {
     event.preventDefault()
     const res = await apiClient.likePost(props.id)
