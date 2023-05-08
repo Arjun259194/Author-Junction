@@ -99,14 +99,7 @@ export default function Login() {
       <Head>
         <title>Login</title>
       </Head>
-      <Header>
-        <li>
-          <Link href="/about">about</Link>
-        </li>
-        <li>
-          <Link href="/contact">contact</Link>
-        </li>
-      </Header>
+      <Header />
       <AuthFormLayout>
         <span className="mb-2 text-sm font-semibold text-cyan-600">Login as an existing user</span>
         <h2 className="mb-2 text-5xl font-bold text-gray-900">Login with your account</h2>

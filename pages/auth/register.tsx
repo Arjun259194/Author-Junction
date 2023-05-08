@@ -88,14 +88,7 @@ const Register: NextPage = () => {
       <Head>
         <title>Register</title>
       </Head>
-      <Header>
-        <li>
-          <Link href="/about">about</Link>
-        </li>
-        <li>
-          <Link href="/contact">contact</Link>
-        </li>
-      </Header>
+      <Header/>
       <AuthFormLayout>
         <span className="mb-2 text-sm font-semibold text-cyan-700">Register as new user</span>
         <h2 className="mb-2 text-5xl font-bold text-gray-900">Create new account</h2>

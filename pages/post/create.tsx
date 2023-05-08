@@ -120,7 +120,7 @@ const CreatePost: NextPage = () => {
           </form>
         </section>
       </main>
-      <Footer className="font-semibold text-gray-700" />
+      <Footer />
     </div>
   )
 }

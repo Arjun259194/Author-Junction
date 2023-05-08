@@ -1,7 +1,7 @@
 import Button from "@/UI/Button"
 import { shareIcon } from "@/assets/icons"
 import { Dialog, Transition } from "@headlessui/react"
-import { FC, Fragment, useState } from "react"
+import { FC, Fragment, useEffect, useState } from "react"
 import PostButton from "./PostButton"
 
 interface Props {
@@ -11,8 +11,7 @@ interface Props {
 const ShareButton: FC<Props> = ({ postId }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [clicked, setClicked] = useState(false)
-
-  const url = new URL("/post/" + postId, "http://localhost:3000")
+  const [url, setUrl] = useState<string>("")
 
   function closeModal() {
     setIsOpen(false)
@@ -21,6 +20,11 @@ const ShareButton: FC<Props> = ({ postId }) => {
   function openModal() {
     setIsOpen(true)
   }
+
+  useEffect(() => {
+    setUrl(new URL("/post/" + postId, window.location.origin).href)
+  })
+
   return (
     <>
       <PostButton onClick={openModal} className="hover:bg-blue-50">
@@ -67,12 +71,8 @@ const ShareButton: FC<Props> = ({ postId }) => {
                     <p className="text-sm text-gray-500">
                       copy and use the link given below to share this post
                     </p>
-                    <p className="rounded-md bg-gray-200 p-2 font-mono text-gray-600">
-                      {url.href}
-                    </p>
-                    <p className="text-gray-500">
-                      {!!clicked ? "copied to clipboard!" : null}
-                    </p>
+                    <p className="rounded-md bg-gray-200 p-2 font-mono text-gray-600">{url}</p>
+                    <p className="text-gray-500">{!!clicked ? "copied to clipboard!" : null}</p>
                   </div>
 
                   <div className="mt-4 space-x-2">
@@ -80,7 +80,7 @@ const ShareButton: FC<Props> = ({ postId }) => {
                       type="button"
                       variant="primary"
                       onClick={_ => {
-                        navigator.clipboard.writeText(url.href)
+                        navigator.clipboard.writeText(url)
                         setClicked(true)
                       }}
                     >
