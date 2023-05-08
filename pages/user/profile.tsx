@@ -63,7 +63,7 @@ export const Profile: NextPage<Props> = ({ user }) => {
         <UserProfile user={{ username, email, followers, following, role }} />
         {role === "READER" ? <ReaderMedia userId={_id} /> : <AuthorMedia fetchUserId={_id} userId={_id} />}
       </main>
-      <Footer />
+      <Footer className="mt-auto" />
     </div>
   )
 }
